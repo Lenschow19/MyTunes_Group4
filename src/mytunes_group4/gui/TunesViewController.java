@@ -7,28 +7,28 @@ package mytunes_group4.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 
 /**
+ * FXML Controller class
  *
  * @author Rizvan
  */
-public class TunesController implements Initializable
+public class TunesViewController implements Initializable
 {
-    
+
     @FXML
-    private Label label;
-    
+    private ListView<?> Playlists;
     @FXML
-    private void handleButtonAction(ActionEvent event)
-    {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-    
+    private ListView<?> SongsInPlaylist;
+    @FXML
+    private ListView<?> SongList;
+
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
