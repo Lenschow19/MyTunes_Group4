@@ -70,5 +70,25 @@ public class TunesViewController implements Initializable
     private void deleteSong(ActionEvent event)
     {
     }
+
+    @FXML
+    private void playSong(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void pauseSong(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void stopSong(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void addSongToPlaylist(ActionEvent event)
+    {
+    }
     
 }
