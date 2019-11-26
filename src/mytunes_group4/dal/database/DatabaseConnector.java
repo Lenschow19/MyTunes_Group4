@@ -14,6 +14,7 @@ import java.util.Properties;
 
 /**
  *
+<<<<<<< HEAD
  * @author mads_
  */
 public class DatabaseConnector
@@ -32,6 +33,11 @@ public class DatabaseConnector
     }
 
     
+=======
+ * @author M
+ */
+public class DatabaseConnector {
+>>>>>>> 8390b6a1ce67dcb87806d1c6bf80238addb249bb
     
     public Connection getConnection() throws SQLServerException
     {   
