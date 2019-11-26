@@ -7,13 +7,9 @@ package mytunes_group4.be;
 
 /**
  *
- * @author Rizvan
+ * @author NLens
  */
-public class Song
+public class Playlist
 {
-    private String songName;
-    private String artistName;
-    private int duration;
-    private String genre;
     
 }
