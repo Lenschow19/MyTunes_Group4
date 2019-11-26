@@ -7,6 +7,7 @@ package mytunes_group4.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
@@ -34,5 +35,40 @@ public class TunesViewController implements Initializable
     {
         // TODO
     }    
+
+    @FXML
+    private void addNewPlaylist(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void editPlaylist(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void deletePlaylist(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void deleteSongInPlaylist(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void addNewSong(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void editSong(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void deleteSong(ActionEvent event)
+    {
+    }
     
 }
