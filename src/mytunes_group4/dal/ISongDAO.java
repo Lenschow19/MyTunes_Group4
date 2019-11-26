@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mytunes_group4.dal.database;
+package mytunes_group4.dal;
 
 /**
  *
  * @author M
  */
-public class DatabaseConnector {
+public class ISongDAO {
     
 }

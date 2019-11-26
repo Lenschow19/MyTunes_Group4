@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mytunes_group4;
+package mytunes_group4.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

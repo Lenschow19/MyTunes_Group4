@@ -9,6 +9,6 @@ package mytunes_group4.dal.database;
  *
  * @author M
  */
-public class DatabaseConnector {
+public class SongDBDAO {
     
 }
