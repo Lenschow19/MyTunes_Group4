@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Slider;
 import mytunes_group4.be.*;
 
 /**
@@ -23,6 +24,10 @@ public class TunesViewController implements Initializable
     private ListView<SongsInPlaylist> SongsInPlaylist;
     @FXML
     private ListView<Song> SongList;
+    
+    private TunesModel model = new TunesModel();
+    @FXML
+    private Slider volumeSlider;
 
     /**
      * Initializes the controller class.
@@ -71,16 +76,19 @@ public class TunesViewController implements Initializable
     @FXML
     private void playSong(ActionEvent event)
     {
+        model.playMusic();
     }
 
     @FXML
     private void pauseSong(ActionEvent event)
     {
+        model.pauseMusic();
     }
 
     @FXML
     private void stopSong(ActionEvent event)
     {
+        model.stopMusic();
     }
 
     @FXML
