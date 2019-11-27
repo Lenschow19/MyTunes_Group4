@@ -67,5 +67,16 @@ public class Song
         this.genre = genre;
     }
     
+    public void setDuration(int trackDuration) {
+      duration = trackDuration;  
+   }
     
+   public int getDuration() {
+      return duration;
+   }
+    
+    @Override
+   public String toString() {
+      return "Title: " + getSongName()+ ", Artist: " + getArtistName() + ", Genre: " + getGenre()+ ", Track Length: " + getDuration();
+   } 
 }
