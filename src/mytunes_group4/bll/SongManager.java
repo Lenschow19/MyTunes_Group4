@@ -5,11 +5,18 @@
  */
 package mytunes_group4.bll;
 
+import java.util.List;
+import mytunes_group4.be.*;
+
 /**
  *
  * @author Rizvan
  */
 public class SongManager
 {
-    
+    public List <Song> getAllSongs()
+    {
+        return getAllSongs();
+    }
+            
 }

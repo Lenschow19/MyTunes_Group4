@@ -16,6 +16,8 @@ import mytunes_group4.be.*;
  */
 public class TunesViewController implements Initializable
 {
+    
+    
 
     @FXML
     private ListView<Playlist> Playlists;
@@ -71,6 +73,7 @@ public class TunesViewController implements Initializable
     @FXML
     private void playSong(ActionEvent event)
     {
+        
     }
 
     @FXML
