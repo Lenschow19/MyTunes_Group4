@@ -20,6 +20,13 @@ public class Playlist
     
     private ArrayList<Song> playlist;
     
+    /**
+     * Properties a playlist should have and can display.
+     * @param id //each playlist have it's own id
+     * @param name
+     * @param totalDuration //calculated
+     * @param songCounter //counter
+     */
     public Playlist(int id, String name, int totalDuration, int songCounter)
     {
         this.id = id; 
@@ -28,16 +35,28 @@ public class Playlist
         this.songCounter = songCounter;
     }
 
+    /**
+     *
+     * @return id of the playlist
+     */
     public int getId()
     {
         return id;
     }
 
+    /**
+     *
+     * @return name of the playlist
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * Naming the playlist
+     * @param name
+     */
     public void setName(String name)
     {
         this.name = name;

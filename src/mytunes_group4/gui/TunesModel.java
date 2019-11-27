@@ -15,10 +15,13 @@ import javafx.scene.media.MediaPlayer;
  */
 public class TunesModel
 {
-    // DETTE SKAL FLYTTES TIL BLL OG LAVES OM TIL AT KUNNE SPILLE FLERE SANGE
+    // TODO: DETTE SKAL FLYTTES TIL BLL OG LAVES OM TIL AT KUNNE SPILLE FLERE SANGE
     private MediaPlayer mediaPlayer;
     private Media media; 
     
+    /**
+     * Plays the music when pressed
+     */
     public void playMusic(){
           
         String path = "C:\\Users\\mads_\\OneDrive\\Documents\\GitHub\\MyTunes_Group4\\Music\\Pop\\popsong.mp3";  
@@ -30,11 +33,17 @@ public class TunesModel
         mediaPlayer.play();
     }
     
+    /**
+     * Pausing the music when pressed
+     */
     public void pauseMusic()
     {
         mediaPlayer.pause();
     }
     
+    /**
+     * Stops the music when pressed
+     */
     public void stopMusic()
     {
         mediaPlayer.stop();
