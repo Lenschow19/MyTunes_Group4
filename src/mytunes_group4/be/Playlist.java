@@ -5,16 +5,20 @@
  */
 package mytunes_group4.be;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author NLens
  */
 public class Playlist
-
+{
     private int id; 
     private String name; //name of playlist
     private int totalDuration; //Displaying duration of all songs in the playlist
     private int songCounter; //Displaying number of songs in the playlist
+    
+    private ArrayList<Song> playlist;
     
     public Playlist(int id, String name, int totalDuration, int songCounter)
     {

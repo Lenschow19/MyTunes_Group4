@@ -5,8 +5,6 @@
  */
 package mytunes_group4.be;
 
-import static javafx.beans.binding.Bindings.length;
-
 /**
  *
  * @author Rizvan & NLens
@@ -69,12 +67,10 @@ public class Song
         this.genre = genre;
     }
     
-    public void setDuration(int h, int m, int s) {
-      duration = (h*3600 + m*60 + s);
-      if(h==0) {
-         duration = (m*60+s);
-      }   
+    public void setDuration(int trackDuration) {
+      duration = trackDuration;  
    }
+    
    public int getDuration() {
       return duration;
    }
