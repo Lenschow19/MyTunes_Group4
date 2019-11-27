@@ -5,10 +5,24 @@
  */
 package mytunes_group4.dal.database;
 
+import java.io.IOException;
+
 /**
  *
  * @author M
  */
-public class SongDBDAO {
+public class SongDBDAO
+{
+
+    private DatabaseConnector dbCon;
+    
+    public SongDBDAO() throws IOException
+    {
+        dbCon = new DatabaseConnector();
+    }
+    
+    
+    
+    
     
 }
