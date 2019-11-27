@@ -17,8 +17,6 @@ import mytunes_group4.be.*;
  */
 public class TunesViewController implements Initializable
 {
-    
-    
 
     @FXML
     private ListView<Playlist> Playlists;
@@ -28,8 +26,7 @@ public class TunesViewController implements Initializable
     private ListView<Song> SongList;
     
     private TunesModel model = new TunesModel();
-    @FXML
-    private Slider volumeSlider;
+    
 
     /**
      * Initializes the controller class.
@@ -78,11 +75,7 @@ public class TunesViewController implements Initializable
     @FXML
     private void playSong(ActionEvent event)
     {
-<<<<<<< HEAD
         model.playMusic();
-=======
-        
->>>>>>> fb97cec4cf0c6dea98706c03b960d562e31f8b69
     }
 
     @FXML
@@ -101,5 +94,8 @@ public class TunesViewController implements Initializable
     private void addSongToPlaylist(ActionEvent event)
     {
     }
+    
+    @FXML
+    private Slider volumeSlider;
     
 }
