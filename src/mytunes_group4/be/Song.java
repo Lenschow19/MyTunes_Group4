@@ -11,18 +11,30 @@ package mytunes_group4.be;
  */
 public class Song
 {
+    private int id; 
     private String songName;
     private String artistName;
     private String genre;
     private int duration; //How long the songs playtime is
     
     
-    public Song(String songName, String artistName, String genre, int duration)
+    public Song(int id, String songName, String artistName, String genre, int duration)
     {
+        this.id = id; 
         this.songName = songName;
         this.artistName = artistName;
         this.genre = genre;
         this.duration = duration;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
     }
 
     public String getSongName()
