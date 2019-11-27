@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package mytunes_group4.gui;
 
 import java.net.URL;
@@ -11,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import mytunes_group4.be.*;
 
 /**
  * FXML Controller class
@@ -21,11 +18,11 @@ public class TunesViewController implements Initializable
 {
 
     @FXML
-    private ListView<?> Playlists;
+    private ListView<Playlist> Playlists;
     @FXML
-    private ListView<?> SongsInPlaylist;
+    private ListView<SongsInPlaylist> SongsInPlaylist;
     @FXML
-    private ListView<?> SongList;
+    private ListView<Song> SongList;
 
     /**
      * Initializes the controller class.
