@@ -10,7 +10,7 @@ package mytunes_group4.be;
  * @author NLens
  */
 public class Playlist
-{
+
     private int id; 
     private String name; //name of playlist
     private int totalDuration; //Displaying duration of all songs in the playlist
@@ -27,11 +27,6 @@ public class Playlist
     public int getId()
     {
         return id;
-    }
-
-    public void setId(int id)
-    {
-        this.id = id;
     }
 
     public String getName()
