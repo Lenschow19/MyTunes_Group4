@@ -14,7 +14,6 @@ import java.util.Properties;
 
 /**
  *
-<<<<<<< HEAD
  * @author mads_
  */
 public class DatabaseConnector
