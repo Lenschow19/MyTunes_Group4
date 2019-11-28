@@ -29,7 +29,6 @@ public class TunesViewController implements Initializable
     @FXML
     private ListView<Song> SongList;
     
-    private TunesModel model = new TunesModel();
     
 
     /**
@@ -91,19 +90,19 @@ public class TunesViewController implements Initializable
     @FXML
     private void playSong(ActionEvent event)
     {
-        model.playMusic();
+        tModel.playMusic();
     }
 
     @FXML
     private void pauseSong(ActionEvent event)
     {
-        model.pauseMusic();
+        tModel.pauseMusic();
     }
 
     @FXML
     private void stopSong(ActionEvent event)
     {
-        model.stopMusic();
+        tModel.stopMusic();
     }
 
     @FXML
