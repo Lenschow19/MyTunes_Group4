@@ -49,12 +49,12 @@ public class TunesModel
      * Plays the music when pressed
      */
     public void playMusic(){
-          
-        String path = "C:\\Users\\mads_\\OneDrive\\Documents\\GitHub\\MyTunes_Group4\\Music\\Pop\\popsong.mp3";  
+        
+        String songTest = "Music/Pop/popsong.mp3";
             
-        media = new Media(new File(path).toURI().toString());  
+        media = new Media(new File(songTest).toURI().toString());  
              
-        mediaPlayer = new MediaPlayer(media);  
+        mediaPlayer = new MediaPlayer(media);
             
         mediaPlayer.play();
     }
