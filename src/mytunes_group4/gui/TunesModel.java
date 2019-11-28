@@ -114,6 +114,8 @@ public class TunesModel
         media = new Media(new File(path).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
+        
+       
     }
 
 
