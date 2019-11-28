@@ -1,13 +1,15 @@
-
 package mytunes_group4.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
+import javafx.scene.input.DragEvent;
 import mytunes_group4.be.*;
 
 /**
@@ -24,9 +26,10 @@ public class TunesViewController implements Initializable
     private ListView<SongsInPlaylist> SongsInPlaylist;
     @FXML
     private ListView<Song> SongList;
-    
+    @FXML
+    private Slider volumeSlider;
+
     private TunesModel model = new TunesModel();
-    
 
     /**
      * Initializes the controller class.
@@ -34,8 +37,8 @@ public class TunesViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
-    }    
+       
+    }
 
     @FXML
     private void addNewPlaylist(ActionEvent event)
@@ -94,8 +97,11 @@ public class TunesViewController implements Initializable
     private void addSongToPlaylist(ActionEvent event)
     {
     }
-    
+
     @FXML
-    private Slider volumeSlider;
-    
+    private void changeVolume(DragEvent event)
+    {
+        model.changeVolume(volumeSlider);
+    }
+
 }
