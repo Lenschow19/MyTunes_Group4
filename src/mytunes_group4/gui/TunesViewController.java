@@ -1,13 +1,24 @@
-
 package mytunes_group4.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
+import javafx.scene.input.DragEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import mytunes_group4.be.*;
 
 /**
@@ -17,10 +28,8 @@ import mytunes_group4.be.*;
  */
 public class TunesViewController implements Initializable
 {
-    
-    private TunesModel tModel;
-    
 
+    private TunesModel tModel;
 
     @FXML
     private ListView<Playlist> Playlists;
@@ -28,8 +37,9 @@ public class TunesViewController implements Initializable
     private ListView<SongsInPlaylist> SongsInPlaylist;
     @FXML
     private ListView<Song> SongList;
-    
-    
+
+    @FXML
+    private Slider volumeSlider;
 
     /**
      * Initializes the controller class.
@@ -37,34 +47,79 @@ public class TunesViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        
-        
-        
-        try {
-        tModel = new TunesModel();
-        SongList.setItems(tModel.getSongs());
+        try
+        {
+            tModel = new TunesModel();
+            SongList.setItems(tModel.getSongs());
         } catch (Exception ex)
         {
             System.out.println("Something went wrong");
             ex.printStackTrace();
         }
-                
-        
-    }    
+
+        try
+        {
+            Playlists.setItems(tModel.getPlaylistList());
+
+        } catch (Exception ex)
+        {
+            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 
     @FXML
     private void addNewPlaylist(ActionEvent event)
     {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddPlaylist.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("ABC");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     private void editPlaylist(ActionEvent event)
     {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditPlaylist.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setTitle("ABC");
+            stage.setScene(new Scene(root1));
+            stage.show();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
-    private void deletePlaylist(ActionEvent event)
+    private void deletePlaylist(ActionEvent event) throws Exception
     {
+        Playlist selectedPlaylist = Playlists.getSelectionModel().getSelectedItem();
+        if (selectedPlaylist != null)
+        {
+            try
+            {
+                tModel.deletePlaylist(selectedPlaylist);
+            } catch (IOException ex)
+            {
+                Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @FXML
@@ -109,8 +164,11 @@ public class TunesViewController implements Initializable
     private void addSongToPlaylist(ActionEvent event)
     {
     }
-    
+
     @FXML
-    private Slider volumeSlider;
-    
+    private void changeVolume(DragEvent event)
+    {
+        tModel.changeVolume(volumeSlider);
+    }
+
 }

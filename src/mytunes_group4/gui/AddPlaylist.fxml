@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="291.0" prefWidth="451.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes_group4.gui.AddPlaylistController">
+   <children>
+      <TextField fx:id="txtPlaylistTitle" layoutX="190.0" layoutY="123.0" />
+      <Text layoutX="151.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" />
+      <Button layoutX="226.0" layoutY="168.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="savePlaylist" layoutX="287.0" layoutY="168.0" mnemonicParsing="false" onAction="#addNewPlaylist" text="Save" />
+   </children>
+</AnchorPane>

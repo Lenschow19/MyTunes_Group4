@@ -27,7 +27,7 @@ public class Playlist
      * @param totalDuration //calculated
      * @param songCounter //counter
      */
-    public Playlist(int id, String name, int totalDuration, int songCounter)
+    public Playlist(int id, String name)
     {
         this.id = id; 
         this.name = name;
