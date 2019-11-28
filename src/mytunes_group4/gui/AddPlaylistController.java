@@ -45,13 +45,10 @@ public class AddPlaylistController implements Initializable
     @FXML
     private void addNewPlaylist(ActionEvent event) throws Exception
     {
-        if (!txtPlaylistTitle.getText().isEmpty())
-        {
-            tModel.createPlaylist(txtPlaylistTitle.getText());
-            
-            Stage stage = (Stage) savePlaylist.getScene().getWindow();
-            stage.close();
-        }
+        tModel.createPlaylist(txtPlaylistTitle.getText());
+
+        Stage stage = (Stage) savePlaylist.getScene().getWindow();
+        stage.close();
     }
 
 }
