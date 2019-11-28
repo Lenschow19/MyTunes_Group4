@@ -20,6 +20,10 @@ public class DatabaseConnector
 {
     private SQLServerDataSource dataSource;
 
+    /**
+     * Creates they properties to make a connection to the MS SQL server.
+     * @throws IOException
+     */
     public DatabaseConnector() throws IOException
     {
         Properties props = new Properties();

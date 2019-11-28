@@ -5,6 +5,13 @@
  */
 package mytunes_group4.gui;
 
+
+import java.io.IOException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import mytunes_group4.be.Song;
+import mytunes_group4.bll.SongManager;
+import mytunes_group4.dal.DalException;
 import java.io.File;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -20,12 +27,10 @@ import mytunes_group4.bll.MusicPlayer;
 public class TunesModel
 {
 
+
     private MusicPlayer mp;
 
-    public TunesModel()
-    {
-        mp = new MusicPlayer();
-    }
+   
 
     // DETTE SKAL FLYTTES TIL BLL OG ÆNDRES TIL AT KUNNE SPILLE FLERE SANGE
     private MediaPlayer mediaPlayer;
@@ -40,15 +45,53 @@ public class TunesModel
         mediaPlayer.play();
     }
 
+
+    private ObservableList<Song> allSongs;
+    private SongManager songManager;
+
+    public TunesModel() throws IOException, DalException
+    {
+        songManager = new SongManager();
+        allSongs = FXCollections.observableArrayList();
+        allSongs.addAll(songManager.getAllSongs());
+        
+        
+    }
+    
+    public ObservableList<Song> getSongs()
+    {
+        return allSongs;
+    }
+    
+    
+    
+    // TODO: DETTE SKAL FLYTTES TIL BLL OG LAVES OM TIL AT KUNNE SPILLE FLERE SANGE
+    
+    
+    /**
+     * Plays the music when pressed
+     */
+    
+    
+    /**
+     * Pausing the music when pressed
+     */
+
     public void pauseMusic()
     {
         mediaPlayer.pause();
     }
 
+    
+    /**
+     * Stops the music when pressed
+     */
+
     public void stopMusic()
     {
         mediaPlayer.stop();
     }
+
 
     // doesn't work :(
     public void changeVolume(Slider vS)
@@ -63,5 +106,6 @@ public class TunesModel
             }
         });
     }
+
 
 }

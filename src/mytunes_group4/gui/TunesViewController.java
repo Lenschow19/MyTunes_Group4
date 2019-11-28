@@ -19,6 +19,10 @@ import mytunes_group4.be.*;
  */
 public class TunesViewController implements Initializable
 {
+    
+    private TunesModel tModel;
+    
+
 
     @FXML
     private ListView<Playlist> Playlists;
@@ -26,10 +30,15 @@ public class TunesViewController implements Initializable
     private ListView<SongsInPlaylist> SongsInPlaylist;
     @FXML
     private ListView<Song> SongList;
+
     @FXML
     private Slider volumeSlider;
 
-    private TunesModel model = new TunesModel();
+    
+
+    
+    
+
 
     /**
      * Initializes the controller class.
@@ -37,8 +46,25 @@ public class TunesViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        try {
+        tModel = new TunesModel();
+        SongList.setItems(tModel.getSongs());
+        } catch (Exception ex)
+        {
+            System.out.println("Something went wrong");
+            ex.printStackTrace();
+        }
        
     }
+
+        
+        
+        
+        
+                
+        
+       
+
 
     @FXML
     private void addNewPlaylist(ActionEvent event)
@@ -78,19 +104,19 @@ public class TunesViewController implements Initializable
     @FXML
     private void playSong(ActionEvent event)
     {
-        model.playMusic();
+        tModel.playMusic();
     }
 
     @FXML
     private void pauseSong(ActionEvent event)
     {
-        model.pauseMusic();
+        tModel.pauseMusic();
     }
 
     @FXML
     private void stopSong(ActionEvent event)
     {
-        model.stopMusic();
+        tModel.stopMusic();
     }
 
     @FXML
@@ -101,7 +127,7 @@ public class TunesViewController implements Initializable
     @FXML
     private void changeVolume(DragEvent event)
     {
-        model.changeVolume(volumeSlider);
+        tModel.changeVolume(volumeSlider);
     }
 
 }

@@ -5,6 +5,8 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -68,5 +70,10 @@
       <Button layoutX="468.0" layoutY="97.0" mnemonicParsing="false" onAction="#stopSong" text="Stop" />
       <Label layoutX="393.0" layoutY="70.0" text="currently playing" />
       <Button layoutX="423.0" layoutY="254.0" mnemonicParsing="false" onAction="#addSongToPlaylist" text="add to playlist" />
+      <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="328.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@sound.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
