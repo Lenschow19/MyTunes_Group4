@@ -5,8 +5,11 @@
  */
 package mytunes_group4.bll;
 
+import java.io.IOException;
 import java.util.List;
 import mytunes_group4.be.*;
+import mytunes_group4.dal.DalException;
+import mytunes_group4.dal.database.SongDBDAO;
 
 /**
  *
@@ -14,9 +17,18 @@ import mytunes_group4.be.*;
  */
 public class SongManager
 {
-    public List <Song> getAllSongs()
+    private SongDBDAO songDB;
+
+    public SongManager() throws IOException
     {
-        return getAllSongs();
+        songDB = new SongDBDAO();
+    }
+    
+    
+    
+    public List <Song> getAllSongs() throws IOException, DalException
+    {
+        return songDB.getAllSongs();
     }
             
 }

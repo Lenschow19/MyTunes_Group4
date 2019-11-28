@@ -29,6 +29,13 @@ public class Song
         this.duration = duration;
     }
 
+    public Song(String title, String artist, String genre)
+    {
+        this.songName = songName;
+        this.artistName = artistName;
+        this.genre = genre;
+    }
+
     public int getId()
     {
         return id;
@@ -81,6 +88,6 @@ public class Song
     
     @Override
    public String toString() {
-      return "Title: " + getSongName()+ ", Artist: " + getArtistName() + ", Genre: " + getGenre()+ ", Track Length: " + getDuration();
+      return "Title: " + songName+ " | Artist: " + artistName + " | Genre: " + genre;
    } 
 }

@@ -9,6 +9,7 @@ package mytunes_group4.dal;
  *
  * @author M
  */
-public class DalException {
+public class DalException extends Exception
+{
     
 }

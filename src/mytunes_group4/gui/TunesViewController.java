@@ -17,6 +17,7 @@ import mytunes_group4.be.*;
 public class TunesViewController implements Initializable
 {
     
+    private TunesModel tModel;
     
 
     @FXML
@@ -32,7 +33,19 @@ public class TunesViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        
+        
+        
+        try {
+        tModel = new TunesModel();
+        SongList.setItems(tModel.getSongs());
+        } catch (Exception ex)
+        {
+            System.out.println("Something went wrong");
+            ex.printStackTrace();
+        }
+                
+        
     }    
 
     @FXML
