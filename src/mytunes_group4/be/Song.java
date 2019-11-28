@@ -34,7 +34,7 @@ public class Song
         this.duration = duration;
     }
 
-    public Song(String title, String artist, String genre)
+    public Song(String songName, String artistName, String genre)
     {
         this.songName = songName;
         this.artistName = artistName;
