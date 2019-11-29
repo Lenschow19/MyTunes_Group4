@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import mytunes_group4.dal.DalException;
 
 /**
  * FXML Controller class
@@ -32,6 +33,8 @@ public class AddPlaylistController implements Initializable
     private TextField txtPlaylistTitle;
 
     private TunesModel tModel;
+    @FXML
+    private Button cancel;
 
     /**
      * Initializes the controller class.
@@ -39,19 +42,24 @@ public class AddPlaylistController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+      
     }
 
     @FXML
     private void addNewPlaylist(ActionEvent event) throws Exception
     {
-        if (!txtPlaylistTitle.getText().isEmpty())
-        {
-            tModel.createPlaylist(txtPlaylistTitle.getText());
-            
-            Stage stage = (Stage) savePlaylist.getScene().getWindow();
-            stage.close();
-        }
+        String titleQuery = txtPlaylistTitle.getText();
+        tModel.createPlaylist(titleQuery);
+
+        Stage stage = (Stage) savePlaylist.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void closeWindow(ActionEvent event)
+    {
+        Stage stage = (Stage) cancel.getScene().getWindow();
+        stage.close();
     }
 
 }

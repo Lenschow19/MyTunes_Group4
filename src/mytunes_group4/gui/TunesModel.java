@@ -30,7 +30,7 @@ import mytunes_group4.bll.PlaylistManager;
 public class TunesModel
 {
 
-
+    private SongManager songManager;
     private PlaylistManager pm;
     private MusicPlayer mp;
     
@@ -120,7 +120,7 @@ public class TunesModel
 
 
     private ObservableList<Song> allSongs;
-    private SongManager songManager;
+    
 
     
     

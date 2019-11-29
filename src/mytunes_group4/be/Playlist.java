@@ -34,6 +34,8 @@ public class Playlist
         this.totalDuration = totalDuration;
         this.songCounter = songCounter;
     }
+    
+    
 
     /**
      *
@@ -61,6 +63,14 @@ public class Playlist
     {
         this.name = name;
     }
+
+    @Override
+    public String toString()
+    {
+        return id + " " + name;
+    }
   
+    
+    
     
 }
