@@ -41,8 +41,8 @@ public class PlaylistDBDAO
             {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                int totalDuration = rs.getInt("duration");
-                int songCounter = rs.getInt("songs");
+                //int totalDuration = rs.getInt("duration");
+                //int songCounter = rs.getInt("songs");
                 Playlist pl = new Playlist(id, name);
                 allPlaylists.add(pl);
             }

@@ -20,6 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import mytunes_group4.be.*;
+import mytunes_group4.dal.DalException;
 
 /**
  * FXML Controller class
@@ -40,6 +41,8 @@ public class TunesViewController implements Initializable
 
     @FXML
     private Slider volumeSlider;
+    
+   
 
     /**
      * Initializes the controller class.
@@ -47,9 +50,19 @@ public class TunesViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        
         try
         {
             tModel = new TunesModel();
+        } catch (DalException ex)
+        {
+            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try
+        {       
             SongList.setItems(tModel.getSongs());
         } catch (Exception ex)
         {
@@ -76,9 +89,6 @@ public class TunesViewController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddPlaylist.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("ABC");
             stage.setScene(new Scene(root1));
             stage.show();
         } catch (IOException ex)
@@ -95,9 +105,6 @@ public class TunesViewController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditPlaylist.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setTitle("ABC");
             stage.setScene(new Scene(root1));
             stage.show();
         } catch (IOException ex)
