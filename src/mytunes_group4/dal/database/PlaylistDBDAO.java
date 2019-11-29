@@ -28,6 +28,7 @@ public class PlaylistDBDAO
         dbc = new DatabaseConnector();
     }
     
+    //test//
     public List<Playlist> getAllPlaylists() throws Exception
     {
         try ( Connection con = dbc.getConnection())
