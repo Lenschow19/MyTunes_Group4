@@ -126,16 +126,7 @@ public class TunesViewController implements Initializable
     private void deletePlaylist(ActionEvent event) throws Exception
     {
         Playlist selectedPlaylist = Playlists.getSelectionModel().getSelectedItem();
-        if (selectedPlaylist != null)
-        {
-            try
-            {
-                tModel.deletePlaylist(selectedPlaylist);
-            } catch (IOException ex)
-            {
-                Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        tModel.deletePlaylist(selectedPlaylist);
     }
 
     @FXML

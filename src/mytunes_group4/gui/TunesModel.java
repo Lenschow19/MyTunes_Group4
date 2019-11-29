@@ -82,6 +82,7 @@ public class TunesModel
     
     public void deletePlaylist(Playlist selectedPlaylist) throws Exception
     {
+        
         pm.deletePlaylist(selectedPlaylist);
         playlists.remove(selectedPlaylist);
     }
