@@ -30,7 +30,7 @@ import mytunes_group4.bll.PlaylistManager;
 public class TunesModel
 {
 
-
+    private SongManager songManager;
     private PlaylistManager pm;
     private MusicPlayer mp;
     
@@ -109,16 +109,18 @@ public class TunesModel
 
     public void playMusic()
     {
-        String path = "C:\\Users\\mads_\\OneDrive\\Documents\\GitHub\\MyTunes_Group4\\Music\\Pop\\popsong.mp3";
+        String path = "Music/Pop/popsong.mp3";
 
         media = new Media(new File(path).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
+        
+       
     }
 
 
     private ObservableList<Song> allSongs;
-    private SongManager songManager;
+    
 
     
     

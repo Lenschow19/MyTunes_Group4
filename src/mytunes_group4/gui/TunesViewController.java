@@ -7,6 +7,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +16,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -41,8 +45,11 @@ public class TunesViewController implements Initializable
 
     @FXML
     private Slider volumeSlider;
-    
-   
+
+    @FXML
+    private TextField ssArtist;
+    @FXML
+    private TextField ssTitle;
 
     /**
      * Initializes the controller class.
@@ -50,7 +57,9 @@ public class TunesViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        
+
+        setSongSelection();
+
         try
         {
             tModel = new TunesModel();
@@ -62,7 +71,7 @@ public class TunesViewController implements Initializable
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         try
-        {       
+        {
             SongList.setItems(tModel.getSongs());
         } catch (Exception ex)
         {
@@ -176,6 +185,30 @@ public class TunesViewController implements Initializable
     private void changeVolume(DragEvent event)
     {
         tModel.changeVolume(volumeSlider);
+    }
+
+    /**
+     * Displays the selected song from the list
+     */
+    private void setSongSelection()
+    {
+        ssTitle.setEditable(false);
+        ssArtist.setEditable(false);
+
+        SongList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        SongList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Song>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Song> arg0, Song oldValue, Song newValue)
+            {
+                if (newValue != null)
+                {
+                    ssTitle.setText(newValue.getArtistName());
+                    ssArtist.setText(newValue.getSongName());
+                }
+            }
+        });
+
     }
 
 }

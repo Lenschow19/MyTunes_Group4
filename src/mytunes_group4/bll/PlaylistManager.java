@@ -21,7 +21,7 @@ public class PlaylistManager
 
     public PlaylistManager() throws Exception
     {
-        this.playlistDbDao = new PlaylistDBDAO();
+        playlistDbDao = new PlaylistDBDAO();
     }
 
     public List<Playlist> getAllPlaylists() throws Exception
@@ -42,6 +42,6 @@ public class PlaylistManager
     public Playlist createPlaylist(String name) throws Exception
     {
         Playlist playlist = playlistDbDao.createPlaylist(name);
-        return playlist; 
+        return playlist;
     }
 }
