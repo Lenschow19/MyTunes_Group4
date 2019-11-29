@@ -199,7 +199,7 @@ public class TunesViewController implements Initializable
                 if (newValue != null)
                 {
                     ssTitle.setText(newValue.getArtistName());
-                    ssArtist.setText(newValue.getArtistName());
+                    ssArtist.setText(newValue.getSongName());
                 }
             }
         });
