@@ -5,11 +5,13 @@
  */
 package mytunes_group4.be;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Rizvan & NLens
  */
-public class Song
+public class Song implements Serializable
 {
     private int id; 
     private String songName;
@@ -34,7 +36,7 @@ public class Song
         this.duration = duration;
     }
 
-    public Song(String songName, String artistName, String genre)
+    public Song(String artistName, String songName, String genre)
     {
         this.songName = songName;
         this.artistName = artistName;
