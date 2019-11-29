@@ -107,7 +107,7 @@ public class Song
     
     /**
      *
-     * @param trackDuration determans how long the playtime id for a song
+     * @param trackDuration determines how long the playtime id for a song
      */
     public void setDuration(int trackDuration) {
       duration = trackDuration;  
@@ -127,6 +127,6 @@ public class Song
     */
    @Override
    public String toString() {
-      return "Title: " + songName+ " | Artist: " + artistName + " | Genre: " + genre;
+      return songName + " by " + artistName + " (" + genre + ")";
    } 
 }

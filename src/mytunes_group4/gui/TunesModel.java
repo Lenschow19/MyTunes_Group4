@@ -13,8 +13,15 @@ import mytunes_group4.be.Song;
 import mytunes_group4.bll.SongManager;
 import mytunes_group4.dal.DalException;
 import java.io.File;
+import java.util.Comparator;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
+import javafx.scene.control.Slider;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import mytunes_group4.be.Playlist;
+import mytunes_group4.bll.MusicPlayer;
+import mytunes_group4.bll.PlaylistManager;
 
 /**
  *
@@ -22,17 +29,100 @@ import javafx.scene.media.MediaPlayer;
  */
 public class TunesModel
 {
-    private ObservableList<Song> allSongs;
-    private SongManager songManager;
 
-    public TunesModel() throws IOException, DalException
+
+    private PlaylistManager pm;
+    private MusicPlayer mp;
+    
+    public TunesModel() throws IOException, DalException, Exception
     {
+        this.pm = new PlaylistManager();
         songManager = new SongManager();
         allSongs = FXCollections.observableArrayList();
         allSongs.addAll(songManager.getAllSongs());
         
         
     }
+    
+    private ObservableList<Playlist> playlists = FXCollections.observableArrayList(); 
+    
+    public ObservableList<Playlist> getPlaylistList() throws IOException, Exception
+    {
+        playlists.addAll(pm.getAllPlaylists());
+        playlists.sort(new Comparator<Playlist>()
+            {
+                @Override
+                public int compare(Playlist arg0, Playlist arg1)
+                {
+                    return arg0.getId() - arg1.getId();
+                }
+
+            });
+        return playlists; 
+        
+    }
+    
+    public void updatePlaylist(Playlist selectedPlaylist) throws Exception
+    {
+        pm.updatePlaylist(selectedPlaylist);
+        if (playlists.remove(selectedPlaylist))
+        {
+            playlists.add(selectedPlaylist);
+            playlists.sort(new Comparator<Playlist>()
+            {
+                @Override
+                public int compare(Playlist arg0, Playlist arg1)
+                {
+                    return arg0.getId() - arg1.getId();
+                }
+
+            });
+        }
+    }
+    
+    public void deletePlaylist(Playlist selectedPlaylist) throws Exception
+    {
+        pm.deletePlaylist(selectedPlaylist);
+        playlists.remove(selectedPlaylist);
+    }
+    
+    public void createPlaylist(String name) throws Exception
+    {
+        Playlist playlist = pm.createPlaylist(name);
+        playlists.add(playlist);
+        playlists.sort(new Comparator<Playlist>()
+            {
+                @Override
+                public int compare(Playlist arg0, Playlist arg1)
+                {
+                    return arg0.getId() - arg1.getId();
+                }
+
+            });
+    }
+
+   
+
+    // DETTE SKAL FLYTTES TIL BLL OG ÆNDRES TIL AT KUNNE SPILLE FLERE SANGE
+    private MediaPlayer mediaPlayer;
+    private Media media;
+
+    public void playMusic()
+    {
+        String path = "Music/Pop/popsong.mp3";
+
+        media = new Media(new File(path).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
+        
+       
+    }
+
+
+    private ObservableList<Song> allSongs;
+    private SongManager songManager;
+
+    
     
     public ObservableList<Song> getSongs()
     {
@@ -42,37 +132,46 @@ public class TunesModel
     
     
     // TODO: DETTE SKAL FLYTTES TIL BLL OG LAVES OM TIL AT KUNNE SPILLE FLERE SANGE
-    private MediaPlayer mediaPlayer;
-    private Media media; 
+    
     
     /**
      * Plays the music when pressed
      */
-    public void playMusic(){
-        
-        String songTest = "Music/Pop/popsong.mp3";
-            
-        media = new Media(new File(songTest).toURI().toString());  
-             
-        mediaPlayer = new MediaPlayer(media);
-            
-        mediaPlayer.play();
-    }
+    
     
     /**
      * Pausing the music when pressed
      */
+
     public void pauseMusic()
     {
         mediaPlayer.pause();
     }
+
     
     /**
      * Stops the music when pressed
      */
+
     public void stopMusic()
     {
         mediaPlayer.stop();
     }
-    
+
+
+    // doesn't work :(
+    public void changeVolume(Slider vS)
+    {
+        vS.setValue(mediaPlayer.getVolume() * 100);
+        vS.valueProperty().addListener(new InvalidationListener()
+        {
+            @Override
+            public void invalidated(Observable observable)
+            {
+                mediaPlayer.setVolume(vS.getValue() / 100);                
+            }
+        });
+    }
+
+
 }
