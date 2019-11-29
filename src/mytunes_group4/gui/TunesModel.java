@@ -173,5 +173,17 @@ public class TunesModel
         });
     }
 
+    public void search(String query) throws IOException, DalException
+    {
+        if (query.isEmpty())
+        {
+            allMovies.clear();
+            allMovies.addAll(songManager.getAllMovies());
+        } else
+        {
+            allMovies.clear();
+            allMovies.addAll(songManager.search(query));
+        }
+    }
 
 }
