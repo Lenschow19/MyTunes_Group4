@@ -129,6 +129,6 @@ public class Song implements Serializable
     */
    @Override
    public String toString() {
-      return "Title: " + songName+ " | Artist: " + artistName + " | Genre: " + genre;
+      return songName + " by " + artistName + " (" + genre + ")";
    } 
 }
