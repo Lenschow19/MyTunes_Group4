@@ -30,6 +30,7 @@ import mytunes_group4.bll.PlaylistManager;
 public class TunesModel
 {
 
+    private ObservableList<Song> allSong;
     private SongManager songManager;
     private PlaylistManager pm;
     private MusicPlayer mp;
@@ -177,12 +178,12 @@ public class TunesModel
     {
         if (query.isEmpty())
         {
-            allMovies.clear();
-            allMovies.addAll(songManager.getAllMovies());
+            allSong.clear();
+            allSong.addAll(songManager.getAllSongs());
         } else
         {
-            allMovies.clear();
-            allMovies.addAll(songManager.search(query));
+            allSong.clear();
+            allSong.addAll(songManager.search(query));
         }
     }
 
