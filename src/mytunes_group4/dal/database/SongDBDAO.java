@@ -51,12 +51,12 @@ public class SongDBDAO
             ArrayList<Song> allSongs = new ArrayList<>();
             while (rs.next())
             {
-                String title = rs.getString("songName");
-                String artist = rs.getString("artistName");
+                String songName = rs.getString("songName");
+                String artistName = rs.getString("artistName");
                 String genre = rs.getString("genre");
                 
-                Song song = new Song(title, artist, genre);
-                allSongs.add(song);
+                Song son = new Song(artistName, songName, genre);
+                allSongs.add(son);
             }
             
             return allSongs;
