@@ -30,6 +30,7 @@ import mytunes_group4.bll.PlaylistManager;
 public class TunesModel
 {
 
+    private ObservableList<Song> allSong;
     private SongManager songManager;
     private PlaylistManager pm;
     private MusicPlayer mp;
@@ -174,5 +175,17 @@ public class TunesModel
         });
     }
 
+    public void search(String query) throws IOException, DalException
+    {
+        if (query.isEmpty())
+        {
+            allSong.clear();
+            allSong.addAll(songManager.getAllSongs());
+        } else
+        {
+            allSong.clear();
+            allSong.addAll(songManager.search(query));
+        }
+    }
 
 }
