@@ -6,6 +6,7 @@
 package mytunes_group4.bll;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import mytunes_group4.be.*;
 import mytunes_group4.dal.DalException;
@@ -30,5 +31,19 @@ public class SongManager
     {
         return songDB.getAllSongs();
     }
-            
+   
+    public List<Song> search(String query) throws DalException
+    {
+        List<Song> searchBase = songDB.getAllSongs();
+        List<Song> result = new ArrayList<>();
+
+        for (Song song : searchBase)
+        {
+            if (song.getSongName().toLowerCase().contains(query.toLowerCase()))
+            {
+                result.add(song);
+            }
+        }
+        return result;
+    }
 }

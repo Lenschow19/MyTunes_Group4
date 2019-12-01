@@ -20,6 +20,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -42,7 +43,6 @@ public class TunesViewController implements Initializable
     private ListView<SongsInPlaylist> SongsInPlaylist;
     @FXML
     private ListView<Song> SongList;
-
     @FXML
     private Slider volumeSlider;
 
@@ -50,6 +50,8 @@ public class TunesViewController implements Initializable
     private TextField ssArtist;
     @FXML
     private TextField ssTitle;
+    @FXML
+    private TextField txtSongSearch;
 
     /**
      * Initializes the controller class.
@@ -209,6 +211,20 @@ public class TunesViewController implements Initializable
             }
         });
 
+    }
+
+    @FXML
+    private void handleSearch(KeyEvent event)
+    {
+        try
+        {
+            String query = txtSongSearch.getText().trim();
+            tModel.search(query);
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        
     }
 
 }
