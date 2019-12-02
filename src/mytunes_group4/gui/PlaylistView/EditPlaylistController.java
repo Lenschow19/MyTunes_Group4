@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mytunes_group4.gui;
+package mytunes_group4.gui.PlaylistView;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,24 +12,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
- * @author Rizvan
+ * @author mads_
  */
-public class EditSongFXMLController implements Initializable
+public class EditPlaylistController implements Initializable
 {
 
     @FXML
-    private TextField txtUpdateTitle;
+    private TextField txtPlaylistTitle;
     @FXML
-    private TextField txtUpdateArtist;
-    @FXML
-    private TextField txtUpdateGenre;
-    @FXML
-    private Button cancelWindow;
+    private Button savePlaylist;
 
     /**
      * Initializes the controller class.
@@ -41,15 +36,8 @@ public class EditSongFXMLController implements Initializable
     }    
 
     @FXML
-    private void updateSong(ActionEvent event)
+    private void addNewPlaylist(ActionEvent event)
     {
-    }
-
-    @FXML
-    private void cancelEditWindow(ActionEvent event)
-    {
-        Stage stage = (Stage) cancelWindow.getScene().getWindow();
-        stage.close();
     }
     
 }

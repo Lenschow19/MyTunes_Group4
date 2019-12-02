@@ -26,15 +26,15 @@ public class SongDBDAO
 {
 
     private DatabaseConnector dbCon;
-    
+
     public SongDBDAO() throws IOException
     {
         dbCon = new DatabaseConnector();
     }
-    
+
     public List<Song> getAllSongs() throws DalException
     {
-        
+
         try
         {
             dbCon = new DatabaseConnector();
@@ -42,7 +42,7 @@ public class SongDBDAO
         {
             Logger.getLogger(SongDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try ( Connection con = dbCon.getConnection())
         {
             String sql = "SELECT * FROM Song;";
@@ -54,29 +54,57 @@ public class SongDBDAO
                 String songName = rs.getString("songName");
                 String artistName = rs.getString("artistName");
                 String genre = rs.getString("genre");
-                
+
                 Song son = new Song(artistName, songName, genre);
                 allSongs.add(son);
             }
-            
+
             return allSongs;
         } catch (SQLException ex)
         {
             ex.printStackTrace();
             throw new DalException();
         }
-        
-        
     }
-    
+
+    public Song addSong(String songName, String artistName, String genre) throws DalException
+    {
+        try ( Connection con = dbCon.getConnection())
+        {
+
+            String sql = "INSERT INTO Song VALUES (?,?,?);";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, songName);
+            ps.setString(2, artistName);
+            ps.setString(3, genre);
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows == 1)
+            {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next())
+                {
+                    int id = rs.getInt(1);
+                    Song son = new Song (songName, artistName, genre);
+                    return son;
+                }
+            }
+            throw new DalException();
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new DalException();
+        }
+
+    }
+
     public void deleteSong(Song song)
     {
-        
+
     }
-    
+
     public void editSong(Song song)
     {
-        
+
     }
-    
+
 }

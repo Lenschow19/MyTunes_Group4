@@ -1,4 +1,4 @@
-package mytunes_group4.gui;
+package mytunes_group4.gui.MainView;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import mytunes_group4.be.*;
 import mytunes_group4.dal.DalException;
+import mytunes_group4.gui.model.TunesModel;
 
 /**
  * FXML Controller class
@@ -97,7 +98,7 @@ public class TunesViewController implements Initializable
     {
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddPlaylist.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlaylistView/AddPlaylist.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -113,7 +114,7 @@ public class TunesViewController implements Initializable
     {
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditPlaylist.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlaylistView/EditPlaylist.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -150,7 +151,7 @@ public class TunesViewController implements Initializable
     {
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddSongFXML.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SongView/AddSongFXML.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
@@ -167,7 +168,7 @@ public class TunesViewController implements Initializable
     {
         try
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditSongFXML.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SongView/EditSongFXML.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
