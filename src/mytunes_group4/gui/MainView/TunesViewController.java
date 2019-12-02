@@ -139,8 +139,6 @@ public class TunesViewController implements Initializable
                 Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
-        
     }
 
     @FXML
@@ -246,14 +244,14 @@ public class TunesViewController implements Initializable
     @FXML
     private void handleSearch(KeyEvent event)
     {
-        /*try
+        try
         {
             String query = txtSongSearch.getText().trim();
             tModel.search(query);
         } catch (Exception ex)
         {
             ex.printStackTrace();
-        }*/
+        }
         
     }
 
