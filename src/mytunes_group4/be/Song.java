@@ -13,31 +13,27 @@ import java.io.Serializable;
  */
 public class Song implements Serializable
 {
-    private int songId; 
+    private int id; 
     private String songName;
     private String artistName;
     private String genre;
-    private double duration; //How long the songs playtime is
-    private String path;
+    private int duration; //How long the songs playtime is
     
     /**
      * Parameters when creating a new song to the database.
-     * @param songId
+     * @param id //each song has it's own individual id
      * @param songName
      * @param artistName
      * @param genre
      * @param duration //calculated
-     * @param songPath
      */
-
-    public Song(int songId, String songName, String artistName, String genre, double duration, String path)
+    public Song(int id, String songName, String artistName, String genre, int duration)
     {
-        this.songId = songId; 
+        this.id = id; 
         this.songName = songName;
         this.artistName = artistName;
         this.genre = genre;
         this.duration = duration;
-        this.path = path;
     }
 
     public Song(String artistName, String songName, String genre)
@@ -45,27 +41,6 @@ public class Song implements Serializable
         this.songName = songName;
         this.artistName = artistName;
         this.genre = genre;
-        this.path = path;
-    }
-
-    public int getSongId()
-    {
-        return songId;
-    }
-
-    public void setSongId(int songId)
-    {
-        this.songId = songId;
-    }
-
-    public String getPath()
-    {
-        return path;
-    }
-
-    public void setPath(String path)
-    {
-        this.path = path;
     }
 
     
@@ -75,7 +50,7 @@ public class Song implements Serializable
      */
     public int getId()
     {
-        return songId;
+        return id;
     } 
 
     /**
@@ -136,27 +111,18 @@ public class Song implements Serializable
      *
      * @param trackDuration determines how long the playtime id for a song
      */
-    public void setDuration(double trackDuration) {
-      duration = trackDuration;
+    public void setDuration(int trackDuration) {
+      duration = trackDuration;  
    }
     
    /**
     * 
     * @return  the playtime of the song
     */
-   public double getDuration() {
+   public int getDuration() {
       return duration;
    }
    
-
-   /*public final Duration getDuration() {
-       // TODO if we want automatic count of length
-   }*/
-
-//   public final Duration getDuration() {
-//       // TODO if we want automatic count of length
-//   }
-
    /**
     * outputs String of the songs properties
     * @return 
