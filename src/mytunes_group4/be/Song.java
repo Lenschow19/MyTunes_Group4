@@ -48,17 +48,26 @@ public class Song implements Serializable
         this.path = path;
     }
 
-    public String getSongPath()
+    public int getSongId()
     {
-        return songPath;
+        return songId;
     }
 
-    public void setSongPath(String songPath)
+    public void setSongId(int songId)
     {
-        this.songPath = songPath;
+        this.songId = songId;
     }
 
-    
+    public String getPath()
+    {
+        return path;
+    }
+
+    public void setPath(String path)
+    {
+        this.path = path;
+    }
+
     
     /**
      * 
@@ -139,9 +148,9 @@ public class Song implements Serializable
       return duration;
    }
    
-   public final Duration getDuration() {
-       // TODO if we want automatic count of length
-   }
+//   public final Duration getDuration() {
+//       // TODO if we want automatic count of length
+//   }
    /**
     * outputs String of the songs properties
     * @return 
