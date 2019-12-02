@@ -27,7 +27,9 @@ public class Song implements Serializable
      * @param artistName
      * @param genre
      * @param duration //calculated
+     * @param songPath
      */
+
     public Song(int songId, String songName, String artistName, String genre, double duration, String path)
     {
         this.songId = songId; 
@@ -35,6 +37,34 @@ public class Song implements Serializable
         this.artistName = artistName;
         this.genre = genre;
         this.duration = duration;
+        this.path = path;
+    }
+
+    public Song(String artistName, String songName, String genre)
+    {
+        this.songName = songName;
+        this.artistName = artistName;
+        this.genre = genre;
+        this.path = path;
+    }
+
+    public int getSongId()
+    {
+        return songId;
+    }
+
+    public void setSongId(int songId)
+    {
+        this.songId = songId;
+    }
+
+    public String getPath()
+    {
+        return path;
+    }
+
+    public void setPath(String path)
+    {
         this.path = path;
     }
 
@@ -118,9 +148,15 @@ public class Song implements Serializable
       return duration;
    }
    
-   public final Duration getDuration() {
+
+   /*public final Duration getDuration() {
        // TODO if we want automatic count of length
-   }
+   }*/
+
+//   public final Duration getDuration() {
+//       // TODO if we want automatic count of length
+//   }
+
    /**
     * outputs String of the songs properties
     * @return 

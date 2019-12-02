@@ -33,10 +33,17 @@ public class SongDBDAO implements ISongDAO{
         dbCon = new DatabaseConnector();
     }
     
-    public final ObserveableMap<java.lang.String,java.lang.Object> getMetadata()
+
+    /*public final ObserveableMap<java.lang.String,java.lang.Object> getMetadata()
     {
         //TODO if we want automatic info extraction
-    }
+    }*/
+
+//    public final ObserveableMap<java.lang.String,java.lang.Object> getMetadata()
+//    {
+//        //TODO if we want automatic info extraction
+//    }
+
     
     public List<Song> getAllSongs() throws DalException
     {
@@ -78,7 +85,9 @@ public class SongDBDAO implements ISongDAO{
     public void deleteSong(Song song) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
             int id = song.getId();
-            String sql = "DELETE FROM movie WHERE id=?;";
+
+            String sql = "DELETE FROM Song WHERE id=?;";
+
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int affectedRows = ps.executeUpdate();
@@ -104,7 +113,7 @@ public class SongDBDAO implements ISongDAO{
     @Override
     public Song createSong(String artistName, String songName, String genre, double duration, String path) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "INSERT INTO movie VALUES (?,?);";
+            String sql = "INSERT INTO Song VALUES (?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, artistName);
             ps.setString(2, songName);
