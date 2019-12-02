@@ -17,6 +17,6 @@
       <Text layoutX="75.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre:" />
       <Text layoutX="67.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="File path:" />
       <Button layoutX="397.0" layoutY="269.0" mnemonicParsing="false" text="Browse..." />
-      <Button layoutX="513.0" layoutY="326.0" mnemonicParsing="false" onAction="#cancelSongWindow" text="Cancel" />
+      <Button fx:id="cancelWindow" layoutX="513.0" layoutY="326.0" mnemonicParsing="false" onAction="#cancelSongWindow" text="Cancel" />
    </children>
 </AnchorPane>

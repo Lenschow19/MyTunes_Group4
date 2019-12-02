@@ -148,11 +148,35 @@ public class TunesViewController implements Initializable
     @FXML
     private void addNewSong(ActionEvent event)
     {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddSongFXML.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage.setTitle("Add song");
+        } catch (IOException ex)
+        {
+            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     private void editSong(ActionEvent event)
     {
+        try
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EditSongFXML.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));
+            stage.show();
+            stage.setTitle("Edit song");
+        } catch (IOException ex)
+        {
+            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
@@ -181,6 +205,9 @@ public class TunesViewController implements Initializable
     @FXML
     private void addSongToPlaylist(ActionEvent event)
     {
+        
+        
+        
     }
 
     @FXML
