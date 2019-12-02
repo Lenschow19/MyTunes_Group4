@@ -128,7 +128,18 @@ public class TunesViewController implements Initializable
     private void deletePlaylist(ActionEvent event) throws Exception
     {
         Playlist selectedPlaylist = Playlists.getSelectionModel().getSelectedItem();
-        tModel.deletePlaylist(selectedPlaylist);
+        if (selectedPlaylist != null)
+        {
+            try
+            {
+                tModel.deletePlaylist(selectedPlaylist);
+            } catch (IOException ex)
+            {
+                Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
     }
 
     @FXML
@@ -207,14 +218,14 @@ public class TunesViewController implements Initializable
     @FXML
     private void handleSearch(KeyEvent event)
     {
-        try
+        /*try
         {
             String query = txtSongSearch.getText().trim();
             tModel.search(query);
         } catch (Exception ex)
         {
             ex.printStackTrace();
-        }
+        }*/
         
     }
 
