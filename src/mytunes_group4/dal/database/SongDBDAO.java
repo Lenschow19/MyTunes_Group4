@@ -32,6 +32,11 @@ public class SongDBDAO
         dbCon = new DatabaseConnector();
     }
     
+    public final ObserveableMap<java.lang.String,java.lang.Object> getMetadata()
+    {
+        //TODO if we want automatic info extraction
+    }
+    
     public List<Song> getAllSongs() throws DalException
     {
         
