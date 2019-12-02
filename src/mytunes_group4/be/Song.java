@@ -118,9 +118,9 @@ public class Song implements Serializable
       return duration;
    }
    
-   public final Duration getDuration() {
+   /*public final Duration getDuration() {
        // TODO if we want automatic count of length
-   }
+   }*/
    /**
     * outputs String of the songs properties
     * @return 
