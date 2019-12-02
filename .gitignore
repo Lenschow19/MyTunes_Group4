@@ -39,5 +39,3 @@ nbdist/
 
 # End of https://www.gitignore.io/api/java,netbeans
 DBSettings.txt
-DBSettings
-src/mytunes_group4/App.java
