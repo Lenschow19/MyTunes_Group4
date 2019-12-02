@@ -24,7 +24,7 @@ import mytunes_group4.dal.DalException;
  *
  * @author M
  */
-public class SongDAO implements ISongDAO 
+/*public class SongDAO implements ISongDAO 
 {
 
     private static final String SONG_SOURCE = "data/songs.txt";
@@ -154,4 +154,4 @@ public class SongDAO implements ISongDAO
     public Song createSong(String artistName, String songName) throws DalException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-}
+}*/
