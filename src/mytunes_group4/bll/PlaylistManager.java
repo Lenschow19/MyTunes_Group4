@@ -16,7 +16,7 @@ import mytunes_group4.dal.database.PlaylistDBDAO;
  */
 public class PlaylistManager
 {
-    
+
     private PlaylistDBDAO playlistDbDao;
 
     public PlaylistManager() throws Exception
@@ -28,20 +28,25 @@ public class PlaylistManager
     {
         return playlistDbDao.getAllPlaylists();
     }
-    
+
     public void updatePlaylist(Playlist playlist) throws Exception
     {
         playlistDbDao.updatePlaylist(playlist);
     }
-    
+
     public void deletePlaylist(Playlist playlist) throws Exception
     {
         playlistDbDao.deletePlaylist(playlist);
     }
-    
+
     public Playlist createPlaylist(String name) throws Exception
     {
-        Playlist playlist = playlistDbDao.createPlaylist(name);
-        return playlist;
+        try
+        {
+            return playlistDbDao.createPlaylist(name);
+        } catch (Exception ex)
+        {
+            throw new Exception("Could not create playlist.");
+        }
     }
 }
