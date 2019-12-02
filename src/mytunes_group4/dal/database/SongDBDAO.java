@@ -27,15 +27,15 @@ public class SongDBDAO implements ISongDAO{
     
 
     private DatabaseConnector dbCon;
-    
+
     public SongDBDAO() throws IOException
     {
         dbCon = new DatabaseConnector();
     }
-    
+
     public List<Song> getAllSongs() throws DalException
     {
-        
+
         try
         {
             dbCon = new DatabaseConnector();
@@ -43,7 +43,7 @@ public class SongDBDAO implements ISongDAO{
         {
             Logger.getLogger(SongDBDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try ( Connection con = dbCon.getConnection())
         {
             String sql = "SELECT * FROM Song;";
@@ -61,17 +61,14 @@ public class SongDBDAO implements ISongDAO{
                 Song son = new Song(songId, artistName, songName, genre, duration, path);
                 allSongs.add(son);
             }
-            
+
             return allSongs;
         } catch (SQLException ex)
         {
             ex.printStackTrace();
             throw new DalException();
         }
-        
-        
     }
-    
     @Override
     public void deleteSong(Song song) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
@@ -125,5 +122,4 @@ public class SongDBDAO implements ISongDAO{
             throw new DalException();
         }
     }
-   
 }
