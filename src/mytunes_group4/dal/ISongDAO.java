@@ -5,7 +5,6 @@
  */
 package mytunes_group4.dal;
 
-import java.io.IOException;
 import java.util.List;
 import mytunes_group4.be.Song;
 
@@ -16,7 +15,7 @@ import mytunes_group4.be.Song;
 public interface ISongDAO
 {
   
-    Song createSong(String artistName, String songName, String genre, double duration, String path) throws DalException;
+    Song createSong(String artistName, String songName) throws DalException;
     
     void deleteSong(Song song) throws DalException;
 

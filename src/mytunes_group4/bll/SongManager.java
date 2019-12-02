@@ -32,8 +32,9 @@ public class SongManager
         return songDB.getAllSongs();
     }
    
-    public List<Song> search(List<Song> searchBase, String query) throws DalException
+    public List<Song> search(String query) throws DalException
     {
+        List<Song> searchBase = songDB.getAllSongs();
         List<Song> result = new ArrayList<>();
 
         for (Song song : searchBase)
@@ -44,15 +45,5 @@ public class SongManager
             }
         }
         return result;
-        
-        
-    }
-    
-    public List<Song> searchSongs(String query) throws Exception
-    {
-             
-        List<Song> allSongs = getAllSongs();
-        allSongs = search(allSongs, query);
-        return allSongs;
     }
 }

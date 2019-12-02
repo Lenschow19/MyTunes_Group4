@@ -38,7 +38,6 @@ public class EditPlaylistController implements Initializable
     @FXML
     private void addNewPlaylist(ActionEvent event)
     {
-        
     }
     
 }

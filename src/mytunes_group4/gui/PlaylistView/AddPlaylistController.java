@@ -49,11 +49,11 @@ public class AddPlaylistController implements Initializable
     @FXML
     private void addNewPlaylist(ActionEvent event) throws Exception
     {
-        String name = txtPlaylistTitle.getText().trim();
-        tModel.createPlaylist(name);
+        String titleQuery = txtPlaylistTitle.getText();
+        tModel.createPlaylist(titleQuery);
 
-        /*Stage stage = (Stage) savePlaylist.getScene().getWindow();
-        stage.close();*/
+        Stage stage = (Stage) savePlaylist.getScene().getWindow();
+        stage.close();
     }
 
     @FXML

@@ -5,12 +5,15 @@
  */
 package mytunes_group4.bll;
 
+import javafx.scene.media.*;
 import java.io.File;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.scene.control.Slider;
+
+import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 
 /**
  *
@@ -19,8 +22,6 @@ import javafx.scene.media.MediaPlayer;
 public class MusicPlayer
 {
 
-    private MediaPlayer mediaPlayer;
-    private Media media;
     private double currentVolume;
 
     public MusicPlayer()
@@ -28,47 +29,14 @@ public class MusicPlayer
         currentVolume = 1.0;
     }
 
-    public void playMusic()
-    {
-        String path = "Music/Pop/popsong.mp3";
-
-        media = new Media(new File(path).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
-    }
-    
-    public void pauseMusic()
-    {
-        mediaPlayer.pause();
-    }
-    
-    public void stopMusic()
-    {
-        mediaPlayer.stop();
-    }
-
     public double getVolume()
     {
         return currentVolume;
     }
-
+    
     public void setVolume(double value)
     {
-        currentVolume = value;
-    }
-    
-    // doesn't work :(
-    public void changeVolume(Slider vS)
-    {
-        vS.setValue(mediaPlayer.getVolume() * 100);
-        vS.valueProperty().addListener(new InvalidationListener()
-        {
-            @Override
-            public void invalidated(Observable observable)
-            {
-                mediaPlayer.setVolume(vS.getValue() / 100);                
-            }
-        });
+        currentVolume = value; 
     }
 
 }
