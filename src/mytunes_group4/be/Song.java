@@ -18,6 +18,7 @@ public class Song implements Serializable
     private String artistName;
     private String genre;
     private int duration; //How long the songs playtime is
+    private String path;
     
     /**
      * Parameters when creating a new song to the database.
@@ -36,12 +37,25 @@ public class Song implements Serializable
         this.duration = duration;
     }
 
-    public Song(String artistName, String songName, String genre)
+    public Song(String artistName, String songName, String genre, String path)
     {
         this.songName = songName;
         this.artistName = artistName;
         this.genre = genre;
+        this.path = path;
     }
+
+    public String getPath()
+    {
+        return path;
+    }
+
+    public void setPath(String path)
+    {
+        this.path = path;
+    }
+    
+    
 
     
     /**
