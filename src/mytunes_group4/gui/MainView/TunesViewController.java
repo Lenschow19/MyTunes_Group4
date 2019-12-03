@@ -242,18 +242,18 @@ public class TunesViewController implements Initializable
 
     }
 
-    //@FXML
-    //private void handleSearch(KeyEvent event)
-    //{
-        /*try
+    @FXML
+    private void handleSearch(KeyEvent event)
+    {
+        try
         {
             String query = txtSongSearch.getText().trim();
             tModel.search(query);
         } catch (Exception ex)
         {
             ex.printStackTrace();
-        }*/
+        }
         
-    //}
+    }
 
 }
