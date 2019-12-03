@@ -21,6 +21,8 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseDragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -91,6 +93,8 @@ public class TunesViewController implements Initializable
         {
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        //tModel.volumeSliderSetup(volumeSlider);
 
     }
 
@@ -212,12 +216,7 @@ public class TunesViewController implements Initializable
         
     }
 
-    @FXML
-    private void changeVolume(DragEvent event)
-    {
-        throw new UnsupportedOperationException("error");
-        //tModel.changeVolume(volumeSlider);
-    }
+    
 
     /**
      * Displays the selected song from the list
@@ -254,6 +253,12 @@ public class TunesViewController implements Initializable
         {
             ex.printStackTrace();
         }
+        
+    }
+
+    @FXML
+    private void changeVolume(MouseEvent event)
+    {
         
     }
 

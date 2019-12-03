@@ -19,6 +19,7 @@ public class MusicPlayer
 
     private String musicLocation;
     private Object length;
+    private Double currentVolume; 
 
     private MediaPlayer mediaPlayer;
 
@@ -55,7 +56,7 @@ public class MusicPlayer
         mediaPlayer.stop();
     }
 
-    private double currentVolume;
+    
 
     public MusicPlayer()
     {
@@ -69,6 +70,10 @@ public class MusicPlayer
 
     public void setVolume(double value)
     {
+        if (mediaPlayer != null)
+        {
+            mediaPlayer.setVolume(value);
+        }
         currentVolume = value;
     }
 

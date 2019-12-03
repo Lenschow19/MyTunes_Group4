@@ -145,17 +145,21 @@ public class TunesModel
    
     
     // doesn't work :(
-    /*public void changeVolume(Slider vS)
+    /*public void volumeSliderSetup(Slider volumeSlider)
     {
-        vS.setValue(mediaPlayer.getVolume() * 100);
-        vS.valueProperty().addListener(new InvalidationListener()
+        volumeSlider.setValue(mp.getVolume() * volumeSlider.getMax());
+        volumeSlider.valueProperty().addListener(new InvalidationListener()
         {
             @Override
             public void invalidated(Observable observable)
             {
-                mediaPlayer.setVolume(vS.getValue() / 100);
+                mp.setVolume(volumeSlider.getValue() / volumeSlider.getMax());
+                if (volumeSlider.getValue() == 0)
+                {
+                }
             }
         });
+
     }*/
 
     public void search(String query) throws IOException, DalException
