@@ -20,27 +20,28 @@ public class MusicPlayer
     private String musicLocation;
     private Object length;
 
-    
+    private MediaPlayer mediaPlayer;
 
     public void playMusic(String musicLocation)
     {
         Media song = new Media(new File(musicLocation).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(song);
-        /*if (mediaPlayer != null)
+        mediaPlayer = new MediaPlayer(song);
+        
+        if (mediaPlayer != null)
         {
             mediaPlayer.seek((Duration) length);
             mediaPlayer.play();
         } else
-        {*/
+        {
             mediaPlayer.play();
             
-        //}
+        }
     }
    
     public void pauseMusic(String musicLocation)
     {
         Media song = new Media(new File(musicLocation).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(song);
+        mediaPlayer = new MediaPlayer(song);
         
         mediaPlayer.pause();
         length = mediaPlayer.getCurrentTime();
@@ -49,7 +50,7 @@ public class MusicPlayer
     public void stopMusic(String musicLocation)
     {
         Media song = new Media(new File(musicLocation).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(song);
+        mediaPlayer = new MediaPlayer(song);
         
         mediaPlayer.stop();
     }
