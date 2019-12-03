@@ -110,11 +110,14 @@ public class TunesModel
 
     public void playMusic()
     {
-        String path = "Music/Pop/popsong.mp3";
+        String musicLocation = "Music/Pop/popsong.mp3";
 
-        media = new Media(new File(path).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.play();
+        MusicPlayer musicPlayer = new MusicPlayer();
+        musicPlayer.playMusic(musicLocation);
+        
+        //media = new Media(new File(path).toURI().toString());
+        //mediaPlayer = new MediaPlayer(media);
+        //mediaPlayer.play();
         
        
     }

@@ -5,15 +5,11 @@
  */
 package mytunes_group4.bll;
 
-import javafx.scene.media.*;
 import java.io.File;
 
-import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.stage.Stage;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
  *
@@ -21,6 +17,28 @@ import javafx.stage.Stage;
  */
 public class MusicPlayer
 {
+
+    public void playMusic(String musicLocation)
+    {
+        File musicPath = new File(musicLocation);
+
+        try
+        {
+            if (musicPath.exists())
+            {
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+            } else
+            {
+                System.out.println("Can't find file.");
+            }
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 
     private double currentVolume;
 
@@ -33,10 +51,10 @@ public class MusicPlayer
     {
         return currentVolume;
     }
-    
+
     public void setVolume(double value)
     {
-        currentVolume = value; 
+        currentVolume = value;
     }
 
 }
