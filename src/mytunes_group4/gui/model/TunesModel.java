@@ -34,6 +34,7 @@ public class TunesModel
     private SongManager songManager;
     private PlaylistManager pm;
     private MusicPlayer mp;
+    private Double currentVolume; 
 
     public TunesModel() throws IOException, DalException, Exception
     {
@@ -145,22 +146,22 @@ public class TunesModel
    
     
     // doesn't work :(
-    /*public void volumeSliderSetup(Slider volumeSlider)
+    public void volumeSliderSetup(Slider volumeSlider)
     {
-        volumeSlider.setValue(mp.getVolume() * volumeSlider.getMax());
+        volumeSlider.setValue(musicPlayer.getVolume() * volumeSlider.getMax());
         volumeSlider.valueProperty().addListener(new InvalidationListener()
         {
             @Override
             public void invalidated(Observable observable)
             {
-                mp.setVolume(volumeSlider.getValue() / volumeSlider.getMax());
+                musicPlayer.setVolume(volumeSlider.getValue() / volumeSlider.getMax());
                 if (volumeSlider.getValue() == 0)
                 {
                 }
             }
         });
 
-    }*/
+    }
 
     public void search(String query) throws IOException, DalException
     {
@@ -177,5 +178,7 @@ public class TunesModel
             songs.addAll(searchedSongs);
         }
     }
+    
+    
 
 }

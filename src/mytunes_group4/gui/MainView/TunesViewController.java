@@ -94,7 +94,7 @@ public class TunesViewController implements Initializable
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        //tModel.volumeSliderSetup(volumeSlider);
+        tModel.volumeSliderSetup(volumeSlider);
 
     }
 
@@ -259,7 +259,7 @@ public class TunesViewController implements Initializable
     @FXML
     private void changeVolume(MouseEvent event)
     {
-        
+       
     }
 
 }
