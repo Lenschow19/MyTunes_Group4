@@ -54,8 +54,9 @@ public class SongDBDAO
                 String songName = rs.getString("songName");
                 String artistName = rs.getString("artistName");
                 String genre = rs.getString("genre");
+                String path = rs.getString("path");
 
-                Song son = new Song(artistName, songName, genre);
+                Song son = new Song(artistName, songName, genre, path);
                 allSongs.add(son);
             }
 
@@ -67,16 +68,17 @@ public class SongDBDAO
         }
     }
 
-    public Song addSong(String songName, String artistName, String genre) throws DalException
+    public Song addSong(String songName, String artistName, String genre, String path) throws DalException
     {
         try ( Connection con = dbCon.getConnection())
         {
 
-            String sql = "INSERT INTO Song VALUES (?,?,?);";
+            String sql = "INSERT INTO Song VALUES (?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, songName);
             ps.setString(2, artistName);
             ps.setString(3, genre);
+            ps.setString(4, path);
             int affectedRows = ps.executeUpdate();
             if (affectedRows == 1)
             {
@@ -84,7 +86,7 @@ public class SongDBDAO
                 if (rs.next())
                 {
                     int id = rs.getInt(1);
-                    Song son = new Song (songName, artistName, genre);
+                    Song son = new Song (songName, artistName, genre, path);
                     return son;
                 }
             }
