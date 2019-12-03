@@ -43,7 +43,7 @@ public class SongManager
         List<Song> results = new ArrayList<>();
         for (Song song : searchBase)
         {
-            if (song.getSongName().toLowerCase().contains(query.toLowerCase())) 
+            if (song.getSongName().toLowerCase().contains(query.toLowerCase()) || song.getArtistName().toLowerCase().contains(query.toLowerCase())) 
             {
                 results.add(song);
             }
