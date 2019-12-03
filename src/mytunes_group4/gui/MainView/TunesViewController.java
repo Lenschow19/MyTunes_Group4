@@ -1,5 +1,6 @@
 package mytunes_group4.gui.MainView;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,10 +24,13 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import mytunes_group4.be.*;
+import mytunes_group4.bll.MusicPlayer;
 import mytunes_group4.dal.DalException;
 import mytunes_group4.gui.model.TunesModel;
 
@@ -37,8 +41,11 @@ import mytunes_group4.gui.model.TunesModel;
  */
 public class TunesViewController implements Initializable
 {
-
+    private Song song = null;
+    private String songPath;
     private TunesModel tModel;
+    private MediaPlayer mediaPlayer;
+    private Media media;
 
     @FXML
     private ListView<Playlist> Playlists;
@@ -191,9 +198,19 @@ public class TunesViewController implements Initializable
     }
 
     @FXML
-    private void playSong(ActionEvent event)
+    private void playSong(ActionEvent event) //Plays selected song
     {
-        tModel.playMusic();
+        if (song == null)
+        {
+            song = SongList.getSelectionModel().getSelectedItem();
+            setMusicPlayerPath();
+            mediaPlayer.play();
+        }
+        else if (song != SongList.getSelectionModel().getSelectedItem())
+        {
+            setMusicPlayerPath();
+            mediaPlayer.play();
+        }
     }
 
     @FXML
@@ -205,7 +222,7 @@ public class TunesViewController implements Initializable
     @FXML
     private void stopSong(ActionEvent event)
     {
-        tModel.stopMusic();
+        mediaPlayer.stop();
     }
 
     @FXML
@@ -255,6 +272,22 @@ public class TunesViewController implements Initializable
         }
         
     }
+    
+    private void setMusicPlayerPath()
+    {
+        if (mediaPlayer != null)
+        {
+            mediaPlayer.stop();
+        }
+        
+        song = SongList.getSelectionModel().getSelectedItem();
+        songPath = song.getPath();
+        media = new Media(new File(songPath).toURI().toString());
+        mediaPlayer = new MediaPlayer(media);      
+    }
+    
+    
+    
 
     @FXML
     private void changeVolume(MouseEvent event)
