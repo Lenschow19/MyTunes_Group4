@@ -29,7 +29,7 @@ import mytunes_group4.bll.PlaylistManager;
  */
 public class TunesModel
 {
-
+    private Song song = null;
     private ObservableList<Song> allSong;
     private SongManager songManager;
     private PlaylistManager pm;
@@ -173,5 +173,7 @@ public class TunesModel
             songs.addAll(searchedSongs);
         }
     }
+    
+    
 
 }

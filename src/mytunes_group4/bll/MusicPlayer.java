@@ -9,6 +9,7 @@ import java.io.File;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import mytunes_group4.be.Song;
 
 /**
  *
@@ -16,7 +17,6 @@ import javafx.util.Duration;
  */
 public class MusicPlayer
 {
-
     private String musicLocation;
     private Object length;
 
@@ -37,6 +37,9 @@ public class MusicPlayer
             
         }
     }
+    
+    
+    
    
     public void pauseMusic(String musicLocation)
     {
