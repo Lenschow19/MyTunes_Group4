@@ -215,7 +215,8 @@ public class TunesViewController implements Initializable
     @FXML
     private void changeVolume(DragEvent event)
     {
-        tModel.changeVolume(volumeSlider);
+        throw new UnsupportedOperationException("error");
+        //tModel.changeVolume(volumeSlider);
     }
 
     /**
@@ -242,18 +243,18 @@ public class TunesViewController implements Initializable
 
     }
 
-    //@FXML
-    //private void handleSearch(KeyEvent event)
-    //{
-        /*try
+    @FXML
+    private void handleSearch(KeyEvent event)
+    {
+        try
         {
             String query = txtSongSearch.getText().trim();
             tModel.search(query);
         } catch (Exception ex)
         {
             ex.printStackTrace();
-        }*/
+        }
         
-    //}
+    }
 
 }

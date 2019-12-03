@@ -5,7 +5,6 @@
  */
 package mytunes_group4.gui.model;
 
-
 import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,38 +34,35 @@ public class TunesModel
     private SongManager songManager;
     private PlaylistManager pm;
     private MusicPlayer mp;
-    
+
     public TunesModel() throws IOException, DalException, Exception
     {
         this.pm = new PlaylistManager();
         songManager = new SongManager();
         allSongs = FXCollections.observableArrayList();
         allSongs.addAll(songManager.getAllSongs());
-        
-        
+
     }
-    
+
     private ObservableList<Playlist> playlists = FXCollections.observableArrayList();
     private ObservableList<Song> songs = FXCollections.observableArrayList();
-    
+
     public ObservableList<Playlist> getPlaylistList() throws IOException, Exception
     {
         playlists.addAll(pm.getAllPlaylists());
         playlists.sort(new Comparator<Playlist>()
+        {
+            @Override
+            public int compare(Playlist arg0, Playlist arg1)
             {
-                @Override
-                public int compare(Playlist arg0, Playlist arg1)
-                {
-                    return arg0.getId() - arg1.getId();
-                }
+                return arg0.getId() - arg1.getId();
+            }
 
-            });
-        return playlists; 
-        
+        });
+        return playlists;
+
     }
-    
-    
-    
+
     public void updatePlaylist(Playlist selectedPlaylist) throws Exception
     {
         pm.updatePlaylist(selectedPlaylist);
@@ -84,101 +80,72 @@ public class TunesModel
             });
         }
     }
-    
+
     public void deletePlaylist(Playlist selectedPlaylist) throws Exception
     {
         pm.deletePlaylist(selectedPlaylist);
         playlists.remove(selectedPlaylist);
     }
-    
+
     public void createPlaylist(String name) throws Exception
     {
         Playlist playlist = pm.createPlaylist(name);
         playlists.add(playlist);
         playlists.sort(new Comparator<Playlist>()
+        {
+            @Override
+            public int compare(Playlist arg0, Playlist arg1)
             {
-                @Override
-                public int compare(Playlist arg0, Playlist arg1)
-                {
-                    return arg0.getId() - arg1.getId();
-                }
+                return arg0.getId() - arg1.getId();
+            }
 
-            });
+        });
     }
 
-   
-
-    // DETTE SKAL FLYTTES TIL BLL OG ÆNDRES TIL AT KUNNE SPILLE FLERE SANGE
-    private MediaPlayer mediaPlayer;
-    private Media media;
-
+    private MusicPlayer musicPlayer = new MusicPlayer();
+    private String musicLocation = "Music/Pop/popsong.mp3";
     public void playMusic()
     {
-        String musicLocation = "Music/Pop/popsong.mp3";
-
-        MusicPlayer musicPlayer = new MusicPlayer();
         musicPlayer.playMusic(musicLocation);
-        
-        //media = new Media(new File(path).toURI().toString());
-        //mediaPlayer = new MediaPlayer(media);
-        //mediaPlayer.play();
-        
-       
     }
 
+     /**
+     * Pausing the music when pressed
+     */
+    public void pauseMusic()
+    {
+        musicPlayer.pauseMusic(musicLocation);
+    }
 
+    /**
+     * Stops the music when pressed
+     */
+    public void stopMusic()
+    {
+        musicPlayer.stopMusic(musicLocation);
+    }
+    
     private ObservableList<Song> allSongs;
-    
 
-    
-    
     public ObservableList<Song> getSongs() throws IOException, DalException
     {
         songs.addAll(songManager.getAllSongs());
         songs.sort(new Comparator<Song>()
+        {
+            @Override
+            public int compare(Song arg0, Song arg1)
             {
-                @Override
-                public int compare(Song arg0, Song arg1)
-                {
-                    return arg0.getId() - arg1.getId();
-                }
+                return arg0.getId() - arg1.getId();
+            }
 
-            });
+        });
         return songs;
     }
-    
-    
-    
-    // TODO: DETTE SKAL FLYTTES TIL BLL OG LAVES OM TIL AT KUNNE SPILLE FLERE SANGE
-    
-    
-    /**
-     * Plays the music when pressed
-     */
-    
-    
-    /**
-     * Pausing the music when pressed
-     */
 
-    public void pauseMusic()
-    {
-        mediaPlayer.pause();
-    }
-
+   
     
-    /**
-     * Stops the music when pressed
-     */
-
-    public void stopMusic()
-    {
-        mediaPlayer.stop();
-    }
-
-
     // doesn't work :(
-    public void changeVolume(Slider vS)
+    /*public void changeVolume(Slider vS)
     {
         vS.setValue(mediaPlayer.getVolume() * 100);
         vS.valueProperty().addListener(new InvalidationListener()
@@ -186,10 +153,10 @@ public class TunesModel
             @Override
             public void invalidated(Observable observable)
             {
-                mediaPlayer.setVolume(vS.getValue() / 100);                
+                mediaPlayer.setVolume(vS.getValue() / 100);
             }
         });
-    }
+    }*/
 
     public void search(String query) throws IOException, DalException
     {
@@ -198,13 +165,13 @@ public class TunesModel
             songs.clear();
             songs.addAll(songManager.getAllSongs());
         }
-        
+
         if (!query.isEmpty())
         {
             List<Song> searchedSongs = songManager.searchSongs(query);
             songs.clear();
             songs.addAll(searchedSongs);
-        } 
+        }
     }
 
 }
