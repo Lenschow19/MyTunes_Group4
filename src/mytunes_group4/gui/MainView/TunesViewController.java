@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
@@ -64,6 +65,8 @@ public class TunesViewController implements Initializable
     private TextField txtSongSearch;
     @FXML
     private Slider songProgress;
+    @FXML
+    private Label currentSongPlaying;
 
     /**
      * Initializes the controller class.
@@ -209,11 +212,13 @@ public class TunesViewController implements Initializable
             song = SongList.getSelectionModel().getSelectedItem();
             setMusicPlayerPath();
             mediaPlayer.play();
+            currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
         }
         else if (song != SongList.getSelectionModel().getSelectedItem())
         {
             setMusicPlayerPath();
             mediaPlayer.play();
+            currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
         }
     }
 
@@ -227,6 +232,7 @@ public class TunesViewController implements Initializable
     private void stopSong(ActionEvent event)
     {
         mediaPlayer.stop();
+        currentSongPlaying.setText("None is currently playing");
     }
 
     @FXML
@@ -305,6 +311,7 @@ public class TunesViewController implements Initializable
         SongList.getSelectionModel().selectPrevious();
         setMusicPlayerPath();
         mediaPlayer.play();
+        currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
     }
 
     @FXML
@@ -313,6 +320,7 @@ public class TunesViewController implements Initializable
         SongList.getSelectionModel().selectNext();
         setMusicPlayerPath();
         mediaPlayer.play();
+        currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
         
     }
 

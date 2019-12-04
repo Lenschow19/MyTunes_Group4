@@ -82,6 +82,6 @@
       <Slider fx:id="songProgress" layoutX="201.0" layoutY="116.0" prefHeight="14.0" prefWidth="453.0" />
       <Button layoutX="328.0" layoutY="136.0" mnemonicParsing="false" onAction="#playPreviousSong" text="&lt;" />
       <Button layoutX="531.0" layoutY="136.0" mnemonicParsing="false" onAction="#playNextSong" text="&gt;" />
-      <Label layoutX="380.0" layoutY="99.0" text="None currently playing" />
+      <Label fx:id="currentSongPlaying" alignment="CENTER" contentDisplay="CENTER" layoutX="204.0" layoutY="93.0" prefHeight="23.0" prefWidth="444.0" text="None is currently playing" textAlignment="CENTER" />
    </children>
 </AnchorPane>
