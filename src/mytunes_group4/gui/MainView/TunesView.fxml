@@ -66,7 +66,7 @@
       </VBox>
       <Slider fx:id="volumeSlider" layoutX="370.0" layoutY="178.0" onMouseDragged="#changeVolume" value="100.0" />
       <Button layoutX="366.0" layoutY="136.0" mnemonicParsing="false" onAction="#playSong" text="Play" />
-      <Button layoutX="417.0" layoutY="136.0" mnemonicParsing="false" onAction="#pauseSong" text="Pause" />
+      <Button fx:id="btnPause" alignment="CENTER" contentDisplay="CENTER" layoutX="409.0" layoutY="136.0" mnemonicParsing="false" onAction="#pauseSong" prefHeight="25.0" prefWidth="63.0" text="Pause" textAlignment="CENTER" />
       <Button layoutX="477.0" layoutY="136.0" mnemonicParsing="false" onAction="#stopSong" text="Stop" />
       <Label layoutX="404.0" layoutY="20.0" text="selected song" />
       <Button layoutX="423.0" layoutY="254.0" mnemonicParsing="false" onAction="#addSongToPlaylist" text="add to playlist" />

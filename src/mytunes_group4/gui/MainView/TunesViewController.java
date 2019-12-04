@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
@@ -67,6 +68,8 @@ public class TunesViewController implements Initializable
     private Slider songProgress;
     @FXML
     private Label currentSongPlaying;
+    @FXML
+    private Button btnPause;
 
     /**
      * Initializes the controller class.
@@ -207,6 +210,7 @@ public class TunesViewController implements Initializable
     @FXML
     private void playSong(ActionEvent event) //Plays selected song
     {
+        btnPause.setText("Pause");
         if (song == null)
         {
             song = SongList.getSelectionModel().getSelectedItem();
@@ -225,7 +229,16 @@ public class TunesViewController implements Initializable
     @FXML
     private void pauseSong(ActionEvent event)
     {
-        tModel.pauseMusic();
+        if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING)
+        {
+            mediaPlayer.pause();
+            btnPause.setText("Resume");
+        }
+        else
+        {
+            mediaPlayer.play();
+            btnPause.setText("Pause");
+        }
     }
 
     @FXML
@@ -297,8 +310,6 @@ public class TunesViewController implements Initializable
     }
     
     
-    
-
     @FXML
     private void changeVolume(MouseEvent event)
     {
