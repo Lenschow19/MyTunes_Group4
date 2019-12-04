@@ -56,7 +56,7 @@ public class TunesModel
             @Override
             public int compare(Playlist arg0, Playlist arg1)
             {
-                return arg0.getId() - arg1.getId();
+                return arg0.getPlaylistId() - arg1.getPlaylistId();
             }
 
         });
@@ -75,7 +75,7 @@ public class TunesModel
                 @Override
                 public int compare(Playlist arg0, Playlist arg1)
                 {
-                    return arg0.getId() - arg1.getId();
+                    return arg0.getPlaylistId() - arg1.getPlaylistId();
                 }
 
             });
@@ -97,7 +97,7 @@ public class TunesModel
             @Override
             public int compare(Playlist arg0, Playlist arg1)
             {
-                return arg0.getId() - arg1.getId();
+                return arg0.getPlaylistId() - arg1.getPlaylistId();
             }
 
         });
@@ -136,7 +136,7 @@ public class TunesModel
             @Override
             public int compare(Song arg0, Song arg1)
             {
-                return arg0.getId() - arg1.getId();
+                return arg0.getSongId() - arg1.getSongId();
             }
 
         });

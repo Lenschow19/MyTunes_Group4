@@ -85,7 +85,7 @@ public class SongDBDAO
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next())
                 {
-                    int id = rs.getInt(1);
+                    int songId = rs.getInt(1);
                     Song son = new Song (songName, artistName, genre, path);
                     return son;
                 }

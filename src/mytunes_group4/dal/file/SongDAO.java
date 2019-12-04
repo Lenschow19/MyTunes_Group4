@@ -85,7 +85,7 @@ public class SongDAO implements ISongDAO
                 {
                     for (Song son : allSongs)
                     {
-                        bw.write(son.getId() + "," + son.getArtistName()+ "," + son.getSongName());
+                        bw.write(son.getSongId() + "," + son.getArtistName()+ "," + son.getSongName());
                         bw.newLine();
                     }
                 }
@@ -108,7 +108,7 @@ public class SongDAO implements ISongDAO
             {
                 for (Song son : allSongs)
                 {
-                    bw.write(son.getId() + "," + son.getArtistName()+ "," + son.getSongName());
+                    bw.write(son.getSongId() + "," + son.getArtistName()+ "," + son.getSongName());
                     bw.newLine();
                 }
             } catch (IOException ex)

@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Playlist
 {
-    private int id; 
+    private int playlistId; 
     private String name; //name of playlist
     private int totalDuration; //Displaying duration of all songs in the playlist
     private int songCounter; //Displaying number of songs in the playlist
@@ -27,9 +27,9 @@ public class Playlist
      * @param totalDuration //calculated
      * @param songCounter //counter
      */
-    public Playlist(int id, String name)
+    public Playlist(int playlistId, String name)
     {
-        this.id = id; 
+        this.playlistId = playlistId; 
         this.name = name;
         this.totalDuration = totalDuration;
         this.songCounter = songCounter;
@@ -41,9 +41,9 @@ public class Playlist
      *
      * @return id of the playlist
      */
-    public int getId()
+    public int getPlaylistId()
     {
-        return id;
+        return playlistId;
     }
 
     /**
@@ -67,7 +67,7 @@ public class Playlist
     @Override
     public String toString()
     {
-        return id + " " + name;
+        return playlistId + " " + name;
     }
   
     

@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 public class Song implements Serializable
 {
-    private int id; 
+    private int songId; 
     private String songName;
     private String artistName;
     private String genre;
@@ -28,9 +28,9 @@ public class Song implements Serializable
      * @param genre
      * @param duration //calculated
      */
-    public Song(int id, String songName, String artistName, String genre, int duration)
+    public Song(int songId, String songName, String artistName, String genre, int duration)
     {
-        this.id = id; 
+        this.songId = songId; 
         this.songName = songName;
         this.artistName = artistName;
         this.genre = genre;
@@ -62,9 +62,9 @@ public class Song implements Serializable
      * 
      * @return song id
      */
-    public int getId()
+    public int getSongId()
     {
-        return id;
+        return songId;
     } 
 
     /**

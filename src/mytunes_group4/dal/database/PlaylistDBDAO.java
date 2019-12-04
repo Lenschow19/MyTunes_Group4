@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import mytunes_group4.be.Playlist;
+import mytunes_group4.be.Song;
 
 /**
  *
@@ -40,7 +41,7 @@ public class PlaylistDBDAO
             ArrayList<Playlist> allPlaylists = new ArrayList<>();
             while (rs.next())
             {
-                int id = rs.getInt("id");
+                int id = rs.getInt("playlistId");
                 String name = rs.getString("name");
 
                 Playlist pl = new Playlist(id, name);
@@ -86,8 +87,8 @@ public class PlaylistDBDAO
     {
         try ( Connection con = dbc.getConnection())
         {
-            int id = playlist.getId();
-            String sql = "DELETE FROM Playlist WHERE id=?";
+            int id = playlist.getPlaylistId();
+            String sql = "DELETE FROM Playlist WHERE playlistId=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int affectedRows = ps.executeUpdate(sql);
@@ -108,9 +109,9 @@ public class PlaylistDBDAO
     {
         try ( Connection con = dbc.getConnection())
         {
-            int id = playlist.getId();
+            int id = playlist.getPlaylistId();
             String name = playlist.getName();
-            String sql = "UPDATE Playlist SET name=? WHERE id=?";
+            String sql = "UPDATE Playlist SET name=? WHERE playlistId=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, name);
             ps.setInt(2, id);
@@ -126,4 +127,6 @@ public class PlaylistDBDAO
             throw new Exception();
         }
     }
+    
+    
 }
