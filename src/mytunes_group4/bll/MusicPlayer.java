@@ -6,6 +6,7 @@
 package mytunes_group4.bll;
 
 import java.io.File;
+import java.io.ObjectInputFilter.Status;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
@@ -26,23 +27,18 @@ public class MusicPlayer
     {
         Media song = new Media(new File(musicLocation).toURI().toString());
         mediaPlayer = new MediaPlayer(song);
-        
-        if (mediaPlayer != null)
-        {
-            mediaPlayer.seek((Duration) length);
-            mediaPlayer.play();
-        } else
-        {
-            mediaPlayer.play();
-            
-        }
+
+        mediaPlayer.seek((Duration) length);
+        mediaPlayer.play();
+
     }
-   
+
+    //TODO fix pause/resume, look into mediaplayer.getStatus
     public void pauseMusic(String musicLocation)
     {
         Media song = new Media(new File(musicLocation).toURI().toString());
         mediaPlayer = new MediaPlayer(song);
-        
+
         mediaPlayer.pause();
         length = mediaPlayer.getCurrentTime();
     }
@@ -51,7 +47,7 @@ public class MusicPlayer
     {
         Media song = new Media(new File(musicLocation).toURI().toString());
         mediaPlayer = new MediaPlayer(song);
-        
+
         mediaPlayer.stop();
     }
 
