@@ -43,6 +43,7 @@ import mytunes_group4.gui.model.TunesModel;
  */
 public class TunesViewController implements Initializable
 {
+
     private Song song = null;
     private String songPath;
     private TunesModel tModel;
@@ -73,6 +74,7 @@ public class TunesViewController implements Initializable
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      */
     @Override
@@ -108,7 +110,7 @@ public class TunesViewController implements Initializable
         {
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         tModel.volumeSliderSetup(volumeSlider);
 
     }
@@ -206,24 +208,17 @@ public class TunesViewController implements Initializable
     }
 
     private boolean isPlaying;
-    
+
     @FXML
     private void playSong(ActionEvent event) //Plays selected song
     {
         btnPause.setText("Pause");
-        if (song == null)
-        {
-            song = SongList.getSelectionModel().getSelectedItem();
-            setMusicPlayerPath();
-            mediaPlayer.play();
-            currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
-        }
-        else if (song != SongList.getSelectionModel().getSelectedItem())
-        {
-            setMusicPlayerPath();
-            mediaPlayer.play();
-            currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
-        }
+
+        song = SongList.getSelectionModel().getSelectedItem();
+        setMusicPlayerPath();
+        mediaPlayer.play();
+        currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
+
     }
 
     @FXML
@@ -233,8 +228,7 @@ public class TunesViewController implements Initializable
         {
             mediaPlayer.pause();
             btnPause.setText("Resume");
-        }
-        else
+        } else
         {
             mediaPlayer.play();
             btnPause.setText("Pause");
@@ -251,12 +245,8 @@ public class TunesViewController implements Initializable
     @FXML
     private void addSongToPlaylist(ActionEvent event)
     {
-        
-        
-        
-    }
 
-    
+    }
 
     /**
      * Displays the selected song from the list
@@ -293,27 +283,26 @@ public class TunesViewController implements Initializable
         {
             ex.printStackTrace();
         }
-        
+
     }
-    
+
     private void setMusicPlayerPath()
     {
         if (mediaPlayer != null)
         {
             mediaPlayer.stop();
         }
-        
+
         song = SongList.getSelectionModel().getSelectedItem();
         songPath = song.getPath();
         media = new Media(new File(songPath).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);      
+        mediaPlayer = new MediaPlayer(media);
     }
-    
-    
+
     @FXML
     private void changeVolume(MouseEvent event)
     {
-       
+
     }
 
     @FXML
@@ -332,7 +321,7 @@ public class TunesViewController implements Initializable
         setMusicPlayerPath();
         mediaPlayer.play();
         currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
-        
+
     }
 
 }
