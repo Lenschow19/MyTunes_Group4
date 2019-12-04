@@ -62,6 +62,8 @@ public class TunesViewController implements Initializable
     private TextField ssTitle;
     @FXML
     private TextField txtSongSearch;
+    @FXML
+    private Slider songProgress;
 
     /**
      * Initializes the controller class.
@@ -197,6 +199,8 @@ public class TunesViewController implements Initializable
     {
     }
 
+    private boolean isPlaying;
+    
     @FXML
     private void playSong(ActionEvent event) //Plays selected song
     {
