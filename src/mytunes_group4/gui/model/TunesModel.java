@@ -29,11 +29,12 @@ import mytunes_group4.bll.PlaylistManager;
  */
 public class TunesModel
 {
-
+    private Song song = null;
     private ObservableList<Song> allSong;
     private SongManager songManager;
     private PlaylistManager pm;
     private MusicPlayer mp;
+    private Double currentVolume; 
 
     public TunesModel() throws IOException, DalException, Exception
     {
@@ -145,18 +146,22 @@ public class TunesModel
    
     
     // doesn't work :(
-    /*public void changeVolume(Slider vS)
+    public void volumeSliderSetup(Slider volumeSlider)
     {
-        vS.setValue(mediaPlayer.getVolume() * 100);
-        vS.valueProperty().addListener(new InvalidationListener()
+        volumeSlider.setValue(musicPlayer.getVolume() * volumeSlider.getMax());
+        volumeSlider.valueProperty().addListener(new InvalidationListener()
         {
             @Override
             public void invalidated(Observable observable)
             {
-                mediaPlayer.setVolume(vS.getValue() / 100);
+                musicPlayer.setVolume(volumeSlider.getValue() / volumeSlider.getMax());
+                if (volumeSlider.getValue() == 0)
+                {
+                }
             }
         });
-    }*/
+
+    }
 
     public void search(String query) throws IOException, DalException
     {
@@ -173,5 +178,7 @@ public class TunesModel
             songs.addAll(searchedSongs);
         }
     }
+    
+    
 
 }

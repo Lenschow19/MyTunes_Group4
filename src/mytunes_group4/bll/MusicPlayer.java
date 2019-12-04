@@ -10,6 +10,7 @@ import java.io.ObjectInputFilter.Status;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+import mytunes_group4.be.Song;
 
 /**
  *
@@ -17,9 +18,9 @@ import javafx.util.Duration;
  */
 public class MusicPlayer
 {
-
     private String musicLocation;
     private Object length;
+    private Double currentVolume; 
 
     private MediaPlayer mediaPlayer;
 
@@ -33,7 +34,6 @@ public class MusicPlayer
 
     }
 
-    //TODO fix pause/resume, look into mediaplayer.getStatus
     public void pauseMusic(String musicLocation)
     {
         Media song = new Media(new File(musicLocation).toURI().toString());
@@ -51,7 +51,7 @@ public class MusicPlayer
         mediaPlayer.stop();
     }
 
-    private double currentVolume;
+    
 
     public MusicPlayer()
     {
@@ -65,7 +65,13 @@ public class MusicPlayer
 
     public void setVolume(double value)
     {
+        if (mediaPlayer != null)
+        {
+            mediaPlayer.setVolume(value);
+        }
         currentVolume = value;
     }
+
+    
 
 }
