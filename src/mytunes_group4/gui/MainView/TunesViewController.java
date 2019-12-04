@@ -299,4 +299,21 @@ public class TunesViewController implements Initializable
        
     }
 
+    @FXML
+    private void playPreviousSong(ActionEvent event)
+    {
+        SongList.getSelectionModel().selectPrevious();
+        setMusicPlayerPath();
+        mediaPlayer.play();
+    }
+
+    @FXML
+    private void playNextSong(ActionEvent event)
+    {
+        SongList.getSelectionModel().selectNext();
+        setMusicPlayerPath();
+        mediaPlayer.play();
+        
+    }
+
 }
