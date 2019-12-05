@@ -50,6 +50,7 @@ public class TunesViewController implements Initializable
     private MediaPlayer mediaPlayer;
     private Media media;
     private boolean isPlaying;
+    private double currentVolume;
 
     @FXML
     private ListView<Playlist> Playlists;
@@ -112,7 +113,7 @@ public class TunesViewController implements Initializable
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        tModel.volumeSliderSetup(volumeSlider);
+        volumeSliderSetup();
 
     }
 
@@ -330,6 +331,39 @@ public class TunesViewController implements Initializable
         setMusicPlayerPath();
         mediaPlayer.play();
         currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
+
+    }
+    
+    public double getVolume()
+    {
+        return currentVolume;
+    }
+
+    public void setVolume(double value)
+    {
+        if (mediaPlayer != null)
+        {
+            mediaPlayer.setVolume(value);
+        }
+        currentVolume = value;
+    }
+    
+    
+    public void volumeSliderSetup()
+    {
+        currentVolume = 1.0;
+        volumeSlider.setValue(getVolume() * volumeSlider.getMax());
+        volumeSlider.valueProperty().addListener(new InvalidationListener()
+        {
+            @Override
+            public void invalidated(Observable observable)
+            {
+                setVolume(volumeSlider.getValue() / volumeSlider.getMax());
+                if (volumeSlider.getValue() == 0)
+                {
+                }
+            }
+        });
 
     }
 
