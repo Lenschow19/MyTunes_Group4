@@ -316,6 +316,7 @@ public class TunesViewController implements Initializable
     private void playPreviousSong(ActionEvent event)
     {
         SongList.getSelectionModel().selectPrevious();
+        isPlaying = true;
         setMusicPlayerPath();
         mediaPlayer.play();
         currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
@@ -325,6 +326,7 @@ public class TunesViewController implements Initializable
     private void playNextSong(ActionEvent event)
     {
         SongList.getSelectionModel().selectNext();
+        isPlaying = true;
         setMusicPlayerPath();
         mediaPlayer.play();
         currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
