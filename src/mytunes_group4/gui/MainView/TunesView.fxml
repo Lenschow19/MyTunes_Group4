@@ -26,7 +26,7 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#addNewPlaylist" text="New" />
                   <Button mnemonicParsing="false" onAction="#editPlaylist" text="Edit" />
-                  <Button mnemonicParsing="false" onAction="#deletePlaylist" text="Delete" />
+                  <Button mnemonicParsing="false" onAction="#deletePlaylist" onMouseReleased="#confirmationDeletePopUpPlaylist" text="Delete" />
                </children>
             </HBox>
          </children>
@@ -59,7 +59,7 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#addNewSong" text="New" />
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#editSong" text="Edit" />
-                  <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteSong" text="Delete" />
+                  <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteSong" onMouseReleased="#confirmationDeletePopUpSong" text="Delete" />
                </children>
             </HBox>
          </children>
