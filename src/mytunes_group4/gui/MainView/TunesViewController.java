@@ -49,6 +49,7 @@ public class TunesViewController implements Initializable
     private TunesModel tModel;
     private MediaPlayer mediaPlayer;
     private Media media;
+    private boolean isPlaying;
 
     @FXML
     private ListView<Playlist> Playlists;
@@ -207,13 +208,11 @@ public class TunesViewController implements Initializable
     {
     }
 
-    private boolean isPlaying;
-
     @FXML
     private void playSong(ActionEvent event) //Plays selected song
     {
         btnPause.setText("Pause");
-
+        isPlaying = true;
         song = SongList.getSelectionModel().getSelectedItem();
         setMusicPlayerPath();
         mediaPlayer.play();
@@ -224,14 +223,20 @@ public class TunesViewController implements Initializable
     @FXML
     private void pauseSong(ActionEvent event)
     {
-        if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING)
+        if (isPlaying == true)
         {
-            mediaPlayer.pause();
-            btnPause.setText("Resume");
+            if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING)
+            {
+                mediaPlayer.pause();
+                btnPause.setText("Resume");
+            } else
+            {
+                mediaPlayer.play();
+                btnPause.setText("Pause");
+            }
         } else
         {
-            mediaPlayer.play();
-            btnPause.setText("Pause");
+            System.out.println("Play a song first");
         }
     }
 
@@ -239,7 +244,9 @@ public class TunesViewController implements Initializable
     private void stopSong(ActionEvent event)
     {
         mediaPlayer.stop();
+        isPlaying = false;
         currentSongPlaying.setText("None is currently playing");
+
     }
 
     @FXML
