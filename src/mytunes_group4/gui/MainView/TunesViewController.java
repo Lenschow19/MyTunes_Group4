@@ -29,6 +29,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import mytunes_group4.be.*;
 import mytunes_group4.bll.PlaylistManager;
 import mytunes_group4.bll.SongManager;
@@ -51,6 +53,8 @@ public class TunesViewController implements Initializable
     private Playlist playlist;
     private PlaylistManager playlistmanager;
     private SongManager songmanager;
+    private boolean isPlaying;
+    private double currentVolume;
 
     @FXML
     private ListView<Playlist> Playlists;
@@ -68,11 +72,11 @@ public class TunesViewController implements Initializable
     @FXML
     private TextField txtSongSearch;
     @FXML
-    private Slider songProgress;
-    @FXML
     private Label currentSongPlaying;
     @FXML
     private Button btnPause;
+    @FXML
+    private Label lblTime;
 
     /**
      * Initializes the controller class.
@@ -113,7 +117,7 @@ public class TunesViewController implements Initializable
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        tModel.volumeSliderSetup(volumeSlider);
+        volumeSliderSetup();
 
     }
 
@@ -221,13 +225,11 @@ public class TunesViewController implements Initializable
         }
     }
 
-    private boolean isPlaying;
-
     @FXML
     private void playSong(ActionEvent event) //Plays selected song
     {
         btnPause.setText("Pause");
-
+        isPlaying = true;
         song = SongList.getSelectionModel().getSelectedItem();
         setMusicPlayerPath();
         mediaPlayer.play();
@@ -238,14 +240,20 @@ public class TunesViewController implements Initializable
     @FXML
     private void pauseSong(ActionEvent event)
     {
-        if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING)
+        if (isPlaying == true)
         {
-            mediaPlayer.pause();
-            btnPause.setText("Resume");
+            if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING)
+            {
+                mediaPlayer.pause();
+                btnPause.setText("Resume");
+            } else
+            {
+                mediaPlayer.play();
+                btnPause.setText("Pause");
+            }
         } else
         {
-            mediaPlayer.play();
-            btnPause.setText("Pause");
+            System.out.println("Play a song first");
         }
     }
 
@@ -254,6 +262,8 @@ public class TunesViewController implements Initializable
     {
         mediaPlayer.stop();
         currentSongPlaying.setText("Nothing is currently playing");
+        isPlaying = false;
+        currentSongPlaying.setText("None is currently playing");
     }
 
     @FXML
@@ -323,6 +333,7 @@ public class TunesViewController implements Initializable
     private void playPreviousSong(ActionEvent event)
     {
         SongList.getSelectionModel().selectPrevious();
+        isPlaying = true;
         setMusicPlayerPath();
         mediaPlayer.play();
         currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
@@ -332,9 +343,43 @@ public class TunesViewController implements Initializable
     private void playNextSong(ActionEvent event)
     {
         SongList.getSelectionModel().selectNext();
+        isPlaying = true;
         setMusicPlayerPath();
         mediaPlayer.play();
         currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
+
+    }
+    
+    public double getVolume()
+    {
+        return currentVolume;
+    }
+
+    public void setVolume(double value)
+    {
+        if (mediaPlayer != null)
+        {
+            mediaPlayer.setVolume(value);
+        }
+        currentVolume = value;
+    }
+    
+    
+    public void volumeSliderSetup()
+    {
+        currentVolume = 1.0;
+        volumeSlider.setValue(getVolume() * volumeSlider.getMax());
+        volumeSlider.valueProperty().addListener(new InvalidationListener()
+        {
+            @Override
+            public void invalidated(Observable observable)
+            {
+                setVolume(volumeSlider.getValue() / volumeSlider.getMax());
+                if (volumeSlider.getValue() == 0)
+                {
+                }
+            }
+        });
 
     }
 

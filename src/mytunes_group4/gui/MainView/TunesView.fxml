@@ -31,14 +31,14 @@
             </HBox>
          </children>
       </VBox>
-      <VBox layoutX="262.0" layoutY="213.0" prefHeight="377.0" prefWidth="157.0">
+      <VBox layoutX="262.0" layoutY="213.0" prefHeight="377.0" prefWidth="205.0">
          <children>
             <Label text="Songs in playlist">
                <font>
                   <Font size="16.0" />
                </font>
             </Label>
-            <ListView fx:id="SongsInPlaylist" prefHeight="287.0" prefWidth="231.0" />
+            <ListView fx:id="SongsInPlaylist" prefHeight="287.0" />
             <HBox alignment="TOP_CENTER" prefHeight="59.0" prefWidth="157.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#deleteSongInPlaylist" text="Delete" />
@@ -69,7 +69,7 @@
       <Button fx:id="btnPause" alignment="CENTER" contentDisplay="CENTER" layoutX="409.0" layoutY="136.0" mnemonicParsing="false" onAction="#pauseSong" prefHeight="25.0" prefWidth="63.0" text="Pause" textAlignment="CENTER" />
       <Button layoutX="477.0" layoutY="136.0" mnemonicParsing="false" onAction="#stopSong" text="Stop" />
       <Label layoutX="404.0" layoutY="20.0" text="selected song" />
-      <Button layoutX="423.0" layoutY="254.0" mnemonicParsing="false" onAction="#addSongToPlaylist" text="add to playlist" />
+      <Button layoutX="485.0" layoutY="293.0" mnemonicParsing="false" onAction="#addSongToPlaylist" text="&lt;" />
       <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="340.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@sound.png" />
@@ -79,9 +79,8 @@
       <Label layoutX="328.0" layoutY="67.0" text="Title:" />
       <TextField fx:id="ssArtist" layoutX="366.0" layoutY="37.0" />
       <TextField fx:id="ssTitle" layoutX="366.0" layoutY="63.0" />
-      <Slider fx:id="songProgress" layoutX="201.0" layoutY="116.0" prefHeight="14.0" prefWidth="453.0" />
       <Button layoutX="328.0" layoutY="136.0" mnemonicParsing="false" onAction="#playPreviousSong" text="&lt;" />
       <Button layoutX="531.0" layoutY="136.0" mnemonicParsing="false" onAction="#playNextSong" text="&gt;" />
-      <Label fx:id="currentSongPlaying" alignment="CENTER" contentDisplay="CENTER" layoutX="204.0" layoutY="93.0" prefHeight="23.0" prefWidth="444.0" text="None is currently playing" textAlignment="CENTER" />
+      <Label fx:id="currentSongPlaying" alignment="CENTER" contentDisplay="CENTER" layoutX="206.0" layoutY="96.0" prefHeight="23.0" prefWidth="444.0" text="None is currently playing" textAlignment="CENTER" />
    </children>
 </AnchorPane>
