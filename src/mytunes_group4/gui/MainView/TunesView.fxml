@@ -79,9 +79,8 @@
       <Label layoutX="328.0" layoutY="67.0" text="Title:" />
       <TextField fx:id="ssArtist" layoutX="366.0" layoutY="37.0" />
       <TextField fx:id="ssTitle" layoutX="366.0" layoutY="63.0" />
-      <Slider fx:id="songProgress" layoutX="214.0" layoutY="116.0" prefHeight="14.0" prefWidth="453.0" />
       <Button layoutX="328.0" layoutY="136.0" mnemonicParsing="false" onAction="#playPreviousSong" text="&lt;" />
       <Button layoutX="531.0" layoutY="136.0" mnemonicParsing="false" onAction="#playNextSong" text="&gt;" />
-      <Label fx:id="currentSongPlaying" alignment="CENTER" contentDisplay="CENTER" layoutX="204.0" layoutY="93.0" prefHeight="23.0" prefWidth="444.0" text="None is currently playing" textAlignment="CENTER" />
+      <Label fx:id="currentSongPlaying" alignment="CENTER" contentDisplay="CENTER" layoutX="206.0" layoutY="96.0" prefHeight="23.0" prefWidth="444.0" text="None is currently playing" textAlignment="CENTER" />
    </children>
 </AnchorPane>

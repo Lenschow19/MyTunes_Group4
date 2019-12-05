@@ -31,6 +31,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import mytunes_group4.be.*;
 import mytunes_group4.bll.MusicPlayer;
 import mytunes_group4.dal.DalException;
@@ -68,11 +69,11 @@ public class TunesViewController implements Initializable
     @FXML
     private TextField txtSongSearch;
     @FXML
-    private Slider songProgress;
-    @FXML
     private Label currentSongPlaying;
     @FXML
     private Button btnPause;
+    @FXML
+    private Label lblTime;
 
     /**
      * Initializes the controller class.
