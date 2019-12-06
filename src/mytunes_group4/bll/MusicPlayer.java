@@ -6,11 +6,9 @@
 package mytunes_group4.bll;
 
 import java.io.File;
-import java.io.ObjectInputFilter.Status;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import mytunes_group4.be.Song;
 
 /**
  *
@@ -18,7 +16,7 @@ import mytunes_group4.be.Song;
  */
 public class MusicPlayer
 {
-    private String musicLocation;
+    
     private Object length;
     private Double currentVolume; 
 
