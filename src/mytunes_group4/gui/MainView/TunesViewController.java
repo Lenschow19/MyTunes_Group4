@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -263,7 +264,7 @@ public class TunesViewController implements Initializable
         mediaPlayer.stop();
         currentSongPlaying.setText("Nothing is currently playing");
         isPlaying = false;
-        currentSongPlaying.setText("None is currently playing");
+        currentSongPlaying.setText("Nothing is currently playing");
     }
 
     @FXML
