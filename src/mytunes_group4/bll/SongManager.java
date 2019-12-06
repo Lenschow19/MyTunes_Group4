@@ -43,7 +43,7 @@ public class SongManager
         List<Song> results = new ArrayList<>();
         for (Song song : searchBase)
         {
-            if (song.getSongName().toLowerCase().contains(query.toLowerCase()) || song.getArtistName().toLowerCase().contains(query.toLowerCase())) 
+            if (song.getSongName().toLowerCase().contains(query.toLowerCase()) || song.getArtistName().toLowerCase().contains(query.toLowerCase()) || song.getGenre().toLowerCase().contains(query.toLowerCase())) 
             {
                 results.add(song);
             }
@@ -56,5 +56,11 @@ public class SongManager
         List<Song> allSongs = getAllSongs();
         allSongs = search(allSongs, query);
         return allSongs;
+    }
+    
+    public void deleteSong(Song song) throws Exception
+    {
+        //SongDBDAO.deleteSong(song);
+        throw new UnsupportedOperationException("not working at the moment. please choose different paths in life and come back later.");
     }
 }
