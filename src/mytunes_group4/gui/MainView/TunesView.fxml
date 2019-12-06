@@ -82,5 +82,6 @@
       <Button layoutX="328.0" layoutY="136.0" mnemonicParsing="false" onAction="#playPreviousSong" text="&lt;" />
       <Button layoutX="531.0" layoutY="136.0" mnemonicParsing="false" onAction="#playNextSong" text="&gt;" />
       <Label fx:id="currentSongPlaying" alignment="CENTER" contentDisplay="CENTER" layoutX="206.0" layoutY="96.0" prefHeight="23.0" prefWidth="444.0" text="None is currently playing" textAlignment="CENTER" />
+      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="CENTER" layoutX="360.0" layoutY="115.0" prefHeight="17.0" prefWidth="156.0" text="0:00" textAlignment="CENTER" />
    </children>
 </AnchorPane>

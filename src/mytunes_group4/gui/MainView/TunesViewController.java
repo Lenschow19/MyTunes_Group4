@@ -322,6 +322,23 @@ public class TunesViewController implements Initializable
         songPath = song.getPath();
         media = new Media(new File(songPath).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
+
+        
+        //shows the duration of the song in seconds in gui (works but doesnt look nice)
+        mediaPlayer.setOnReady(() ->
+        {
+            lblTime.setText("" + media.getDuration().toSeconds());
+
+        });
+
+        
+        //plays the next song automatically after first song has finished
+        mediaPlayer.setOnEndOfMedia(() ->
+        {
+            SongList.getSelectionModel().selectNext();
+            setMusicPlayerPath();
+            mediaPlayer.play();
+        });
     }
 
     @FXML
@@ -350,7 +367,7 @@ public class TunesViewController implements Initializable
         currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
 
     }
-    
+
     public double getVolume()
     {
         return currentVolume;
@@ -364,9 +381,7 @@ public class TunesViewController implements Initializable
         }
         currentVolume = value;
     }
-    
-    
-   /* public void volumeSliderSetup()
+    public void volumeSliderSetup()
     {
         currentVolume = 1.0;
         volumeSlider.setValue(getVolume() * volumeSlider.getMax());
@@ -382,7 +397,7 @@ public class TunesViewController implements Initializable
             }
         });
 
-    }*/
+    }
 
     @FXML
     private void confirmationDeletePopUpPlaylist(MouseEvent event) throws Exception
