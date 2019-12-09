@@ -22,7 +22,7 @@ public class Song implements Serializable
     
     /**
      * Parameters when creating a new song to the database.
-     * @param id //each song has it's own individual id
+     * @param songId
      * @param songName
      * @param artistName
      * @param genre

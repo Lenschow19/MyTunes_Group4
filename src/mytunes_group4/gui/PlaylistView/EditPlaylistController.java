@@ -25,6 +25,8 @@ public class EditPlaylistController implements Initializable
     private TextField txtPlaylistTitle;
     @FXML
     private Button savePlaylist;
+    @FXML
+    private Button cancel;
 
     /**
      * Initializes the controller class.
@@ -37,6 +39,11 @@ public class EditPlaylistController implements Initializable
 
     @FXML
     private void addNewPlaylist(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void closeWindow(ActionEvent event)
     {
     }
     

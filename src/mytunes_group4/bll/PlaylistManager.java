@@ -17,7 +17,7 @@ import mytunes_group4.dal.database.PlaylistDBDAO;
  */
 public class PlaylistManager
 {
-    
+
     private PlaylistDBDAO playlistDbDao;
 
     public PlaylistManager() throws Exception
