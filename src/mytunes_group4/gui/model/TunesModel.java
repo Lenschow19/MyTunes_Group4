@@ -103,14 +103,7 @@ public class TunesModel
         return songsShownInPlaylist; 
     }
     
-    /*public void setSongsInPlaylist(Playlist selectedItem)
-    {
-        if (selectedItem != null)
-        {
-            songsShownInPlaylist.clear();
-            songsShownInPlaylist.addAll(selectedItem.getSongsInPlaylist());
-        }
-    }*/
+   
     
     
     
