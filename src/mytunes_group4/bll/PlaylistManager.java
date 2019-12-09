@@ -8,6 +8,7 @@ package mytunes_group4.bll;
 import java.io.IOException;
 import java.util.List;
 import mytunes_group4.be.Playlist;
+import mytunes_group4.be.Song;
 import mytunes_group4.dal.database.PlaylistDBDAO;
 
 /**
@@ -43,5 +44,10 @@ public class PlaylistManager
     {
         Playlist playlist = playlistDbDao.createPlaylist(name);
         return playlist;
+    }
+    
+    public List<Song> getAllSongsInPlaylist(int playlistId) throws Exception
+    {
+        return playlistDbDao.getAllSongsInPlaylist(playlistId);
     }
 }

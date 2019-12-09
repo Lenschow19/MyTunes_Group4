@@ -47,7 +47,7 @@ public class SongDAO implements ISongDAO
                     try
                     {
                         String[] arrSong = aLineOfText.split(",");
-                        int id = Integer.parseInt(arrSong[0].trim()); //Jeg læser ID'et.
+                        int songId = Integer.parseInt(arrSong[0].trim()); //Jeg læser ID'et.
                         int duration = Integer.parseInt(arrSong[1].trim()); //Jeg læser årstal.
                         String songName = arrSong[2].trim(); //Jeg læser titlen.
                         String artistName = arrSong[2].trim();
@@ -57,7 +57,7 @@ public class SongDAO implements ISongDAO
                         {
                             songName += "," + arrSong[i];
                         }
-                        Song son = new Song(id, songName, artistName, genre, duration);
+                        Song son = new Song(songId, songName, artistName, genre, duration);
                         allSongs.add(son);
                     } catch (Exception e)
                     {

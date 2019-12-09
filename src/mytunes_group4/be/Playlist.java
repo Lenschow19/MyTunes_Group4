@@ -6,6 +6,7 @@
 package mytunes_group4.be;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,6 +16,7 @@ public class Playlist
 {
     private int playlistId; 
     private String name; //name of playlist
+    private List<Song> songs;
     private int totalDuration; //Displaying duration of all songs in the playlist
     private int songCounter; //Displaying number of songs in the playlist
     
@@ -31,6 +33,7 @@ public class Playlist
     {
         this.playlistId = playlistId; 
         this.name = name;
+        songs = new ArrayList<>();
         this.totalDuration = totalDuration;
         this.songCounter = songCounter;
     }
@@ -62,6 +65,11 @@ public class Playlist
     public void setName(String name)
     {
         this.name = name;
+    }
+    
+    public List<Song> getSongsInPlaylist()
+    {
+        return songs; 
     }
 
     @Override

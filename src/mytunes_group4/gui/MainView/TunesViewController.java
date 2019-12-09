@@ -10,6 +10,7 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,16 +42,18 @@ import mytunes_group4.gui.model.TunesModel;
  */
 public class TunesViewController implements Initializable
 {
+
     private Song song = null;
     private String songPath;
     private TunesModel tModel;
     private MediaPlayer mediaPlayer;
     private Media media;
+    private Playlist selectedPlaylist;
 
     @FXML
     private ListView<Playlist> Playlists;
     @FXML
-    private ListView<SongsInPlaylist> SongsInPlaylist;
+    private ListView<Song> SongsInPlaylist;
     @FXML
     private ListView<Song> SongList;
     @FXML
@@ -67,6 +70,7 @@ public class TunesViewController implements Initializable
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      */
     @Override
@@ -74,6 +78,8 @@ public class TunesViewController implements Initializable
     {
 
         setSongSelection();
+        
+        
 
         try
         {
@@ -85,6 +91,15 @@ public class TunesViewController implements Initializable
         {
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        try
+        {
+            setSongsInPlaylistSelection();
+        } catch (Exception ex)
+        {
+            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         try
         {
             SongList.setItems(tModel.getSongs());
@@ -102,7 +117,9 @@ public class TunesViewController implements Initializable
         {
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         
+
         tModel.volumeSliderSetup(volumeSlider);
 
     }
@@ -200,7 +217,7 @@ public class TunesViewController implements Initializable
     }
 
     private boolean isPlaying;
-    
+
     @FXML
     private void playSong(ActionEvent event) //Plays selected song
     {
@@ -209,8 +226,7 @@ public class TunesViewController implements Initializable
             song = SongList.getSelectionModel().getSelectedItem();
             setMusicPlayerPath();
             mediaPlayer.play();
-        }
-        else if (song != SongList.getSelectionModel().getSelectedItem())
+        } else if (song != SongList.getSelectionModel().getSelectedItem())
         {
             setMusicPlayerPath();
             mediaPlayer.play();
@@ -232,12 +248,8 @@ public class TunesViewController implements Initializable
     @FXML
     private void addSongToPlaylist(ActionEvent event)
     {
-        
-        
-        
-    }
 
-    
+    }
 
     /**
      * Displays the selected song from the list
@@ -253,6 +265,8 @@ public class TunesViewController implements Initializable
             @Override
             public void changed(ObservableValue<? extends Song> arg0, Song oldValue, Song newValue)
             {
+                
+                
                 if (newValue != null)
                 {
                     ssTitle.setText(newValue.getArtistName());
@@ -261,6 +275,31 @@ public class TunesViewController implements Initializable
             }
         });
 
+    }
+
+    private void setSongsInPlaylistSelection()
+    {
+        Playlists.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        Playlists.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Playlist>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Playlist> arg0, Playlist oldValue, Playlist newValue)
+            {
+                if (newValue != null)
+                {
+                    
+                    tModel.setChosenPlaylist(Playlists.getSelectionModel().getSelectedItem()); 
+                    
+                    try
+                    {
+                        SongsInPlaylist.setItems(tModel.getSongsInPlaylist());
+                    } catch (Exception ex)
+                    {
+                        Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
     }
 
     @FXML
@@ -274,29 +313,35 @@ public class TunesViewController implements Initializable
         {
             ex.printStackTrace();
         }
-        
+
     }
-    
+
     private void setMusicPlayerPath()
     {
         if (mediaPlayer != null)
         {
             mediaPlayer.stop();
         }
-        
+
         song = SongList.getSelectionModel().getSelectedItem();
         songPath = song.getPath();
         media = new Media(new File(songPath).toURI().toString());
-        mediaPlayer = new MediaPlayer(media);      
+        mediaPlayer = new MediaPlayer(media);
     }
-    
-    
-    
 
     @FXML
     private void changeVolume(MouseEvent event)
     {
-       
+
     }
 
+    
+
+    /*private void setSongsOnListView(Playlist playlist)
+    {
+        tModel.setSongsInPlaylist(playlist);
+
+    }*/
+
+   
 }
