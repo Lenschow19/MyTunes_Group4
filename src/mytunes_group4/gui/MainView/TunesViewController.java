@@ -119,7 +119,7 @@ public class TunesViewController implements Initializable
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        volumeSliderSetup();
+      //  volumeSliderSetup();
 
     }
 
@@ -382,7 +382,6 @@ public class TunesViewController implements Initializable
         }
         currentVolume = value;
     }
-
     public void volumeSliderSetup()
     {
         currentVolume = 1.0;
@@ -398,6 +397,7 @@ public class TunesViewController implements Initializable
                 }
             }
         });
+
     }
 
     @FXML
