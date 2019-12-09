@@ -30,6 +30,10 @@ public class EditSongFXMLController implements Initializable
     private TextField txtUpdateGenre;
     @FXML
     private Button cancelWindow;
+    @FXML
+    private TextField txtUpdatePath;
+    @FXML
+    private Button lookinForUpdatedSong;
 
     /**
      * Initializes the controller class.
