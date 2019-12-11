@@ -11,14 +11,8 @@ import javafx.collections.ObservableList;
 import mytunes_group4.be.Song;
 import mytunes_group4.bll.SongManager;
 import mytunes_group4.dal.DalException;
-import java.io.File;
 import java.util.Comparator;
 import java.util.List;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.scene.control.Slider;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import mytunes_group4.be.Playlist;
 import mytunes_group4.bll.MusicPlayer;
 import mytunes_group4.bll.PlaylistManager;
@@ -213,6 +207,7 @@ public class TunesModel
         }
     }
 
+
     
     public void addSongToPlaylist(Playlist playlist, Song song) throws Exception
     {
@@ -242,6 +237,25 @@ public class TunesModel
        }
            
     }
+
+   
+
+ 
+
+    public Song addSong(String songName, String artistName, String genre, String path) throws Exception {
+        songManager.addSong(artistName, songName, genre, path);
+        return song;
+    }
+
+    public void deleteSong(Song selectedSong) throws Exception {
+        songManager.deleteSong(selectedSong);
+        songs.remove(selectedSong);
+    }
+
+    public void editSong(Song selectedSong) throws Exception {
+        songManager.editSong(selectedSong);
+    }    
+
     
 
 }

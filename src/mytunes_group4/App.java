@@ -17,7 +17,11 @@ import javafx.stage.Stage;
  */
 public class App extends Application
 {
-    
+    /**
+     * Will start the program at launch, start with the first scene "TunesView"
+     * @param stage
+     * @throws Exception 
+     */
     @Override
     public void start(Stage stage) throws Exception
     {
