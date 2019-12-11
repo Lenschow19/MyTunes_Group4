@@ -58,9 +58,18 @@ public class SongManager
         return allSongs;
     }
     
-    public void deleteSong(Song song) throws Exception
-    {
-        //SongDBDAO.deleteSong(song);
-        throw new UnsupportedOperationException("not working at the moment. please choose different paths in life and come back later.");
+    public void editSong(Song song) throws Exception {
+        songDB.editSong(song);
     }
+
+    public void deleteSong(Song selectedSong) throws Exception {
+        songDB.deleteSong(selectedSong);
+    }
+
+    public Song addSong(String songName, String artistName, String genre, String path) throws Exception {
+        Song song = songDB.addSong(artistName, songName, genre, path);
+        return song;
+    }
+
+   
 }
