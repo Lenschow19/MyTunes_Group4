@@ -14,16 +14,11 @@ import mytunes_group4.be.Song;
  */
 public interface ISongDAO
 {
-  
-    Song createSong(String artistName, String songName) throws DalException;
+    Song addSong(String songName, String artistName, String genre, String path) throws DalException;
     
     void deleteSong(Song song) throws DalException;
 
     List<Song> getAllSongs() throws DalException;
 
-    void updateSong(Song song) throws DalException;
-
-    void writeAllSongs(List<Song> allSongs, String fileName) throws DalException;
-    
-
+    void editSong(Song song) throws DalException;
 }
