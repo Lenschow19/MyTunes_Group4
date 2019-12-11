@@ -324,9 +324,10 @@ public class TunesViewController implements Initializable
     }
 
     @FXML
-    private void addSongToPlaylist(ActionEvent event)
+    private void addSongToPlaylist(ActionEvent event) throws Exception
     {
-
+        tModel.setChosenSong(songTableView.getSelectionModel().getSelectedItem());
+        tModel.addSongToPlaylist(playlistTableView.getSelectionModel().getSelectedItem(), tModel.getChosenSong());
     }
 
     /**
@@ -511,11 +512,7 @@ public class TunesViewController implements Initializable
 
     
 
-    /*private void setSongsOnListView(Playlist playlist)
-    {
-        tModel.setSongsInPlaylist(playlist);
-
-    }*/
+  
 
    
 }

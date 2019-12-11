@@ -31,6 +31,7 @@ public class TunesModel
     private Double currentVolume;
     
     private Playlist chosenPlaylist; 
+    private Song chosenSong; 
     
     private ObservableList<Song> songsShownInPlaylist;
 
@@ -206,7 +207,33 @@ public class TunesModel
         }
     }
 
-   
+    public void addSongToPlaylist(Playlist playlist, Song song) throws Exception
+    {
+        pm.addSongToPlaylist(playlist, song);
+        playlist.addSongToPlaylist(chosenSong);
+        getSongsInPlaylist();
+    }
+    
+    public void setChosenSong(Song selectedSong)
+    {
+        chosenSong = selectedSong;
+    }
+    
+    public Song getChosenSong()
+    {
+        return chosenSong; 
+    }
+    
+    public void deleteSongInPlaylist(Song selectedSong) throws Exception
+    {
+       if (pm.deleteSongInPlaylist(chosenSong.getSongId(), chosenPlaylist.getPlaylistId()))
+       {
+           chosenPlaylist.getSongsInPlaylist().remove(chosenSong);
+           songsShownInPlaylist.clear();
+           songsShownInPlaylist.addAll(pm.getAllSongsInPlaylist(chosenPlaylist.getPlaylistId()));
+       }
+           
+    }
 
  
 

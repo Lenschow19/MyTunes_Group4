@@ -50,4 +50,14 @@ public class PlaylistManager
     {
         return playlistDbDao.getAllSongsInPlaylist(playlistId);
     }
+    
+    public boolean addSongToPlaylist(Playlist playlist, Song song) throws Exception
+    {
+        return playlistDbDao.addSongToPlaylist(playlist, song);
+    }
+    
+    public boolean deleteSongInPlaylist(int songId, int playlistId) throws Exception
+    {
+        return playlistDbDao.deleteSongInPlaylist(songId, playlistId);
+    }
 }

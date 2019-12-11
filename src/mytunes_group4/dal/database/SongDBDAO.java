@@ -53,12 +53,13 @@ public class SongDBDAO implements ISongDAO
             ArrayList<Song> allSongs = new ArrayList<>();
             while (rs.next())
             {
+                int id = rs.getInt("songId");
                 String songName = rs.getString("songName");
                 String artistName = rs.getString("artistName");
                 String genre = rs.getString("genre");
                 String path = rs.getString("path");
 
-                Song son = new Song(artistName, songName, genre, path);
+                Song son = new Song(id, artistName, songName, genre, path);
                 allSongs.add(son);
             }
 
