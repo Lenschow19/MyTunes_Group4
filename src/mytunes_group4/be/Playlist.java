@@ -71,6 +71,11 @@ public class Playlist
     {
         return songs; 
     }
+    
+    public void addSongToPlaylist (Song song)
+    {
+        songs.add(song);
+    }
 
     @Override
     public String toString()
