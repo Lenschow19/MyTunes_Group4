@@ -27,6 +27,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
@@ -83,6 +84,12 @@ public class TunesViewController implements Initializable
     private Button btnPause;
     @FXML
     private Label lblTime;
+    @FXML
+    private ImageView ArrowUp;
+    @FXML
+    private ImageView ArrowDown;
+    @FXML
+    private Button LeftArrow;
 
     /**
      * Initializes the controller class.
@@ -489,6 +496,16 @@ public class TunesViewController implements Initializable
         tModel.setSongsInPlaylist(playlist);
 
     }*/
+
+    @FXML
+    private void moveSongUp(MouseEvent event)
+    {
+    }
+
+    @FXML
+    private void moveSongDown(MouseEvent event)
+    {
+    }
 
    
 }
