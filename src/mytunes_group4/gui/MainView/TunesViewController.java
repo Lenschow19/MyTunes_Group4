@@ -65,7 +65,7 @@ public class TunesViewController implements Initializable
 
 
     @FXML
-    private ListView<SongsInPlaylist> SongsInPlaylist;
+    private ListView<Song> SongsInPlaylist;
     @FXML
     private Slider volumeSlider;
     @FXML
@@ -122,6 +122,9 @@ public class TunesViewController implements Initializable
         {
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DalException ex)
+        {
+            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex)
         {
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -264,22 +267,22 @@ public class TunesViewController implements Initializable
 
     
 
-    @FXML
-    private void playSong(ActionEvent event) //Plays selected song
-    {
-        if (song == null)
-        {
-            song = songTableView.getSelectionModel().getSelectedItem();
-            setMusicPlayerPath();
-            mediaPlayer.play();
-        } else if (song != songTableView.getSelectionModel().getSelectedItem())
-        {
-            setMusicPlayerPath();
-            mediaPlayer.play();
-        }
-    }
+//    @FXML
+//    private void playSong(ActionEvent event) //Plays selected song
+//    {
+//        if (song == null)
+//        {
+//            song = songTableView.getSelectionModel().getSelectedItem();
+//            setMusicPlayerPath();
+//            mediaPlayer.play();
+//        } else if (song != songTableView.getSelectionModel().getSelectedItem())
+//        {
+//            setMusicPlayerPath();
+//            mediaPlayer.play();
+//        }
+//    }
         
-    /*@FXML
+    @FXML
     private void playSong(ActionEvent event) //Plays selected song
     {
         btnPause.setText("Pause");
@@ -290,7 +293,7 @@ public class TunesViewController implements Initializable
         currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
 
 
-    }*/
+    }
 
     @FXML
     private void pauseSong(ActionEvent event)
