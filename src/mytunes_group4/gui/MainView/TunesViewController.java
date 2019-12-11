@@ -117,8 +117,8 @@ public class TunesViewController implements Initializable
     {
         
         //initialize our song selection and volumeslider
-        setSongSelection();
-        volumeSliderSetup();
+//        setSongSelection();
+//        volumeSliderSetup();
 
         
         //initialize our table of songs and playlists
