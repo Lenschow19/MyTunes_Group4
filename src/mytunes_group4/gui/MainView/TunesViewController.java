@@ -137,13 +137,13 @@ public class TunesViewController implements Initializable
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        try
-        {
-            setSongsInPlaylistSelection();
-        } catch (Exception ex)
-        {
-            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try
+//        {
+//            setSongsInPlaylistSelection();
+//        } catch (Exception ex)
+//        {
+//            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }
     
