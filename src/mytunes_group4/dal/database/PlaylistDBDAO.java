@@ -74,6 +74,7 @@ public class PlaylistDBDAO
             while (rs.next())
             {
                 Song song = new Song(
+                        rs.getInt("songId"),
                         rs.getString("songName"),
                         rs.getString("artistName"),
                         rs.getString("genre"),
@@ -189,11 +190,11 @@ public class PlaylistDBDAO
         }
     }
 
-    public boolean deleteSongInPlaylist(int songId, int playlistId) throws Exception
+    public boolean deleteSongInPlaylist(int playlistId, int songId) throws Exception
     {
         try ( Connection con = dbc.getConnection())
         {
-            int sapId = getSapId(songId, playlistId);
+            int sapId = getSapId(playlistId, songId);
             String sql = "DELETE SongsInPlaylist WHERE sapId=?;";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
@@ -209,20 +210,20 @@ public class PlaylistDBDAO
 
         } catch (SQLServerException ex)
         {
-            ex.printStackTrace();
-            throw new Exception();
+            
+            throw new Exception(ex.getMessage(), ex.getCause());
         }
     }
 
-    private int getSapId(int songId, int playlistId) throws Exception
+    private int getSapId(int playlistId, int songId) throws Exception
     {
         try ( Connection con = dbc.getConnection())
         {
-            String sql = "SELECT sapId FROM SongsInPlaylist WHERE songId=? AND playlistId=?;";
+            String sql = "SELECT sapId FROM SongsInPlaylist WHERE playlistId=? AND songId=?;";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, songId);
-            ps.setInt(2, playlistId);
+            ps.setInt(1, playlistId);
+            ps.setInt(2, songId);
 
             ResultSet rs = ps.executeQuery();
             rs.next();
@@ -231,8 +232,7 @@ public class PlaylistDBDAO
 
         } catch (SQLServerException ex)
         {
-            ex.printStackTrace();
-            throw new Exception();
+            throw new Exception(ex.getMessage(), ex.getCause());
         }
     }
 

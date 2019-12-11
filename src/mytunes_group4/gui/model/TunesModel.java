@@ -23,16 +23,18 @@ import mytunes_group4.bll.PlaylistManager;
  */
 public class TunesModel
 {
+
     private Song song = null;
     private ObservableList<Song> allSong;
     private SongManager songManager;
     private PlaylistManager pm;
     private MusicPlayer mp;
     private Double currentVolume;
-    
-    private Playlist chosenPlaylist; 
-    private Song chosenSong; 
-    
+
+    private Playlist chosenPlaylist;
+    private Song chosenSong;
+    private String selectedSong;
+
     private ObservableList<Song> songsShownInPlaylist;
 
     public TunesModel() throws IOException, DalException, Exception
@@ -42,13 +44,11 @@ public class TunesModel
         allSongs = FXCollections.observableArrayList();
         allSongs.addAll(songManager.getAllSongs());
         songsShownInPlaylist = FXCollections.observableArrayList();
-        
 
     }
 
     private ObservableList<Playlist> playlists = FXCollections.observableArrayList();
     private ObservableList<Song> songs = FXCollections.observableArrayList();
-    
 
     public ObservableList<Playlist> getPlaylistList() throws IOException, Exception
     {
@@ -65,7 +65,7 @@ public class TunesModel
         return playlists;
 
     }
-    
+
     public ObservableList<Song> getSongs() throws IOException, DalException
     {
         songs.addAll(songManager.getAllSongs());
@@ -80,29 +80,24 @@ public class TunesModel
         });
         return songs;
     }
-    
+
     public void setChosenPlaylist(Playlist chosenPlaylist)
     {
         this.chosenPlaylist = chosenPlaylist;
     }
-    
+
     public Playlist getChosenPlaylist()
     {
-        return chosenPlaylist; 
+        return chosenPlaylist;
     }
-    
+
     public ObservableList<Song> getSongsInPlaylist() throws Exception
     {
         songsShownInPlaylist.clear();
         songsShownInPlaylist.addAll(pm.getAllSongsInPlaylist(chosenPlaylist.getPlaylistId()));
-        return songsShownInPlaylist; 
+        return songsShownInPlaylist;
     }
-    
-   
-    
-    
-    
-    
+
     public void updatePlaylist(Playlist selectedPlaylist) throws Exception
     {
         pm.updatePlaylist(selectedPlaylist);
@@ -144,12 +139,13 @@ public class TunesModel
 
     private MusicPlayer musicPlayer = new MusicPlayer();
     private String musicLocation = "Music/Pop/popsong.mp3";
+
     public void playMusic()
     {
         musicPlayer.playMusic(musicLocation);
     }
 
-     /**
+    /**
      * Pausing the music when pressed
      */
     public void pauseMusic()
@@ -164,15 +160,9 @@ public class TunesModel
     {
         musicPlayer.stopMusic(musicLocation);
     }
-    
+
     private ObservableList<Song> allSongs;
 
-    
-    
-    
-
-   
-    
     // doesn't work :(
 //    public void volumeSliderSetup(Slider volumeSlider)
 //    {
@@ -190,7 +180,6 @@ public class TunesModel
 //        });
 //
 //    }
-
     public void search(String query) throws IOException, DalException
     {
         if (query.isEmpty())
@@ -213,43 +202,40 @@ public class TunesModel
         playlist.addSongToPlaylist(chosenSong);
         getSongsInPlaylist();
     }
-    
+
     public void setChosenSong(Song selectedSong)
     {
         chosenSong = selectedSong;
     }
-    
+
     public Song getChosenSong()
     {
-        return chosenSong; 
+        return chosenSong;
     }
-    
+
     public void deleteSongInPlaylist(Song selectedSong) throws Exception
     {
-       if (pm.deleteSongInPlaylist(chosenSong.getSongId(), chosenPlaylist.getPlaylistId()))
-       {
-           chosenPlaylist.getSongsInPlaylist().remove(chosenSong);
-           songsShownInPlaylist.clear();
-           songsShownInPlaylist.addAll(pm.getAllSongsInPlaylist(chosenPlaylist.getPlaylistId()));
-       }
-           
+        pm.deleteSongInPlaylist(chosenSong.getSongId(), chosenPlaylist.getPlaylistId());
+        chosenPlaylist.getSongsInPlaylist().remove(chosenSong);
+        getSongsInPlaylist();
+
     }
 
- 
-
-    public Song addSong(String songName, String artistName, String genre, String path) throws Exception {
+    public Song addSong(String songName, String artistName, String genre, String path) throws Exception
+    {
         songManager.addSong(artistName, songName, genre, path);
         return song;
     }
 
-    public void deleteSong(Song selectedSong) throws Exception {
+    public void deleteSong(Song selectedSong) throws Exception
+    {
         songManager.deleteSong(selectedSong);
         songs.remove(selectedSong);
     }
 
-    public void editSong(Song selectedSong) throws Exception {
+    public void editSong(Song selectedSong) throws Exception
+    {
         songManager.editSong(selectedSong);
-    }    
-    
+    }
 
 }

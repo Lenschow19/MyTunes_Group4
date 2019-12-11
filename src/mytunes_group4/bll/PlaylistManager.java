@@ -56,7 +56,7 @@ public class PlaylistManager
         return playlistDbDao.addSongToPlaylist(playlist, song);
     }
     
-    public boolean deleteSongInPlaylist(int songId, int playlistId) throws Exception
+    public boolean deleteSongInPlaylist(int playlistId, int songId) throws Exception
     {
         return playlistDbDao.deleteSongInPlaylist(songId, playlistId);
     }
