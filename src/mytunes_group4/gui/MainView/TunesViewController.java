@@ -224,12 +224,12 @@ public class TunesViewController implements Initializable
         }
     }
 
-    @FXML
-    private void deleteSongInPlaylist(ActionEvent event) throws Exception
-    {
-        tModel.setChosenSong(SongsInPlaylist.getSelectionModel().getSelectedItem());
-        tModel.deleteSongInPlaylist(tModel.getChosenSong());
-    }
+//    @FXML
+//    private void deleteSongInPlaylist(ActionEvent event) throws Exception
+//    {
+//        tModel.setChosenSong(SongsInPlaylist.getSelectionModel().getSelectedItem());
+//        tModel.deleteSongInPlaylist(tModel.getChosenSong());
+//    }
 
     @FXML
     private void addNewSong(ActionEvent event)
@@ -351,8 +351,8 @@ public class TunesViewController implements Initializable
     @FXML
     private void addSongToPlaylist(ActionEvent event) throws Exception
     {
-        tModel.setChosenSong(SongList.getSelectionModel().getSelectedItem());
-        tModel.addSongToPlaylist(Playlists.getSelectionModel().getSelectedItem(), tModel.getChosenSong());
+        tModel.setChosenSong(songTableView.getSelectionModel().getSelectedItem());
+        tModel.addSongToPlaylist(playlistTableView.getSelectionModel().getSelectedItem(), tModel.getChosenSong());
 
     }
 
