@@ -11,14 +11,8 @@ import javafx.collections.ObservableList;
 import mytunes_group4.be.Song;
 import mytunes_group4.bll.SongManager;
 import mytunes_group4.dal.DalException;
-import java.io.File;
 import java.util.Comparator;
 import java.util.List;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
-import javafx.scene.control.Slider;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import mytunes_group4.be.Playlist;
 import mytunes_group4.bll.MusicPlayer;
 import mytunes_group4.bll.PlaylistManager;
@@ -34,19 +28,26 @@ public class TunesModel
     private SongManager songManager;
     private PlaylistManager pm;
     private MusicPlayer mp;
-    private Double currentVolume; 
+    private Double currentVolume;
+    
+    private Playlist chosenPlaylist; 
+    
+    private ObservableList<Song> songsShownInPlaylist;
 
     public TunesModel() throws IOException, DalException, Exception
     {
-        this.pm = new PlaylistManager();
+        pm = new PlaylistManager();
         songManager = new SongManager();
         allSongs = FXCollections.observableArrayList();
         allSongs.addAll(songManager.getAllSongs());
+        songsShownInPlaylist = FXCollections.observableArrayList();
+        
 
     }
 
     private ObservableList<Playlist> playlists = FXCollections.observableArrayList();
     private ObservableList<Song> songs = FXCollections.observableArrayList();
+    
 
     public ObservableList<Playlist> getPlaylistList() throws IOException, Exception
     {
@@ -63,7 +64,44 @@ public class TunesModel
         return playlists;
 
     }
+    
+    public ObservableList<Song> getSongs() throws IOException, DalException
+    {
+        songs.addAll(songManager.getAllSongs());
+        songs.sort(new Comparator<Song>()
+        {
+            @Override
+            public int compare(Song arg0, Song arg1)
+            {
+                return arg0.getSongId() - arg1.getSongId();
+            }
 
+        });
+        return songs;
+    }
+    
+    public void setChosenPlaylist(Playlist chosenPlaylist)
+    {
+        this.chosenPlaylist = chosenPlaylist;
+    }
+    
+    public Playlist getChosenPlaylist()
+    {
+        return chosenPlaylist; 
+    }
+    
+    public ObservableList<Song> getSongsInPlaylist() throws Exception
+    {
+        songsShownInPlaylist.clear();
+        songsShownInPlaylist.addAll(pm.getAllSongsInPlaylist(chosenPlaylist.getPlaylistId()));
+        return songsShownInPlaylist; 
+    }
+    
+   
+    
+    
+    
+    
     public void updatePlaylist(Playlist selectedPlaylist) throws Exception
     {
         pm.updatePlaylist(selectedPlaylist);
@@ -128,20 +166,9 @@ public class TunesModel
     
     private ObservableList<Song> allSongs;
 
-    public ObservableList<Song> getSongs() throws IOException, DalException
-    {
-        songs.addAll(songManager.getAllSongs());
-        songs.sort(new Comparator<Song>()
-        {
-            @Override
-            public int compare(Song arg0, Song arg1)
-            {
-                return arg0.getSongId() - arg1.getSongId();
-            }
-
-        });
-        return songs;
-    }
+    
+    
+    
 
    
     
@@ -178,7 +205,24 @@ public class TunesModel
             songs.addAll(searchedSongs);
         }
     }
-    
+
+   
+
+ 
+
+    public Song addSong(String songName, String artistName, String genre, String path) throws Exception {
+        songManager.addSong(artistName, songName, genre, path);
+        return song;
+    }
+
+    public void deleteSong(Song selectedSong) throws Exception {
+        songManager.deleteSong(selectedSong);
+        songs.remove(selectedSong);
+    }
+
+    public void editSong(Song selectedSong) throws Exception {
+        songManager.editSong(selectedSong);
+    }    
     
 
 }

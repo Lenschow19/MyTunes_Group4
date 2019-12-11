@@ -14,9 +14,9 @@
       <TextField fx:id="txtUpdateTitle" layoutX="210.0" layoutY="68.0" />
       <TextField fx:id="txtUpdateArtist" layoutX="210.0" layoutY="114.0" />
       <TextField fx:id="txtUpdateGenre" layoutX="210.0" layoutY="161.0" />
-      <TextField layoutX="210.0" layoutY="227.0" prefHeight="25.0" prefWidth="209.0" />
-      <Button layoutX="440.0" layoutY="227.0" mnemonicParsing="false" text="Browse..." />
-      <Button layoutX="359.0" layoutY="291.0" mnemonicParsing="false" onAction="#updateSong" text="Update" />
+      <TextField fx:id="txtUpdatePath" layoutX="210.0" layoutY="227.0" prefHeight="25.0" prefWidth="209.0" />
+      <Button fx:id="browseFile" layoutX="440.0" layoutY="227.0" mnemonicParsing="false" onAction="#browseFile" text="Browse..." />
+      <Button fx:id="editSong" layoutX="359.0" layoutY="291.0" mnemonicParsing="false" onAction="#editSong" text="Update" />
       <Button fx:id="cancelWindow" layoutX="433.0" layoutY="291.0" mnemonicParsing="false" onAction="#cancelEditWindow" text="Cancel" />
    </children>
 </AnchorPane>

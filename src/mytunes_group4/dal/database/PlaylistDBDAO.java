@@ -22,13 +22,14 @@ import mytunes_group4.be.Song;
  */
 public class PlaylistDBDAO
 {
+
     private DatabaseConnector dbc;
 
-    public PlaylistDBDAO() throws Exception 
+    public PlaylistDBDAO() throws Exception
     {
         dbc = new DatabaseConnector();
     }
-    
+
     //test//
     public List<Playlist> getAllPlaylists() throws Exception
     {
@@ -55,6 +56,39 @@ public class PlaylistDBDAO
         }
     }
     
+    public List<Song> getAllSongsInPlaylist(int playlistId) throws Exception
+    {
+        try ( Connection con = dbc.getConnection())
+        {
+
+            String sql = "SELECT * FROM Song "
+                    + "INNER JOIN SongsInPlaylist ON SongsInPlaylist.songId = Song.songId "
+                    + "INNER JOIN Playlist ON Playlist.playlistId = SongsInPlaylist.playlistId "
+                    + "WHERE Playlist.playlistId = " + playlistId + ";";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+
+            List<Song> songs = new ArrayList<>();
+
+            while (rs.next())
+            {
+                Song song = new Song(
+                        rs.getString("songName"),
+                        rs.getString("artistName"),
+                        rs.getString("genre"),
+                        rs.getString("path")
+                );
+
+                songs.add(song);
+            }
+            return songs;
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new Exception();
+        }
+    }
+
     public Playlist createPlaylist(String name) throws Exception
     {
         try ( Connection con = dbc.getConnection())
@@ -82,7 +116,7 @@ public class PlaylistDBDAO
             throw new Exception();
         }
     }
-    
+
     public void deletePlaylist(Playlist playlist) throws Exception
     {
         try ( Connection con = dbc.getConnection())
@@ -92,7 +126,7 @@ public class PlaylistDBDAO
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int affectedRows = ps.executeUpdate(sql);
-            if(affectedRows != 1)
+            if (affectedRows != 1)
             {
                 throw new Exception();
             }
@@ -104,7 +138,7 @@ public class PlaylistDBDAO
         }
 
     }
-    
+
     public void updatePlaylist(Playlist playlist) throws Exception
     {
         try ( Connection con = dbc.getConnection())
@@ -116,7 +150,7 @@ public class PlaylistDBDAO
             ps.setString(1, name);
             ps.setInt(2, id);
             int affectedRows = ps.executeUpdate();
-            if(affectedRows != 1)
+            if (affectedRows != 1)
             {
                 throw new IOException();
             }
@@ -127,6 +161,6 @@ public class PlaylistDBDAO
             throw new Exception();
         }
     }
-    
+
     
 }

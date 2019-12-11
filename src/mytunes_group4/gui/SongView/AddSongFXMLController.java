@@ -5,6 +5,7 @@
  */
 package mytunes_group4.gui.SongView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import mytunes_group4.gui.model.TunesModel;
 
 /**
  * FXML Controller class
@@ -22,14 +24,19 @@ import javafx.stage.Stage;
 public class AddSongFXMLController implements Initializable
 {
 
-    @FXML
-    private TextField txtSongTitle;
-    @FXML
-    private TextField txtArtistTitle;
-    @FXML
-    private TextField txtSongGenre;
+     private TunesModel tMod;
     @FXML
     private Button cancelWindow;
+    @FXML
+    private Button addSong;
+    @FXML
+    private TextField txtGenre;
+    @FXML
+    private TextField txtPath;
+    @FXML
+    private TextField txtTitle;
+    @FXML
+    private TextField txtArtist;
 
     /**
      * Initializes the controller class.
@@ -41,8 +48,18 @@ public class AddSongFXMLController implements Initializable
     }    
 
     @FXML
-    private void addNewSong(ActionEvent event)
-    {
+    private void addSong(ActionEvent event) throws Exception {
+
+        try {
+            tMod = new TunesModel();
+            String songName = txtTitle.getText().trim();
+            String artistName = txtArtist.getText().trim();
+            String genre = txtGenre.getText().trim();
+            String path = txtPath.getText().trim();
+            tMod.addSong(songName, artistName, genre, path);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML
