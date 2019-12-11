@@ -11,6 +11,8 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +27,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
@@ -59,11 +64,7 @@ public class TunesViewController implements Initializable
     private double currentVolume;
 
     @FXML
-    private ListView<Playlist> Playlists;
-    @FXML
     private ListView<SongsInPlaylist> SongsInPlaylist;
-    @FXML
-    private ListView<Song> SongList;
     @FXML
     private Slider volumeSlider;
 
@@ -79,6 +80,20 @@ public class TunesViewController implements Initializable
     private Button btnPause;
     @FXML
     private Label lblTime;
+    @FXML
+    private TableView<Song> songTableView;
+    @FXML
+    private TableColumn<Song, String> viewSongTitle;
+    @FXML
+    private TableColumn<Song, String> viewSongArtist;
+    @FXML
+    private TableColumn<Song, String> viewSongGenre;
+    @FXML
+    private TableView<Playlist> playlistTableView;
+    @FXML
+    private TableColumn<Playlist, String> viewNumber;
+    @FXML
+    private TableColumn<Playlist, String> viewName;
 
     /**
      * Initializes the controller class.
@@ -88,12 +103,22 @@ public class TunesViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-
+        
+        //initialize our song selection and volumeslider
         setSongSelection();
+        volumeSliderSetup();
 
+
+        
+        //initialize our table of songs and playlists
         try
         {
             tModel = new TunesModel();
+            songTable();
+            playlistTable();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (DalException ex)
         {
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -101,26 +126,26 @@ public class TunesViewController implements Initializable
         {
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try
-        {
-            SongList.setItems(tModel.getSongs());
-        } catch (Exception ex)
-        {
-            System.out.println("Something went wrong");
-            ex.printStackTrace();
-        }
 
-        try
-        {
-            Playlists.setItems(tModel.getPlaylistList());
-
-        } catch (Exception ex)
-        {
-            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-      //  volumeSliderSetup();
-
+    }
+    
+    private void songTable() throws IOException, DalException
+    {
+        viewSongTitle.setCellValueFactory(new PropertyValueFactory<> ("songName"));
+        viewSongArtist.setCellValueFactory(new PropertyValueFactory<> ("artistName"));
+        viewSongGenre.setCellValueFactory(new PropertyValueFactory<> ("genre"));
+        songTableView.getColumns().clear();
+        songTableView.setItems(tModel.getSongs());
+        songTableView.getColumns().addAll(viewSongTitle, viewSongArtist, viewSongGenre);
+    }
+    
+    private void playlistTable() throws IOException, DalException, Exception
+    {
+        viewNumber.setCellValueFactory(new PropertyValueFactory<> ("playlistId"));
+        viewName.setCellValueFactory (new PropertyValueFactory<> ("name"));
+        playlistTableView.getColumns().clear();
+        playlistTableView.setItems(tModel.getPlaylistList());
+        playlistTableView.getColumns().addAll(viewNumber, viewName);
     }
 
     @FXML
@@ -161,7 +186,7 @@ public class TunesViewController implements Initializable
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("A Deletion Confirmation");
         alert.setHeaderText("Are you sure you want to delete:");
-        alert.setContentText(Playlists.getSelectionModel().getSelectedItem() + "?");
+        alert.setContentText(playlistTableView.getSelectionModel().getSelectedItem() + "?");
         
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
@@ -217,7 +242,7 @@ public class TunesViewController implements Initializable
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("'Delete Song' I Choose You");
         alert.setHeaderText("Are you sure you want to delete:");
-        alert.setContentText(SongList.getSelectionModel().getSelectedItem() + "?");
+        alert.setContentText(songTableView.getSelectionModel().getSelectedItem() + "?");
         
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.YES){
@@ -232,7 +257,7 @@ public class TunesViewController implements Initializable
     {
         btnPause.setText("Pause");
         isPlaying = true;
-        song = SongList.getSelectionModel().getSelectedItem();
+        song = songTableView.getSelectionModel().getSelectedItem();
         setMusicPlayerPath();
         mediaPlayer.play();
         currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
@@ -265,7 +290,6 @@ public class TunesViewController implements Initializable
         mediaPlayer.stop();
         currentSongPlaying.setText("Nothing is currently playing");
         isPlaying = false;
-        currentSongPlaying.setText("Nothing is currently playing");
     }
 
     @FXML
@@ -282,16 +306,16 @@ public class TunesViewController implements Initializable
         ssTitle.setEditable(false);
         ssArtist.setEditable(false);
 
-        SongList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        SongList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Song>()
+        songTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        songTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Song>()
         {
             @Override
             public void changed(ObservableValue<? extends Song> arg0, Song oldValue, Song newValue)
             {
                 if (newValue != null)
                 {
-                    ssTitle.setText(newValue.getArtistName());
-                    ssArtist.setText(newValue.getSongName());
+                    ssTitle.setText(newValue.getSongName());
+                    ssArtist.setText(newValue.getArtistName());
                 }
             }
         });
@@ -319,7 +343,7 @@ public class TunesViewController implements Initializable
             mediaPlayer.stop();
         }
 
-        song = SongList.getSelectionModel().getSelectedItem();
+        song = songTableView.getSelectionModel().getSelectedItem();
         songPath = song.getPath();
         media = new Media(new File(songPath).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
@@ -336,9 +360,20 @@ public class TunesViewController implements Initializable
         //plays the next song automatically after first song has finished
         mediaPlayer.setOnEndOfMedia(() ->
         {
-            SongList.getSelectionModel().selectNext();
+            songTableView.getSelectionModel().selectNext();
             setMusicPlayerPath();
             mediaPlayer.play();
+            currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
+            
+            
+            //if the song is the last one on the list, it will play the first song after finished
+            if (songTableView.getItems().size() == songTableView.getSelectionModel().getSelectedIndex() + 1)
+                {
+                    songTableView.getSelectionModel().selectFirst();
+                    setMusicPlayerPath();
+                    mediaPlayer.play();
+                    currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
+                }
         });
     }
 
@@ -351,7 +386,7 @@ public class TunesViewController implements Initializable
     @FXML
     private void playPreviousSong(ActionEvent event)
     {
-        SongList.getSelectionModel().selectPrevious();
+        songTableView.getSelectionModel().selectPrevious();
         isPlaying = true;
         setMusicPlayerPath();
         mediaPlayer.play();
@@ -361,7 +396,7 @@ public class TunesViewController implements Initializable
     @FXML
     private void playNextSong(ActionEvent event)
     {
-        SongList.getSelectionModel().selectNext();
+        songTableView.getSelectionModel().selectNext();
         isPlaying = true;
         setMusicPlayerPath();
         mediaPlayer.play();
