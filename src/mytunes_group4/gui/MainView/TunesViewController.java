@@ -11,7 +11,6 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,8 +31,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Duration;
 import mytunes_group4.be.*;
 import mytunes_group4.bll.PlaylistManager;
 import mytunes_group4.bll.SongManager;
@@ -83,6 +80,8 @@ public class TunesViewController implements Initializable
     private Button btnPause;
     @FXML
     private Label lblTime;
+    @FXML
+    private Button newSong;
 
     /**
      * Initializes the controller class.
@@ -241,7 +240,7 @@ public class TunesViewController implements Initializable
         
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.YES){
-            songmanager.deleteSong(song);
+            tModel.deleteSong(song);
         } else {
             alert.close();
         }

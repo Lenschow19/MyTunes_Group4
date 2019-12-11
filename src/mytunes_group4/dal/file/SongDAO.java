@@ -47,17 +47,18 @@ public class SongDAO implements ISongDAO
                     try
                     {
                         String[] arrSong = aLineOfText.split(",");
-                        int songId = Integer.parseInt(arrSong[0].trim()); //Jeg læser ID'et.
+                        int id = Integer.parseInt(arrSong[0].trim()); //Jeg læser ID'et.
                         int duration = Integer.parseInt(arrSong[1].trim()); //Jeg læser årstal.
                         String songName = arrSong[2].trim(); //Jeg læser titlen.
-                        String artistName = arrSong[2].trim();
-                        String genre = arrSong[2].trim();
+                        String artistName = arrSong[3].trim();
+                        String genre = arrSong[4].trim();
+                        String path = arrSong[5].trim();
                         // Add if commas in title, includes the rest of the string:
                         for (int i = 3; i < arrSong.length; i++) //Loop will only run if the array has a length of 3+
                         {
                             songName += "," + arrSong[i];
                         }
-                        Song son = new Song(songId, songName, artistName, genre, duration);
+                        Song son = new Song(id, songName, artistName, genre, path);
                         allSongs.add(son);
                     } catch (Exception e)
                     {
@@ -97,7 +98,7 @@ public class SongDAO implements ISongDAO
     }
 
     @Override
-    public void updateSong(Song song) throws DalException
+    public void editSong(Song song) throws DalException
     {
         List<Song> allSongs = getAllSongs();
         if (allSongs.remove(song))
@@ -119,39 +120,39 @@ public class SongDAO implements ISongDAO
         }
     }
 
-    @Override
-    public void writeAllSongs(List<Song> allSongs, String fileName) throws DalException
-    {
-        File listFile = new File(fileName);
+//    @Override
+//    public void writeAllSongs(List<Song> allSongs, String fileName) throws DalException
+//    {
+//        File listFile = new File(fileName);
+//
+//        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(listFile)))
+//        {
+//            oos.writeObject(allSongs);
+//            oos.flush();
+//        } catch (IOException ex)
+//        {
+//            Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            throw new DalException();
+//        }
 
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(listFile)))
-        {
-            oos.writeObject(allSongs);
-            oos.flush();
-        } catch (IOException ex)
-        {
-            Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new DalException();
-        }
-
-    }
+//    }
 
     public static void main(String[] args)
     {
-        try
-        {
-            SongDAO songDao = new SongDAO();
-            List<Song> allSongs = songDao.getAllSongs();
-            songDao.writeAllSongs(allSongs, "data/songsAsObjects.txt");
-            System.out.println("Done");
-        } catch (DalException ex)
-        {
-            Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try
+//        {
+//            SongDAO songDao = new SongDAO();
+//            List<Song> allSongs = songDao.getAllSongs();
+//            songDao.writeAllSongs(allSongs, "data/songsAsObjects.txt");
+//            System.out.println("Done");
+//        } catch (DalException ex)
+//        {
+//            Logger.getLogger(SongDAO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     @Override
-    public Song createSong(String artistName, String songName) throws DalException {
+    public Song addSong(String artistName, String songName, String genre, String path) throws DalException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
