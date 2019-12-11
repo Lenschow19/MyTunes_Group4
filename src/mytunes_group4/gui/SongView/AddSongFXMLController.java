@@ -5,7 +5,6 @@
  */
 package mytunes_group4.gui.SongView;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -13,9 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import mytunes_group4.gui.model.TunesModel;
 
 /**
  * FXML Controller class
@@ -25,22 +22,16 @@ import mytunes_group4.gui.model.TunesModel;
 public class AddSongFXMLController implements Initializable
 {
 
-     private TunesModel tMod;
-    @FXML
-    private Button cancelWindow;
-    @FXML
-    private Button addSong;
-    private TextField txtGenre;
-    @FXML
-    private TextField txtPath;
-    private TextField txtTitle;
-    private TextField txtArtist;
     @FXML
     private TextField txtSongTitle;
     @FXML
     private TextField txtArtistTitle;
     @FXML
     private TextField txtSongGenre;
+    @FXML
+    private Button cancelWindow;
+    @FXML
+    private TextField txtPath;
     @FXML
     private Button lookForSong;
 
@@ -54,29 +45,13 @@ public class AddSongFXMLController implements Initializable
     }    
 
     @FXML
-    private void addSong(ActionEvent event) throws Exception {
-
-        try {
-            tMod = new TunesModel();
-            String songName = txtTitle.getText().trim();
-            String artistName = txtArtist.getText().trim();
-            String genre = txtGenre.getText().trim();
-            String path = txtPath.getText().trim();
-            tMod.addSong(songName, artistName, genre, path);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    private void addNewSong(ActionEvent event)
+    {
     }
 
     @FXML
     private void cancelSongWindow(ActionEvent event)
     {
-        Stage stage = (Stage) cancelWindow.getScene().getWindow();
-        stage.close();
-    }
-
-    @FXML
-    private void cancelSongWindow(MouseEvent event) {
         Stage stage = (Stage) cancelWindow.getScene().getWindow();
         stage.close();
     }

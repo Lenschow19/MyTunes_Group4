@@ -27,15 +27,15 @@ import mytunes_group4.gui.model.TunesModel;
  */
 public class AddPlaylistController implements Initializable
 {
+
+    @FXML
     private Button savePlaylist;
     @FXML
     private TextField txtPlaylistTitle;
 
-    private TunesModel tMod;
+    private TunesModel tModel;
     @FXML
     private Button cancel;
-    @FXML
-    private Button addPlaylist;
 
     /**
      * Initializes the controller class.
@@ -49,13 +49,8 @@ public class AddPlaylistController implements Initializable
     @FXML
     private void addNewPlaylist(ActionEvent event) throws Exception
     {
-        try {
-            tMod = new TunesModel();
-            String name = txtPlaylistTitle.getText().trim();
-            tMod.createPlaylist(name);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        String titleQuery = txtPlaylistTitle.getText();
+        tModel.createPlaylist(titleQuery);
 
         Stage stage = (Stage) savePlaylist.getScene().getWindow();
         stage.close();

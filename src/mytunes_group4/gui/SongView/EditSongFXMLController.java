@@ -5,7 +5,6 @@
  */
 package mytunes_group4.gui.SongView;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -14,8 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import mytunes_group4.gui.model.TunesModel;
-import mytunes_group4.be.Song;
 
 /**
  * FXML Controller class
@@ -24,7 +21,7 @@ import mytunes_group4.be.Song;
  */
 public class EditSongFXMLController implements Initializable
 {
-    private TunesModel tMod;
+
     @FXML
     private TextField txtUpdateTitle;
     @FXML
@@ -36,9 +33,7 @@ public class EditSongFXMLController implements Initializable
     @FXML
     private TextField txtUpdatePath;
     @FXML
-    private Button editSong;
-    @FXML
-    private Button browseFile;
+    private Button lookinForUpdatedSong;
 
     /**
      * Initializes the controller class.
@@ -49,33 +44,16 @@ public class EditSongFXMLController implements Initializable
         // TODO
     }    
 
+    @FXML
+    private void updateSong(ActionEvent event)
+    {
+    }
 
     @FXML
     private void cancelEditWindow(ActionEvent event)
     {
         Stage stage = (Stage) cancelWindow.getScene().getWindow();
         stage.close();
-    }
-
-    @FXML
-    private void editSong(ActionEvent event) throws Exception {
-        
-        try {
-            tMod = new TunesModel();
-            String songName = txtUpdateTitle.getText().trim();
-            String artistName = txtUpdateArtist.getText().trim();
-            String genre = txtUpdateGenre.getText().trim();
-            String path = txtUpdatePath.getText().trim();
-            
-            Song song = new Song(songName, artistName, genre, path);
-            tMod.editSong(song);
-        } catch (IOException ex) {
-            throw ex;
-        }
-    }
-
-    @FXML
-    private void browseFile(ActionEvent event) {
     }
     
 }

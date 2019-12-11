@@ -26,16 +26,15 @@ public class Song implements Serializable
      * @param songName
      * @param artistName
      * @param genre
-     * @param path
+     * @param duration //calculated
      */
-    public Song(int songId, String songName, String artistName, String genre, String path)
+    public Song(int songId, String songName, String artistName, String genre, int duration)
     {
-        this.songId = songId;
+        this.songId = songId; 
         this.songName = songName;
         this.artistName = artistName;
         this.genre = genre;
-//        this.duration = duration;
-        this.path = path;
+        this.duration = duration;
     }
 
     public Song(String artistName, String songName, String genre, String path)
