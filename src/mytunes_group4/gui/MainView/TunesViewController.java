@@ -30,8 +30,10 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
@@ -66,7 +68,7 @@ public class TunesViewController implements Initializable
 
 
     @FXML
-    private ListView<SongsInPlaylist> SongsInPlaylist;
+    private ListView<Song> SongsInPlaylist;
     @FXML
     private Slider volumeSlider;
     @FXML
@@ -81,6 +83,7 @@ public class TunesViewController implements Initializable
     private Button btnPause;
     @FXML
     private Label lblTime;
+
     @FXML
 
     private ImageView ArrowUp;
@@ -88,6 +91,7 @@ public class TunesViewController implements Initializable
     private ImageView ArrowDown;
     @FXML
     private Button LeftArrow;
+
 
     private TableView<Song> songTableView;
     @FXML
@@ -348,13 +352,13 @@ public class TunesViewController implements Initializable
         isPlaying = false;
     }
 
-    @FXML
+    /*@FXML
     private void addSongToPlaylist(ActionEvent event) throws Exception
     {
         tModel.setChosenSong(SongList.getSelectionModel().getSelectedItem());
         tModel.addSongToPlaylist(Playlists.getSelectionModel().getSelectedItem(), tModel.getChosenSong());
 
-    }
+    }*/
 
     /**
      * Displays the selected song from the list
@@ -543,16 +547,6 @@ public class TunesViewController implements Initializable
         tModel.setSongsInPlaylist(playlist);
 
     }*/
-
-    @FXML
-    private void moveSongUp(MouseEvent event)
-    {
-    }
-
-    @FXML
-    private void moveSongDown(MouseEvent event)
-    {
-    }
 
    
 }
