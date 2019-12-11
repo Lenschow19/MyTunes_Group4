@@ -269,10 +269,10 @@ public class TunesViewController implements Initializable
     {
         if (song == null)
         {
-            song = SongList.getSelectionModel().getSelectedItem();
+            song = songTableView.getSelectionModel().getSelectedItem();
             setMusicPlayerPath();
             mediaPlayer.play();
-        } else if (song != SongList.getSelectionModel().getSelectedItem())
+        } else if (song != songTableView.getSelectionModel().getSelectedItem())
         {
             setMusicPlayerPath();
             mediaPlayer.play();
@@ -354,8 +354,8 @@ public class TunesViewController implements Initializable
 
     private void setSongsInPlaylistSelection()
     {
-        Playlists.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        Playlists.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Playlist>()
+        playlistTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        playlistTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Playlist>()
         {
             @Override
             public void changed(ObservableValue<? extends Playlist> arg0, Playlist oldValue, Playlist newValue)
@@ -363,7 +363,7 @@ public class TunesViewController implements Initializable
                 if (newValue != null)
                 {
                     
-                    tModel.setChosenPlaylist(Playlists.getSelectionModel().getSelectedItem()); 
+                    tModel.setChosenPlaylist(playlistTableView.getSelectionModel().getSelectedItem()); 
                     
                     try
                     {
