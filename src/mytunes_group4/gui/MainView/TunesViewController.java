@@ -89,8 +89,6 @@ public class TunesViewController implements Initializable
     @FXML
     private TableView<Playlist> playlistTableView;
     @FXML
-    private TableColumn<Playlist, String> viewNumber;
-    @FXML
     private TableColumn<Playlist, String> viewName;
     @FXML
     private Button newSong;
@@ -149,11 +147,10 @@ public class TunesViewController implements Initializable
     
     private void playlistTable() throws IOException, DalException, Exception
     {
-        viewNumber.setCellValueFactory(new PropertyValueFactory<> ("playlistId"));
         viewName.setCellValueFactory (new PropertyValueFactory<> ("name"));
         playlistTableView.getColumns().clear();
         playlistTableView.setItems(tModel.getPlaylistList());
-        playlistTableView.getColumns().addAll(viewNumber, viewName);
+        playlistTableView.getColumns().addAll(viewName);
 
         
     }
