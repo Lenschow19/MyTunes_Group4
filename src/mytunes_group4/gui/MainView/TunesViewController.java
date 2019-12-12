@@ -276,20 +276,7 @@ public class TunesViewController implements Initializable
 
     
 
-//    @FXML
-//    private void playSong(ActionEvent event) //Plays selected song
-//    {
-//        if (song == null)
-//        {
-//            song = songTableView.getSelectionModel().getSelectedItem();
-//            setMusicPlayerPath();
-//            mediaPlayer.play();
-//        } else if (song != songTableView.getSelectionModel().getSelectedItem())
-//        {
-//            setMusicPlayerPath();
-//            mediaPlayer.play();
-//        }
-//    }
+
         
     @FXML
     private void playSong(ActionEvent event) //Plays selected song

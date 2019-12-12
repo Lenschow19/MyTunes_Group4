@@ -163,23 +163,7 @@ public class TunesModel
 
     private ObservableList<Song> allSongs;
 
-    // doesn't work :(
-//    public void volumeSliderSetup(Slider volumeSlider)
-//    {
-//        volumeSlider.setValue(musicPlayer.getVolume() * volumeSlider.getMax());
-//        volumeSlider.valueProperty().addListener(new InvalidationListener()
-//        {
-//            @Override
-//            public void invalidated(Observable observable)
-//            {
-//                musicPlayer.setVolume(volumeSlider.getValue() / volumeSlider.getMax());
-//                if (volumeSlider.getValue() == 0)
-//                {
-//                }
-//            }
-//        });
-//
-//    }
+
     public void search(String query) throws IOException, DalException
     {
         if (query.isEmpty())
