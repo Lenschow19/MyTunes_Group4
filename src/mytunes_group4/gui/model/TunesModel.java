@@ -52,6 +52,7 @@ public class TunesModel
 
     public ObservableList<Playlist> getPlaylistList() throws IOException, Exception
     {
+        playlists.clear();
         playlists.addAll(pm.getAllPlaylists());
         playlists.sort(new Comparator<Playlist>()
         {
@@ -116,11 +117,7 @@ public class TunesModel
         }
     }
 
-    public void deletePlaylist(Playlist selectedPlaylist) throws Exception
-    {
-        pm.deletePlaylist(selectedPlaylist);
-        playlists.remove(selectedPlaylist);
-    }
+    
 
     public void createPlaylist(String name) throws Exception
     {
@@ -203,6 +200,12 @@ public class TunesModel
         chosenPlaylist.getSongsInPlaylist().remove(chosenSong);
         getSongsInPlaylist();
 
+    }
+    
+    public void deletePlaylist(Playlist playlist) throws Exception
+    {
+        pm.deletePlaylist(chosenPlaylist);
+        getPlaylistList();
     }
 
     public Song addSong(String songName, String artistName, String genre, String path) throws Exception

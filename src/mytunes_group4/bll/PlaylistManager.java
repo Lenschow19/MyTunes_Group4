@@ -35,9 +35,9 @@ public class PlaylistManager
         playlistDbDao.updatePlaylist(playlist);
     }
     
-    public void deletePlaylist(Playlist playlist) throws Exception
+    public boolean deletePlaylist(Playlist playlist) throws Exception
     {
-        playlistDbDao.deletePlaylist(playlist);
+        return playlistDbDao.deletePlaylist(playlist);
     }
     
     public Playlist createPlaylist(String name) throws Exception

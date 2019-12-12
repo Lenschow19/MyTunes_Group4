@@ -195,7 +195,10 @@ public class TunesViewController implements Initializable
     @FXML
     private void deletePlaylist(ActionEvent event) throws Exception
     {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
+        tModel.setChosenPlaylist(playlistTableView.getSelectionModel().getSelectedItem());
+        tModel.deletePlaylist(tModel.getChosenPlaylist());
+        
+        /*Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("A Deletion Confirmation");
         alert.setHeaderText("Are you sure you want to delete:");
         alert.setContentText(playlistTableView.getSelectionModel().getSelectedItem() + "?");
@@ -205,7 +208,7 @@ public class TunesViewController implements Initializable
             playlistmanager.deletePlaylist(playlist);
         } else {
             alert.close();
-        }
+        }*/
         
     }
 
@@ -273,11 +276,7 @@ public class TunesViewController implements Initializable
         }
     }
 
-
-    
-
-
-        
+     
     @FXML
     private void playSong(ActionEvent event) //Plays selected song
     {
@@ -287,7 +286,6 @@ public class TunesViewController implements Initializable
         setMusicPlayerPath();
         mediaPlayer.play();
         currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
-
 
     }
 

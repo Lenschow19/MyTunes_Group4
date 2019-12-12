@@ -119,27 +119,7 @@ public class PlaylistDBDAO
         }
     }
 
-    public void deletePlaylist(Playlist playlist) throws Exception
-    {
-        try ( Connection con = dbc.getConnection())
-        {
-            int id = playlist.getPlaylistId();
-            String sql = "DELETE FROM Playlist WHERE playlistId=?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            int affectedRows = ps.executeUpdate(sql);
-            if (affectedRows != 1)
-            {
-                throw new Exception();
-            }
-
-        } catch (SQLException ex)
-        {
-            ex.printStackTrace();
-            throw new Exception();
-        }
-
-    }
+    
 
     public void updatePlaylist(Playlist playlist) throws Exception
     {
@@ -188,6 +168,30 @@ public class PlaylistDBDAO
             ex.printStackTrace();
             throw new Exception();
         }
+    }
+    
+    public boolean deletePlaylist(Playlist playlist) throws Exception
+    {
+        try ( Connection con = dbc.getConnection())
+        {
+            int playlistId = playlist.getPlaylistId();
+            String sql = "DELETE FROM Playlist WHERE playlistId=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, playlistId);
+            if (ps.executeUpdate() == 1)
+            {
+                return true;
+            } else
+            {
+                throw new Exception();
+            }
+
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new Exception();
+        }
+
     }
 
     public boolean deleteSongInPlaylist(int playlistId, int songId) throws Exception
