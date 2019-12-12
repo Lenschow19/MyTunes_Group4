@@ -58,7 +58,7 @@ public class SongDBDAO implements ISongDAO
                 String genre = rs.getString("genre");
                 String path = rs.getString("path");
 
-                Song son = new Song(id, artistName, songName, genre, path);
+                Song son = new Song(id, songName, artistName, genre, path);
                 allSongs.add(son);
             }
 

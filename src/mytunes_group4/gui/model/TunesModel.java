@@ -139,8 +139,6 @@ public class TunesModel
         }
     }
 
-    
-
     public void createPlaylist(String name) throws Exception
     {
         Playlist playlist = pm.createPlaylist(name);
