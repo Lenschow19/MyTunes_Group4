@@ -25,7 +25,6 @@ public class TunesModel
 {
 
     private Song song = null;
-    private ObservableList<Song> allSong;
     private SongManager songManager;
     private PlaylistManager pm;
     private MusicPlayer mp;
@@ -33,7 +32,6 @@ public class TunesModel
 
     private Playlist chosenPlaylist;
     private Song chosenSong;
-    private String selectedSong;
 
     private ObservableList<Song> songsShownInPlaylist;
 
@@ -41,8 +39,6 @@ public class TunesModel
     {
         pm = new PlaylistManager();
         songManager = new SongManager();
-        allSongs = FXCollections.observableArrayList();
-        allSongs.addAll(songManager.getAllSongs());
         songsShownInPlaylist = FXCollections.observableArrayList();
 
     }
@@ -50,6 +46,12 @@ public class TunesModel
     private ObservableList<Playlist> playlists = FXCollections.observableArrayList();
     private ObservableList<Song> songs = FXCollections.observableArrayList();
 
+    /**
+     * Gets and displays a list of all playlists in the database
+     * @return An observable list of playlist objects
+     * @throws IOException
+     * @throws Exception
+     */
     public ObservableList<Playlist> getPlaylistList() throws IOException, Exception
     {
         playlists.clear();
@@ -82,16 +84,29 @@ public class TunesModel
         return songs;
     }
 
+    /**
+     * Sets the selected playlist
+     * @param chosenPlaylist
+     */
     public void setChosenPlaylist(Playlist chosenPlaylist)
     {
         this.chosenPlaylist = chosenPlaylist;
     }
 
+    /**
+     * Gets the selected playlist
+     * @return A playlist object
+     */
     public Playlist getChosenPlaylist()
     {
         return chosenPlaylist;
     }
 
+    /**
+     * Gets all songs in the selected playlist 
+     * @return An observable list of song objects
+     * @throws Exception
+     */
     public ObservableList<Song> getSongsInPlaylist() throws Exception
     {
         songsShownInPlaylist.clear();
@@ -134,33 +149,12 @@ public class TunesModel
         });
     }
 
-    private MusicPlayer musicPlayer = new MusicPlayer();
-    private String musicLocation = "Music/Pop/popsong.mp3";
-
-    public void playMusic()
-    {
-        musicPlayer.playMusic(musicLocation);
-    }
-
     /**
-     * Pausing the music when pressed
+     * Searches for the given query in the list of songs
+     * @param query
+     * @throws IOException
+     * @throws DalException
      */
-    public void pauseMusic()
-    {
-        musicPlayer.pauseMusic(musicLocation);
-    }
-
-    /**
-     * Stops the music when pressed
-     */
-    public void stopMusic()
-    {
-        musicPlayer.stopMusic(musicLocation);
-    }
-
-    private ObservableList<Song> allSongs;
-
-
     public void search(String query) throws IOException, DalException
     {
         if (query.isEmpty())
@@ -177,6 +171,12 @@ public class TunesModel
         }
     }
 
+    /**
+     * Adds the selected song to the selected playlist
+     * @param playlist
+     * @param song
+     * @throws Exception
+     */
     public void addSongToPlaylist(Playlist playlist, Song song) throws Exception
     {
         pm.addSongToPlaylist(playlist, song);
@@ -184,16 +184,29 @@ public class TunesModel
         getSongsInPlaylist();
     }
 
+    /**
+     * Sets the selected song
+     * @param selectedSong
+     */
     public void setChosenSong(Song selectedSong)
     {
         chosenSong = selectedSong;
     }
 
+    /**
+     * Gets the selected song
+     * @return A song object
+     */
     public Song getChosenSong()
     {
         return chosenSong;
     }
 
+    /**
+     * Removes the selected song from the selected playlist
+     * @param selectedSong
+     * @throws Exception
+     */
     public void deleteSongInPlaylist(Song selectedSong) throws Exception
     {
         pm.deleteSongInPlaylist(chosenSong.getSongId(), chosenPlaylist.getPlaylistId());
@@ -202,6 +215,11 @@ public class TunesModel
 
     }
     
+    /**
+     * Deletes a playlist object from the database
+     * @param playlist
+     * @throws Exception
+     */
     public void deletePlaylist(Playlist playlist) throws Exception
     {
         pm.deletePlaylist(chosenPlaylist);

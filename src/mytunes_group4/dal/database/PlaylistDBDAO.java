@@ -31,7 +31,13 @@ public class PlaylistDBDAO
         dbc = new DatabaseConnector();
     }
 
-    //test//
+    
+
+    /**
+     * Gets all playlists in the database
+     * @return A list of playlist objects
+     * @throws Exception
+     */
     public List<Playlist> getAllPlaylists() throws Exception
     {
         try ( Connection con = dbc.getConnection())
@@ -57,6 +63,12 @@ public class PlaylistDBDAO
         }
     }
     
+    /**
+     * Gets all songs in a given playlist 
+     * @param playlistId
+     * @return All song objects in a playlist
+     * @throws Exception
+     */
     public List<Song> getAllSongsInPlaylist(int playlistId) throws Exception
     {
         try ( Connection con = dbc.getConnection())
@@ -144,6 +156,13 @@ public class PlaylistDBDAO
         }
     }
     
+    /**
+     * Adds a song to a playlist
+     * @param playlist
+     * @param song
+     * @return true if a song was added to a playlist
+     * @throws Exception
+     */
     public boolean addSongToPlaylist(Playlist playlist, Song song) throws Exception
     {
         try ( Connection con = dbc.getConnection())
@@ -170,6 +189,12 @@ public class PlaylistDBDAO
         }
     }
     
+    /**
+     * Deletes a playlist object
+     * @param playlist
+     * @return true if playlist was deleted
+     * @throws Exception
+     */
     public boolean deletePlaylist(Playlist playlist) throws Exception
     {
         try ( Connection con = dbc.getConnection())
@@ -194,6 +219,13 @@ public class PlaylistDBDAO
 
     }
 
+    /**
+     * Deletes a song from a playlist in the database
+     * @param playlistId
+     * @param songId
+     * @return true if song was deleted from a playlist
+     * @throws Exception
+     */
     public boolean deleteSongInPlaylist(int playlistId, int songId) throws Exception
     {
         try ( Connection con = dbc.getConnection())
@@ -219,6 +251,13 @@ public class PlaylistDBDAO
         }
     }
 
+    /**
+     * Gets a SongAndPlaylistId from the database
+     * @param playlistId
+     * @param songId
+     * @return 
+     * @throws Exception
+     */
     private int getSapId(int playlistId, int songId) throws Exception
     {
         try ( Connection con = dbc.getConnection())
