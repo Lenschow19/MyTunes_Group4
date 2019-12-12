@@ -33,18 +33,17 @@ public class TunesModel
     private Playlist chosenPlaylist;
     private Song chosenSong;
 
-    private ObservableList<Song> songsShownInPlaylist;
+    private ObservableList<Song> songsShownInPlaylist = FXCollections.observableArrayList();
+    private ObservableList<Playlist> playlists = FXCollections.observableArrayList();
+    private ObservableList<Song> songs = FXCollections.observableArrayList();
 
     public TunesModel() throws IOException, DalException, Exception
     {
         pm = new PlaylistManager();
         songManager = new SongManager();
-        songsShownInPlaylist = FXCollections.observableArrayList();
-
     }
 
-    private ObservableList<Playlist> playlists = FXCollections.observableArrayList();
-    private ObservableList<Song> songs = FXCollections.observableArrayList();
+    
 
     /**
      * Gets and displays a list of all playlists in the database
@@ -69,6 +68,12 @@ public class TunesModel
 
     }
 
+    /**
+     * Gets and displays a list of all songs in the database
+     * @return An observable list of song objects
+     * @throws IOException
+     * @throws DalException
+     */
     public ObservableList<Song> getSongs() throws IOException, DalException
     {
         songs.addAll(songManager.getAllSongs());
@@ -82,6 +87,18 @@ public class TunesModel
 
         });
         return songs;
+    }
+    
+    /**
+     * Gets all songs in the selected playlist 
+     * @return An observable list of song objects
+     * @throws Exception
+     */
+    public ObservableList<Song> getSongsInPlaylist() throws Exception
+    {
+        songsShownInPlaylist.clear();
+        songsShownInPlaylist.addAll(pm.getAllSongsInPlaylist(chosenPlaylist.getPlaylistId()));
+        return songsShownInPlaylist;
     }
 
     /**
@@ -102,17 +119,7 @@ public class TunesModel
         return chosenPlaylist;
     }
 
-    /**
-     * Gets all songs in the selected playlist 
-     * @return An observable list of song objects
-     * @throws Exception
-     */
-    public ObservableList<Song> getSongsInPlaylist() throws Exception
-    {
-        songsShownInPlaylist.clear();
-        songsShownInPlaylist.addAll(pm.getAllSongsInPlaylist(chosenPlaylist.getPlaylistId()));
-        return songsShownInPlaylist;
-    }
+    
 
     public void updatePlaylist(Playlist selectedPlaylist) throws Exception
     {
@@ -147,6 +154,17 @@ public class TunesModel
             }
 
         });
+    }
+    
+    /**
+     * Deletes a playlist object from the database
+     * @param playlist
+     * @throws Exception
+     */
+    public void deletePlaylist(Playlist playlist) throws Exception
+    {
+        pm.deletePlaylist(chosenPlaylist);
+        getPlaylistList();
     }
 
     /**
@@ -215,16 +233,7 @@ public class TunesModel
 
     }
     
-    /**
-     * Deletes a playlist object from the database
-     * @param playlist
-     * @throws Exception
-     */
-    public void deletePlaylist(Playlist playlist) throws Exception
-    {
-        pm.deletePlaylist(chosenPlaylist);
-        getPlaylistList();
-    }
+    
 
     public Song addSong(String songName, String artistName, String genre, String path) throws Exception
     {
