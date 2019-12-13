@@ -5,19 +5,14 @@
  */
 package mytunes_group4.gui.PlaylistView;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import mytunes_group4.dal.DalException;
 import mytunes_group4.gui.model.TunesModel;
 
 /**
@@ -27,15 +22,15 @@ import mytunes_group4.gui.model.TunesModel;
  */
 public class AddPlaylistController implements Initializable
 {
+
+    @FXML
     private Button savePlaylist;
     @FXML
     private TextField txtPlaylistTitle;
 
-    private TunesModel tMod;
+    private TunesModel tModel;
     @FXML
     private Button cancel;
-    @FXML
-    private Button addPlaylist;
 
     /**
      * Initializes the controller class.
@@ -49,13 +44,8 @@ public class AddPlaylistController implements Initializable
     @FXML
     private void addNewPlaylist(ActionEvent event) throws Exception
     {
-        try {
-            tMod = new TunesModel();
-            String name = txtPlaylistTitle.getText().trim();
-            tMod.createPlaylist(name);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        String titleQuery = txtPlaylistTitle.getText();
+        tModel.createPlaylist(titleQuery);
 
         Stage stage = (Stage) savePlaylist.getScene().getWindow();
         stage.close();

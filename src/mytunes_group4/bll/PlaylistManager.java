@@ -25,6 +25,11 @@ public class PlaylistManager
         playlistDbDao = new PlaylistDBDAO();
     }
 
+    /**
+     * Gets all playlists in the database
+     * @return A list of playlist objects
+     * @throws Exception
+     */
     public List<Playlist> getAllPlaylists() throws Exception
     {
         return playlistDbDao.getAllPlaylists();
@@ -35,9 +40,15 @@ public class PlaylistManager
         playlistDbDao.updatePlaylist(playlist);
     }
     
-    public void deletePlaylist(Playlist playlist) throws Exception
+    /**
+     * Deletes a playlist object
+     * @param playlist
+     * @return true if playlist was deleted
+     * @throws Exception
+     */
+    public boolean deletePlaylist(Playlist playlist) throws Exception
     {
-        playlistDbDao.deletePlaylist(playlist);
+        return playlistDbDao.deletePlaylist(playlist);
     }
     
     public Playlist createPlaylist(String name) throws Exception
@@ -46,18 +57,43 @@ public class PlaylistManager
         return playlist;
     }
     
+    /**
+     * Gets all songs in a given playlist 
+     * @param playlistId
+     * @return All song objects in a playlist
+     * @throws Exception
+     */
     public List<Song> getAllSongsInPlaylist(int playlistId) throws Exception
     {
         return playlistDbDao.getAllSongsInPlaylist(playlistId);
     }
     
+    /**
+     * Adds a song to a playlist in the database
+     * @param playlist
+     * @param song
+     * @return true if song was added to playlist
+     * @throws Exception
+     */
     public boolean addSongToPlaylist(Playlist playlist, Song song) throws Exception
     {
         return playlistDbDao.addSongToPlaylist(playlist, song);
     }
     
-    public boolean deleteSongInPlaylist(int songId, int playlistId) throws Exception
+    /**
+     * Deletes a song from a playlist in the database
+     * @param playlistId
+     * @param songId
+     * @return true if song was deleted from playlist
+     * @throws Exception
+     */
+    public boolean deleteSongInPlaylist(int playlistId, int songId) throws Exception
     {
         return playlistDbDao.deleteSongInPlaylist(songId, playlistId);
+    }
+    
+    public boolean changeSongPosition(int firstSongId, int secondSongId, int playlistId) throws Exception
+    {
+        return playlistDbDao.changeSongPosition(firstSongId, secondSongId, playlistId);
     }
 }

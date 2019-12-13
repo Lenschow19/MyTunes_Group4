@@ -35,7 +35,11 @@ public class DatabaseConnector
         dataSource.setServerName(props.getProperty("server"));
     }
 
-    
+    /**
+     *
+     * @return
+     * @throws SQLServerException
+     */
     public Connection getConnection() throws SQLServerException
     {   
         return dataSource.getConnection();
