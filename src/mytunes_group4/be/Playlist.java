@@ -23,6 +23,7 @@ public class Playlist
      * Properties a playlist should have and can display.
      *
      * @param playlistId //each playlist have it's own id
+     * Properties of a playlist should have and can display.
      * @param name
      */
     public Playlist(int playlistId, String name)
