@@ -23,6 +23,7 @@
                   <Font size="16.0" />
                </font>
             </Label>
+
             <TableView fx:id="playlistTableView" prefHeight="332.0" prefWidth="205.0">
               <columns>
                 <TableColumn fx:id="viewName" prefWidth="203.33334732055664" text="Name" />
@@ -47,7 +48,17 @@
             <ListView fx:id="SongsInPlaylist" prefHeight="328.0" prefWidth="205.0" />
             <HBox alignment="TOP_CENTER" prefHeight="59.0" prefWidth="205.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#deleteSongInPlaylist" text="Delete" />
+                  <ImageView fx:id="ArrowUp" fitHeight="30.0" fitWidth="35.0" onMouseClicked="#moveSongUp" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@arrow%20up.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="ArrowDown" fitHeight="33.0" fitWidth="32.0" onMouseClicked="#moveSongDown" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@arrow%20down.png" />
+                     </image>
+                  </ImageView>
+                  <Button mnemonicParsing="false" onAction="#deleteSongInPlaylist" prefWidth="60.0" text="Delete" />
                </children>
             </HBox>
          </children>
@@ -70,7 +81,7 @@
             <HBox alignment="TOP_CENTER" prefHeight="53.0" prefWidth="290.0">
                <children>
                   <Button fx:id="newSong" mnemonicParsing="false" onAction="#addNewSong" text="New" />
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#editSong" text="Edit" />
+                  <Button fx:id="editSong" alignment="CENTER" mnemonicParsing="false" onAction="#editSong" text="Edit" />
                   <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteSong" onMouseReleased="#confirmationDeletePopUpSong" text="Delete" />
                </children>
             </HBox>

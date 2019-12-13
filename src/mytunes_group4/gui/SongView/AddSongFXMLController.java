@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import mytunes_group4.gui.model.TunesModel;
 
@@ -29,14 +30,19 @@ public class AddSongFXMLController implements Initializable
     private Button cancelWindow;
     @FXML
     private Button addSong;
-    @FXML
     private TextField txtGenre;
     @FXML
     private TextField txtPath;
-    @FXML
     private TextField txtTitle;
-    @FXML
     private TextField txtArtist;
+    @FXML
+    private TextField txtSongTitle;
+    @FXML
+    private TextField txtArtistTitle;
+    @FXML
+    private TextField txtSongGenre;
+    @FXML
+    private Button lookForSong;
 
     /**
      * Initializes the controller class.
@@ -65,6 +71,12 @@ public class AddSongFXMLController implements Initializable
     @FXML
     private void cancelSongWindow(ActionEvent event)
     {
+        Stage stage = (Stage) cancelWindow.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void cancelSongWindow(MouseEvent event) {
         Stage stage = (Stage) cancelWindow.getScene().getWindow();
         stage.close();
     }
