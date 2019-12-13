@@ -26,8 +26,7 @@
 
             <TableView fx:id="playlistTableView" prefHeight="332.0" prefWidth="205.0">
               <columns>
-                <TableColumn fx:id="viewNumber" prefWidth="40.0" text="id" />
-                <TableColumn fx:id="viewName" prefWidth="164.0" text="Name" />
+                <TableColumn fx:id="viewName" prefWidth="203.33334732055664" text="Name" />
               </columns>
             </TableView>
             <HBox alignment="TOP_CENTER" prefHeight="62.0" prefWidth="205.0">

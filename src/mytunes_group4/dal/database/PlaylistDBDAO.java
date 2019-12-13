@@ -33,7 +33,13 @@ public class PlaylistDBDAO
         dbc = new DatabaseConnector();
     }
 
-    //test//
+    
+
+    /**
+     * Gets all playlists in the database
+     * @return A list of playlist objects
+     * @throws Exception
+     */
     public List<Playlist> getAllPlaylists() throws Exception
     {
         try ( Connection con = dbc.getConnection())
@@ -58,7 +64,13 @@ public class PlaylistDBDAO
             throw new Exception();
         }
     }
-
+    
+    /**
+     * Gets all songs in a given playlist 
+     * @param playlistId
+     * @return All song objects in a playlist
+     * @throws Exception
+     */
     public List<Song> getAllSongsInPlaylist(int playlistId) throws Exception
     {
         try ( Connection con = dbc.getConnection())
@@ -76,6 +88,7 @@ public class PlaylistDBDAO
             while (rs.next())
             {
                 Song song = new Song(
+                        rs.getInt("songId"),
                         rs.getString("songName"),
                         rs.getString("artistName"),
                         rs.getString("genre"),
@@ -191,27 +204,7 @@ public class PlaylistDBDAO
         }
     }
 
-    public void deletePlaylist(Playlist playlist) throws Exception
-    {
-        try ( Connection con = dbc.getConnection())
-        {
-            int id = playlist.getPlaylistId();
-            String sql = "DELETE FROM Playlist WHERE playlistId=?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            int affectedRows = ps.executeUpdate(sql);
-            if (affectedRows != 1)
-            {
-                throw new Exception();
-            }
-
-        } catch (SQLException ex)
-        {
-            ex.printStackTrace();
-            throw new Exception();
-        }
-
-    }
+    
 
     public void updatePlaylist(Playlist playlist) throws Exception
     {
@@ -233,6 +226,129 @@ public class PlaylistDBDAO
         {
             ex.printStackTrace();
             throw new Exception();
+        }
+    }
+    
+    /**
+     * Adds a song to a playlist
+     * @param playlist
+     * @param song
+     * @return true if a song was added to a playlist
+     * @throws Exception
+     */
+    public boolean addSongToPlaylist(Playlist playlist, Song song) throws Exception
+    {
+        try ( Connection con = dbc.getConnection())
+        {
+            String sql = "INSERT INTO SongsInPlaylist VALUES (?,?);";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            int songId = song.getSongId();
+            int playlistId = playlist.getPlaylistId();
+            ps.setInt(1, playlistId);
+            ps.setInt(2, songId);
+
+            if (ps.executeUpdate() == 1)
+            {
+                return true;
+            } else
+            {
+                throw new Exception("Could not add song to playlist");
+            }
+
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new Exception();
+        }
+    }
+    
+    /**
+     * Deletes a playlist object
+     * @param playlist
+     * @return true if playlist was deleted
+     * @throws Exception
+     */
+    public boolean deletePlaylist(Playlist playlist) throws Exception
+    {
+        try ( Connection con = dbc.getConnection())
+        {
+            int playlistId = playlist.getPlaylistId();
+            String sql = "DELETE FROM Playlist WHERE playlistId=?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, playlistId);
+            if (ps.executeUpdate() == 1)
+            {
+                return true;
+            } else
+            {
+                throw new Exception();
+            }
+
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new Exception();
+        }
+
+    }
+
+    /**
+     * Deletes a song from a playlist in the database
+     * @param playlistId
+     * @param songId
+     * @return true if song was deleted from a playlist
+     * @throws Exception
+     */
+    public boolean deleteSongInPlaylist(int playlistId, int songId) throws Exception
+    {
+        try ( Connection con = dbc.getConnection())
+        {
+            int sapId = getSapId(playlistId, songId);
+            String sql = "DELETE SongsInPlaylist WHERE sapId=?;";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setInt(1, sapId);
+
+            if (ps.executeUpdate() == 1)
+            {
+                return true;
+            } else
+            {
+                throw new Exception();
+            }
+
+        } catch (SQLServerException ex)
+        {
+            
+            throw new Exception(ex.getMessage(), ex.getCause());
+        }
+    }
+
+    /**
+     * Gets a SongAndPlaylistId from the database
+     * @param playlistId
+     * @param songId
+     * @return 
+     * @throws Exception
+     */
+    private int getSapId(int playlistId, int songId) throws Exception
+    {
+        try ( Connection con = dbc.getConnection())
+        {
+            String sql = "SELECT sapId FROM SongsInPlaylist WHERE playlistId=? AND songId=?;";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setInt(1, playlistId);
+            ps.setInt(2, songId);
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int id = rs.getInt("sapId");
+            return id;
+
+        } catch (SQLServerException ex)
+        {
+            throw new Exception(ex.getMessage(), ex.getCause());
         }
     }
 

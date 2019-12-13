@@ -13,12 +13,12 @@ import java.io.Serializable;
  */
 public class Song implements Serializable
 {
-    private int songId; 
-    private String songName;
-    private String artistName;
-    private String genre;
+    private int songId; //The unique ID of a song
+    private String songName; //Title of the song
+    private String artistName; //Name of the artist
+    private String genre; //The kind of music
     private int duration; //How long the songs playtime is
-    private String path;
+    private String path; //Where the song is located
     
     /**
      * Parameters when creating a new song to the database.
@@ -38,6 +38,13 @@ public class Song implements Serializable
         this.path = path;
     }
 
+    /**
+     * 
+     * @param artistName
+     * @param songName
+     * @param genre
+     * @param path 
+     */
     public Song(String artistName, String songName, String genre, String path)
     {
         this.songName = songName;
@@ -46,19 +53,24 @@ public class Song implements Serializable
         this.path = path;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public String getPath()
     {
         return path;
     }
 
+    /**
+     * 
+     * @param path 
+     */
     public void setPath(String path)
     {
         this.path = path;
     }
-    
-    
 
-    
     /**
      * 
      * @return song id
