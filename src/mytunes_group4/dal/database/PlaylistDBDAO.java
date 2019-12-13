@@ -14,6 +14,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mytunes_group4.be.Playlist;
 import mytunes_group4.be.Song;
 
@@ -97,6 +99,77 @@ public class PlaylistDBDAO
             }
             return songs;
         } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new Exception();
+        }
+    }
+
+    public boolean addSongToPlaylist(Playlist playlist, Song song) throws Exception
+    {
+        try ( Connection con = dbc.getConnection())
+        {
+            String sql = "INSERT INTO SongsInPlaylist VALUES (?,?);";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, playlist.getPlaylistId());
+            ps.setInt(2, song.getSongId());
+
+            if (ps.executeUpdate() == 1)
+            {
+                return true;
+            } else
+            {
+                throw new Exception();
+            }
+
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            throw new Exception();
+        }
+    }
+
+    public boolean deleteSongInPlaylist(int songId, int playlistId) throws Exception
+    {
+        try ( Connection con = dbc.getConnection())
+        {
+            int sapId = getSapId(songId, playlistId);
+            String sql = "DELETE SongsInPlaylist WHERE sapId=?;";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setInt(1, sapId);
+
+            if (ps.executeUpdate() == 1)
+            {
+                return true;
+            } else
+            {
+                throw new Exception();
+            }
+
+        } catch (SQLServerException ex)
+        {
+            ex.printStackTrace();
+            throw new Exception();
+        }
+    }
+
+    private int getSapId(int songId, int playlistId) throws Exception
+    {
+        try ( Connection con = dbc.getConnection())
+        {
+            String sql = "SELECT sapId FROM SongsInPlaylist WHERE songId=? AND playlistId=?;";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setInt(1, songId);
+            ps.setInt(2, playlistId);
+
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int id = rs.getInt("sapId");
+            return id;
+
+        } catch (SQLServerException ex)
         {
             ex.printStackTrace();
             throw new Exception();
@@ -279,5 +352,4 @@ public class PlaylistDBDAO
         }
     }
 
-    
 }

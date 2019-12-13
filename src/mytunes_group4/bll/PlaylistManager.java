@@ -75,11 +75,13 @@ public class PlaylistManager
      * @return true if song was added to playlist
      * @throws Exception
      */
+
     public boolean addSongToPlaylist(Playlist playlist, Song song) throws Exception
     {
         return playlistDbDao.addSongToPlaylist(playlist, song);
     }
     
+
     /**
      * Deletes a song from a playlist in the database
      * @param playlistId

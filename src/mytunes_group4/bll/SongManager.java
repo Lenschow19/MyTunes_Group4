@@ -62,8 +62,8 @@ public class SongManager
         songDB.editSong(song);
     }
 
-    public void deleteSong(Song song) throws Exception {
-        songDB.deleteSong(song);
+    public void deleteSong(Song selectedSong) throws Exception {
+        songDB.deleteSong(selectedSong);
     }
 
     public Song addSong(String songName, String artistName, String genre, String path) throws Exception {
