@@ -14,31 +14,24 @@ import java.util.List;
  */
 public class Playlist
 {
-    private int playlistId; 
+
+    private int playlistId;
     private String name; //name of playlist
     private List<Song> songs;
-    private int totalDuration; //Displaying duration of all songs in the playlist
-    private int songCounter; //Displaying number of songs in the playlist
-    
-    private ArrayList<Song> playlist;
-    
+
     /**
      * Properties a playlist should have and can display.
-     * @param id //each playlist have it's own id
+     *
+     * @param playlistId //each playlist have it's own id
      * @param name
-     * @param totalDuration //calculated
-     * @param songCounter //counter
      */
     public Playlist(int playlistId, String name)
     {
-        this.playlistId = playlistId; 
+        this.playlistId = playlistId;
         this.name = name;
         songs = new ArrayList<>();
-        this.totalDuration = totalDuration;
-        this.songCounter = songCounter;
+
     }
-    
-    
 
     /**
      *
@@ -60,19 +53,28 @@ public class Playlist
 
     /**
      * Naming the playlist
+     *
      * @param name
      */
     public void setName(String name)
     {
         this.name = name;
     }
-    
+
+    /**
+     *
+     * @return A list of song objects in the playlist
+     */
     public List<Song> getSongsInPlaylist()
     {
-        return songs; 
+        return songs;
     }
-    
-    public void addSongToPlaylist (Song song)
+
+    /**
+     * Adds a song object to a playlist
+     * @param song
+     */
+    public void addSongToPlaylist(Song song)
     {
         songs.add(song);
     }
@@ -82,8 +84,5 @@ public class Playlist
     {
         return playlistId + " " + name;
     }
-  
-    
-    
-    
+
 }

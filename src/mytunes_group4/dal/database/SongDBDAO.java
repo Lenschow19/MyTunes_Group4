@@ -15,7 +15,6 @@ import java.sql.SQLException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import mytunes_group4.be.Song;
 import mytunes_group4.dal.DalException;
 import mytunes_group4.dal.ISongDAO;
 import mytunes_group4.be.Song;
@@ -53,12 +52,13 @@ public class SongDBDAO implements ISongDAO
             ArrayList<Song> allSongs = new ArrayList<>();
             while (rs.next())
             {
+                int id = rs.getInt("songId");
                 String songName = rs.getString("songName");
                 String artistName = rs.getString("artistName");
                 String genre = rs.getString("genre");
                 String path = rs.getString("path");
 
-                Song son = new Song(artistName, songName, genre, path);
+                Song son = new Song(id, songName, artistName, genre, path);
                 allSongs.add(son);
             }
 
@@ -104,9 +104,9 @@ public class SongDBDAO implements ISongDAO
     }
 
     @Override
-    public void deleteSong(Song selectedSong) throws DalException {
+    public void deleteSong(Song song) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            int songId = selectedSong.getSongId();
+            int songId = song.getSongId();
             String sql = "DELETE FROM Song WHERE songId=?;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, songId);
@@ -124,15 +124,15 @@ public class SongDBDAO implements ISongDAO
     public void editSong(Song song) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
             int songId = song.getSongId();
-            String songName = song.getSongName();
-            String artistName = song.getArtistName();
-            String genre = song.getGenre();
-            String path = song.getPath();
+//            String songName = song.getSongName();
+//            String artistName = song.getArtistName();
+//            String genre = song.getGenre();
+//            String path = song.getPath();
 
-//            String songName = new String();
-//            String artistName = new String();
-//            String genre = new String();
-//            String path = new String();
+            String songName = new String();
+            String artistName = new String();
+            String genre = new String();
+            String path = new String();
             String sql = "UPDATE Song SET songName=?, artistName=?, genre=?, path=? WHERE songId=?;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, songName);
@@ -140,11 +140,10 @@ public class SongDBDAO implements ISongDAO
             ps.setString(3, genre);
             ps.setString(4, path);
             ps.setInt(5, songId);
-//            int affectedRows = 
-                    ps.executeUpdate();
-//            if (affectedRows != 1) {
-//                throw new DalException();
-//            }
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows != 1) {
+                throw new DalException();
+            }
 
         } catch (SQLException ex) {
             ex.printStackTrace();
