@@ -24,6 +24,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.SelectionModel;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -47,7 +48,7 @@ import mytunes_group4.gui.model.TunesModel;
  */
 public class TunesViewController implements Initializable
 {
-
+    private SelectionModel<Song> selModel;
     private Song song = null;
     private String songPath;
     private TunesModel tModel;
@@ -102,6 +103,16 @@ public class TunesViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        
+        SongsInPlaylist.getSelectionModel().selectedItemProperty().addListener((obs, old, newVal) ->
+        {
+            selModel = SongsInPlaylist.getSelectionModel();
+        });
+        
+        songTableView.getSelectionModel().selectedItemProperty().addListener((obs, old, newVal) ->
+        {
+            selModel = songTableView.getSelectionModel();
+        });
         
         //initialize our song selection and volumeslider
         setSongSelection();
@@ -277,11 +288,35 @@ public class TunesViewController implements Initializable
     {
         btnPause.setText("Pause");
         isPlaying = true;
-        song = songTableView.getSelectionModel().getSelectedItem();
+        song = selModel.getSelectedItem();
         setMusicPlayerPath();
         mediaPlayer.play();
         currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
 
+        //shows the duration of the song in seconds in gui (works but doesnt look nice)
+        mediaPlayer.setOnReady(() ->
+        {
+            lblTime.setText("" + media.getDuration().toSeconds());
+        });
+
+        //plays the next song automatically after first song has finished
+        mediaPlayer.setOnEndOfMedia(() ->
+        {
+            selModel.selectNext();
+            setMusicPlayerPath();
+            mediaPlayer.play();
+            currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
+
+            //if the song is the last one on the list, it will play the first song after finished
+            if (songTableView.getItems().size() == selModel.getSelectedIndex() + 1 || SongsInPlaylist.getItems().size() == selModel.getSelectedIndex() + 1)
+            {
+                selModel.selectFirst();
+                setMusicPlayerPath();
+                mediaPlayer.play();
+                currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
+            }
+        });
+        
     }
 
     @FXML
@@ -339,6 +374,27 @@ public class TunesViewController implements Initializable
         });
 
     }
+    
+    private void setSongSelectionInPlaylist()
+    {
+        ssTitle.setEditable(false);
+        ssArtist.setEditable(false);
+        
+        SongsInPlaylist.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        SongsInPlaylist.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Song>()
+        {
+            @Override
+            public void changed(ObservableValue<? extends Song> arg0, Song oldValue, Song newValue)
+            {
+
+                if (newValue != null)
+                {
+                    ssTitle.setText(newValue.getSongName());
+                    ssArtist.setText(newValue.getArtistName());
+                }
+            }
+        });
+    }
 
     private void setSongsInPlaylistSelection()
     {
@@ -381,45 +437,10 @@ public class TunesViewController implements Initializable
 
     private void setMusicPlayerPath()
     {
-        if (mediaPlayer != null)
-        {
-            mediaPlayer.stop();
-        }
-
-        song = songTableView.getSelectionModel().getSelectedItem();
+        song = selModel.getSelectedItem();
         songPath = song.getPath();
         media = new Media(new File(songPath).toURI().toString());
         mediaPlayer = new MediaPlayer(media);
-
-
-        
-        //shows the duration of the song in seconds in gui (works but doesnt look nice)
-        mediaPlayer.setOnReady(() ->
-        {
-            lblTime.setText("" + media.getDuration().toSeconds());
-
-        });
-
-        
-        //plays the next song automatically after first song has finished
-        mediaPlayer.setOnEndOfMedia(() ->
-        {
-            songTableView.getSelectionModel().selectNext();
-            setMusicPlayerPath();
-            mediaPlayer.play();
-            currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
-            
-            
-            //if the song is the last one on the list, it will play the first song after finished
-            if (songTableView.getItems().size() == songTableView.getSelectionModel().getSelectedIndex() + 1)
-                {
-                    songTableView.getSelectionModel().selectFirst();
-                    setMusicPlayerPath();
-                    mediaPlayer.play();
-                    currentSongPlaying.setText(song.getArtistName() + " - " + song.getSongName() + " is currently playing");
-                }
-        });
-
     }
 
     @FXML
@@ -432,7 +453,7 @@ public class TunesViewController implements Initializable
     @FXML
     private void playPreviousSong(ActionEvent event)
     {
-        songTableView.getSelectionModel().selectPrevious();
+        selModel.selectPrevious();
         isPlaying = true;
         setMusicPlayerPath();
         mediaPlayer.play();
@@ -442,7 +463,7 @@ public class TunesViewController implements Initializable
     @FXML
     private void playNextSong(ActionEvent event)
     {
-        songTableView.getSelectionModel().selectNext();
+        selModel.selectNext();
         isPlaying = true;
         setMusicPlayerPath();
         mediaPlayer.play();
