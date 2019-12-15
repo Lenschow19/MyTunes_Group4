@@ -281,12 +281,20 @@ public class PlaylistDBDAO
         }
     }
     
+    /**
+     *
+     * @param firstSongId
+     * @param secondSongId
+     * @param playlistId
+     * @return
+     * @throws Exception
+     */
     public boolean changeSongPosition(int firstSongId, int secondSongId, int playlistId) throws Exception
     {
         try (Connection con = dbc.getConnection())
         {
-            int firstSapId = getSapId(firstSongId, playlistId);
-            int secondSapId = getSapId(secondSongId, playlistId);
+            int firstSapId = getSapId(playlistId, firstSongId);
+            int secondSapId = getSapId(playlistId, secondSongId);
             
             String sql = "UPDATE SongsInPlaylist SET songId=? WHERE sapId=?;"
                     + "UPDATE SongsInPlaylist SET songId=? WHERE sapId=?;";
