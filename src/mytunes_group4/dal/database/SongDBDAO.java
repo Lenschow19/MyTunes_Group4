@@ -27,11 +27,18 @@ public class SongDBDAO
 
     private DatabaseConnector dbCon;
 
+    /*
+    Initlializes the database connector
+    */
     public SongDBDAO() throws IOException
     {
         dbCon = new DatabaseConnector();
     }
 
+    
+    /*
+    Get all songs
+    */
     public List<Song> getAllSongs() throws DalException
     {
 
@@ -69,6 +76,9 @@ public class SongDBDAO
         }
     }
 
+    /*
+    Add song
+    */
     public Song addSong(String songName, String artistName, String genre, String path) throws DalException
     {
         try ( Connection con = dbCon.getConnection())
@@ -101,6 +111,9 @@ public class SongDBDAO
         
     }
 
+    /*
+    Delete song
+    */
     public void deleteSong(Song song) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
             int songId = song.getSongId();
@@ -117,6 +130,9 @@ public class SongDBDAO
         }
     }
 
+    /*
+    Edit song
+    */
     public void editSong(Song song) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
             

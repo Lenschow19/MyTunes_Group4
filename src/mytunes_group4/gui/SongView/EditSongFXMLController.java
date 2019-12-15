@@ -44,7 +44,9 @@ public class EditSongFXMLController implements Initializable
     @FXML
     private Button browseFile;
     
-    
+    /**
+     *
+     */
     public void EditSongFXMLController(){
         txtUpdateTitle.setText(TunesViewController.getTitle);
         txtUpdateArtist.setText(TunesViewController.getArtist);
@@ -62,7 +64,9 @@ public class EditSongFXMLController implements Initializable
         // TODO
     }    
     
-    
+    /*
+    Close stage
+    */
     @FXML
     private void cancelEditWindow(ActionEvent event)
     {
@@ -70,7 +74,10 @@ public class EditSongFXMLController implements Initializable
         stage.close();
     }
 
-    
+    /*
+    Initialize tunesModel
+    Edit song
+    */
     @FXML
     private void editSong(ActionEvent event) throws Exception {
         
@@ -88,7 +95,9 @@ public class EditSongFXMLController implements Initializable
         }
     }
 
-    
+    /*
+        Browse files
+    */
     @FXML
     private void browseFile(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();

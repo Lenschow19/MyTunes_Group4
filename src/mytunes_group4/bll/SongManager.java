@@ -21,20 +21,26 @@ public class SongManager
     private SongDBDAO songDB;
     private Song song;
 
+    
+    /*
+    Initializes SongDBDAO
+    */
     public SongManager() throws IOException
     {
         songDB = new SongDBDAO();
     }
     
     
-    
+    /*
+    Get all songs
+    */
     public List <Song> getAllSongs() throws IOException, DalException
     {
         return songDB.getAllSongs();
     }
    
     /**
-     *
+     *Search list
      * @param searchBase
      * @param query
      * @return
@@ -52,6 +58,9 @@ public class SongManager
         return results;
     }
 
+    /*
+    Search songs
+    */
     public List<Song> searchSongs(String query) throws DalException, IOException
     {
         List<Song> allSongs = getAllSongs();
@@ -59,14 +68,24 @@ public class SongManager
         return allSongs;
     }
     
+    /*
+    Edit song
+    */
     public void editSong(Song song) throws Exception {
         songDB.editSong(song);
     }
 
+    
+    /*
+    Delete song
+    */
     public void deleteSong(Song song) throws Exception {
         songDB.deleteSong(song);
     }
 
+    /*
+    Add song
+    */
     public Song addSong(String songName, String artistName, String genre, String path) throws Exception {
         song = songDB.addSong(artistName, songName, genre, path);
         return song;

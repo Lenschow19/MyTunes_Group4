@@ -166,6 +166,9 @@ public class TunesViewController implements Initializable
 
     }
 
+    /*
+    Set and show stage addPlaylist
+    */
     @FXML
     private void addNewPlaylist(ActionEvent event)
     {
@@ -183,6 +186,9 @@ public class TunesViewController implements Initializable
         }
     }
 
+    /*
+    Set and show stage editPlaylist
+    */
     @FXML
     private void editPlaylist(ActionEvent event)
     {
@@ -204,24 +210,15 @@ public class TunesViewController implements Initializable
         }
     }
 
+    /*
+    Delete playlist
+    */
     @FXML
     private void deletePlaylist(ActionEvent event) throws Exception
     {
         tModel.setChosenPlaylist(playlistTableView.getSelectionModel().getSelectedItem());
         tModel.deletePlaylist(tModel.getChosenPlaylist());
     }
-        /*Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("A Deletion Confirmation");
-        alert.setHeaderText("Are you sure you want to delete:");
-        alert.setContentText(playlistTableView.getSelectionModel().getSelectedItem() + "?");
-        
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
-            playlistmanager.deletePlaylist(playlist);
-        } else {
-            alert.close();
-        }*/
-    
 
     @FXML
     private void deleteSongInPlaylist(ActionEvent event) throws Exception
@@ -237,6 +234,9 @@ public class TunesViewController implements Initializable
         tModel.addSongToPlaylist(playlistTableView.getSelectionModel().getSelectedItem(), tModel.getChosenSong());
     }
 
+    /*
+    Set and show stage addSong
+    */
     @FXML
     private void addSong(ActionEvent event) {
         try {
@@ -253,6 +253,9 @@ public class TunesViewController implements Initializable
         }
     }
 
+    /*
+    Set and show stage editSong and store song values in variables
+    */
     @FXML
     private void editSong(ActionEvent event)
     {
@@ -279,7 +282,9 @@ public class TunesViewController implements Initializable
         }
     }
     
-
+    /*
+    Delete song
+    */
     @FXML
     private void deleteSong(ActionEvent event) throws Exception
     {
@@ -293,26 +298,6 @@ public class TunesViewController implements Initializable
             }
     }
     }
-//        Song selectedSong = songTableView.getSelectionModel().getSelectedItem();
-//    
-//        Alert alert = new Alert(AlertType.CONFIRMATION);
-//        alert.setTitle("'Delete Song' I Choose You");
-//        alert.setHeaderText("Are you sure you want to delete:");
-//        alert.setContentText(songTableView.getSelectionModel().getSelectedItem() + "?");
-//        
-//        Optional<ButtonType> result = alert.showAndWait();
-//        if (result.get() == ButtonType.YES){
-//            if (selectedSong != null) {
-//                try {
-//                    tModel.deleteSong(selectedSong);
-//                } catch (IOException ex) {
-//                    Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//        } else {
-//            alert.close();
-//        }
-//    }
-    
 
     @FXML
     private void playSong(ActionEvent event) //Plays selected song

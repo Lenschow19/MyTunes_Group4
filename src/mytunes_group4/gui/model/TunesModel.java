@@ -126,6 +126,9 @@ public class TunesModel
         return chosenPlaylist;
     }
 
+    /*
+    Updates playlist
+    */
     public void updatePlaylist(Playlist selectedPlaylist) throws Exception
     {
         pm.updatePlaylist(selectedPlaylist);
@@ -144,6 +147,9 @@ public class TunesModel
         }
     }
 
+    /*
+    Add playlist to DB and playlistList
+    */
     public void createPlaylist(String name) throws Exception
     {
         Playlist playlist = pm.createPlaylist(name);
@@ -269,6 +275,9 @@ public class TunesModel
         return -1; 
     }
 
+    /*
+    Add song to db and songlist
+    */
     public Song addSong(String songName, String artistName, String genre, String path) throws Exception
     {
         song = songManager.addSong(artistName, songName, genre, path);
@@ -276,12 +285,18 @@ public class TunesModel
         return song;
     }
 
+    /*
+    Delete song from db and songlist
+    */
     public void deleteSong(Song selectedSong) throws Exception
     {
         songManager.deleteSong(selectedSong);
         songs.remove(selectedSong);
     }
 
+    /*
+    Edit song
+    */
     public void editSong(Song selectedSong) throws Exception
     {
         songManager.editSong(selectedSong);

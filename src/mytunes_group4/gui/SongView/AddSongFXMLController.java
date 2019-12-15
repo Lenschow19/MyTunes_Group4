@@ -50,6 +50,10 @@ public class AddSongFXMLController implements Initializable {
         // TODO
     }    
 
+    /*
+    Initialize tunesModel
+    Add song
+    */
     @FXML
     private void addSong(ActionEvent event) throws Exception {
         try {
@@ -67,7 +71,9 @@ public class AddSongFXMLController implements Initializable {
 
     }
     
-
+    /*
+    Close stage
+    */
     @FXML
     private void cancelSongWindow(ActionEvent event) {
         
@@ -75,6 +81,9 @@ public class AddSongFXMLController implements Initializable {
         stage.close();
     }
 
+    /*
+    Browse files
+    */
     @FXML
     private void browseFiles(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();

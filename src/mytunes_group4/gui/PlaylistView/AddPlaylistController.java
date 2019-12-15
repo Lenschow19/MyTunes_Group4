@@ -39,12 +39,21 @@ public class AddPlaylistController implements Initializable {
         // TODO
     }    
 
+    
+    /*
+    Close stage
+    */
     @FXML
     private void closeWindow(ActionEvent event) {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
 
+    
+    /*
+    Initialize tunesModel
+    Add playlist
+    */
     @FXML
     private void addNewPlaylist(ActionEvent event) throws Exception {
         try{

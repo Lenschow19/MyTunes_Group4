@@ -35,6 +35,8 @@ public class EditPlaylistController implements Initializable
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -42,14 +44,19 @@ public class EditPlaylistController implements Initializable
         // TODO
     }    
 
- 
+    /*
+    Closes window
+    */
     @FXML
     private void closeWindow(ActionEvent event)
     {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
-
+    
+    /*
+    Saves playlist
+    */
     @FXML
     private void savePlaylist(ActionEvent event) throws DalException, Exception {
         
