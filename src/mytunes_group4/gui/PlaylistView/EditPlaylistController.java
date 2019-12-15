@@ -12,6 +12,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import mytunes_group4.dal.DalException;
+import mytunes_group4.gui.MainView.TunesViewController;
+import mytunes_group4.gui.model.TunesModel;
+import mytunes_group4.be.Playlist;
 
 /**
  * FXML Controller class
@@ -20,7 +25,7 @@ import javafx.scene.control.TextField;
  */
 public class EditPlaylistController implements Initializable
 {
-
+    
     @FXML
     private TextField txtPlaylistTitle;
     @FXML
@@ -37,14 +42,24 @@ public class EditPlaylistController implements Initializable
         // TODO
     }    
 
-    @FXML
-    private void addNewPlaylist(ActionEvent event)
-    {
-    }
-
+ 
     @FXML
     private void closeWindow(ActionEvent event)
     {
+        Stage stage = (Stage) cancel.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void savePlaylist(ActionEvent event) throws DalException, Exception {
+        
+        TunesModel tmod = new TunesModel();
+        
+        Playlist playlist = new Playlist(TunesViewController.getPlaylistId, txtPlaylistTitle.getText().trim());
+        tmod.updatePlaylist(playlist);
+        
+        Stage stage = (Stage) savePlaylist.getScene().getWindow();
+        stage.close();
     }
     
 }

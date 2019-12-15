@@ -16,14 +16,13 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import mytunes_group4.dal.DalException;
-import mytunes_group4.dal.ISongDAO;
 import mytunes_group4.be.Song;
 
 /**
  *
  * @author M
  */
-public class SongDBDAO implements ISongDAO
+public class SongDBDAO
 {
 
     private DatabaseConnector dbCon;
@@ -70,13 +69,12 @@ public class SongDBDAO implements ISongDAO
         }
     }
 
-   @Override
     public Song addSong(String songName, String artistName, String genre, String path) throws DalException
     {
         try ( Connection con = dbCon.getConnection())
         {
             
-            String sql = "INSERT INTO Song VALUES (?,?,?,?);";
+            String sql = "INSERT INTO Song VALUES (?,?,?,?)";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, songName);
             ps.setString(2, artistName);
@@ -103,7 +101,6 @@ public class SongDBDAO implements ISongDAO
         
     }
 
-    @Override
     public void deleteSong(Song song) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
             int songId = song.getSongId();
@@ -120,20 +117,16 @@ public class SongDBDAO implements ISongDAO
         }
     }
 
-    @Override
     public void editSong(Song song) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
+            
             int songId = song.getSongId();
-//            String songName = song.getSongName();
-//            String artistName = song.getArtistName();
-//            String genre = song.getGenre();
-//            String path = song.getPath();
+            String songName = song.getSongName();
+            String artistName = song.getArtistName();
+            String genre = song.getGenre();
+            String path = song.getPath();
 
-            String songName = new String();
-            String artistName = new String();
-            String genre = new String();
-            String path = new String();
-            String sql = "UPDATE Song SET songName=?, artistName=?, genre=?, path=? WHERE songId=?;";
+            String sql = "UPDATE Song SET songName=?, artistName=?, genre=?, path=? WHERE songId=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, songName);
             ps.setString(2, artistName);

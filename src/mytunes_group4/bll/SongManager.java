@@ -19,6 +19,7 @@ import mytunes_group4.dal.database.SongDBDAO;
 public class SongManager
 {
     private SongDBDAO songDB;
+    private Song song;
 
     public SongManager() throws IOException
     {
@@ -67,7 +68,7 @@ public class SongManager
     }
 
     public Song addSong(String songName, String artistName, String genre, String path) throws Exception {
-        Song song = songDB.addSong(artistName, songName, genre, path);
+        song = songDB.addSong(artistName, songName, genre, path);
         return song;
     }
 

@@ -71,7 +71,7 @@
             </TableView>
             <HBox alignment="TOP_CENTER" prefHeight="53.0" prefWidth="290.0">
                <children>
-                  <Button fx:id="newSong" mnemonicParsing="false" onAction="#addNewSong" text="New" />
+                  <Button mnemonicParsing="false" onAction="#addSong" text="New" />
                   <Button alignment="CENTER" mnemonicParsing="false" onAction="#editSong" text="Edit" />
                   <Button alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#deleteSong" onMouseReleased="#confirmationDeletePopUpSong" text="Delete" />
                </children>

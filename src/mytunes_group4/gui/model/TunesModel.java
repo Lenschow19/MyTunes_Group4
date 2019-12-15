@@ -20,6 +20,7 @@ import mytunes_group4.be.Playlist;
 import mytunes_group4.bll.MusicPlayer;
 import mytunes_group4.bll.PlaylistManager;
 
+
 /**
  *
  * @author Rizvan
@@ -37,8 +38,8 @@ public class TunesModel
     private Song chosenSong;
 
     private ObservableList<Song> songsShownInPlaylist = FXCollections.observableArrayList();
-    private ObservableList<Playlist> playlists = FXCollections.observableArrayList();
-    private ObservableList<Song> songs = FXCollections.observableArrayList();
+    public ObservableList<Playlist> playlists = FXCollections.observableArrayList();
+    public ObservableList<Song> songs = FXCollections.observableArrayList();
 
     public TunesModel() throws IOException, DalException, Exception
     {
@@ -270,7 +271,8 @@ public class TunesModel
 
     public Song addSong(String songName, String artistName, String genre, String path) throws Exception
     {
-        songManager.addSong(artistName, songName, genre, path);
+        song = songManager.addSong(artistName, songName, genre, path);
+        songs.add(song);
         return song;
     }
 
@@ -283,6 +285,7 @@ public class TunesModel
     public void editSong(Song selectedSong) throws Exception
     {
         songManager.editSong(selectedSong);
+        getSongs();
     }
 
 }

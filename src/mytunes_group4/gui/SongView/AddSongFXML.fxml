@@ -7,16 +7,16 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes_group4.gui.SongView.AddSongFXMLController">
    <children>
-      <Button layoutX="428.0" layoutY="326.0" mnemonicParsing="false" onAction="#addNewSong" text="Add Song" />
-      <TextField fx:id="txtSongTitle" layoutX="155.0" layoutY="79.0" prefHeight="25.0" prefWidth="308.0" />
-      <TextField fx:id="txtArtistTitle" layoutX="155.0" layoutY="145.0" prefHeight="25.0" prefWidth="308.0" />
-      <TextField fx:id="txtSongGenre" layoutX="155.0" layoutY="209.0" />
+      <Button fx:id="add" layoutX="488.0" layoutY="325.0" mnemonicParsing="false" onAction="#addSong" text="Add Song" />
+      <TextField fx:id="txtTitle" layoutX="155.0" layoutY="79.0" prefHeight="25.0" prefWidth="308.0" />
+      <TextField fx:id="txtArtist" layoutX="155.0" layoutY="145.0" prefHeight="25.0" prefWidth="308.0" />
+      <TextField fx:id="txtGenre" layoutX="155.0" layoutY="209.0" />
       <TextField fx:id="txtPath" layoutX="155.0" layoutY="269.0" prefHeight="25.0" prefWidth="234.0" />
       <Text layoutX="77.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Title:" />
       <Text layoutX="75.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist:" />
       <Text layoutX="75.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre:" />
       <Text layoutX="67.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="File path:" />
-      <Button fx:id="lookForSong" layoutX="397.0" layoutY="269.0" mnemonicParsing="false" text="Browse..." />
-      <Button fx:id="cancelWindow" layoutX="513.0" layoutY="326.0" mnemonicParsing="false" onAction="#cancelSongWindow" text="Cancel" />
+      <Button layoutX="397.0" layoutY="269.0" mnemonicParsing="false" onAction="#browseFiles" text="Browse..." />
+      <Button fx:id="cancelWindow" layoutX="407.0" layoutY="325.0" mnemonicParsing="false" onAction="#cancelSongWindow" text="Cancel" />
    </children>
 </AnchorPane>

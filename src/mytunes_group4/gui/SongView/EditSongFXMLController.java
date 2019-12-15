@@ -5,6 +5,7 @@
  */
 package mytunes_group4.gui.SongView;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,9 +14,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import mytunes_group4.gui.model.TunesModel;
 import mytunes_group4.be.Song;
+import mytunes_group4.gui.MainView.TunesViewController;
 
 /**
  * FXML Controller class
@@ -25,6 +28,7 @@ import mytunes_group4.be.Song;
 public class EditSongFXMLController implements Initializable
 {
     private TunesModel tMod;
+    private TunesViewController tvc;
     @FXML
     private TextField txtUpdateTitle;
     @FXML
@@ -39,6 +43,15 @@ public class EditSongFXMLController implements Initializable
     private Button editSong;
     @FXML
     private Button browseFile;
+    
+    
+    public void EditSongFXMLController(){
+        txtUpdateTitle.setText(TunesViewController.getTitle);
+        txtUpdateArtist.setText(TunesViewController.getArtist);
+        txtUpdateGenre.setText(TunesViewController.getGenre);
+        txtUpdatePath.setText(TunesViewController.getPath);
+    }
+    
 
     /**
      * Initializes the controller class.
@@ -48,8 +61,8 @@ public class EditSongFXMLController implements Initializable
     {
         // TODO
     }    
-
-
+    
+    
     @FXML
     private void cancelEditWindow(ActionEvent event)
     {
@@ -57,25 +70,39 @@ public class EditSongFXMLController implements Initializable
         stage.close();
     }
 
+    
     @FXML
     private void editSong(ActionEvent event) throws Exception {
         
         try {
             tMod = new TunesModel();
-            String songName = txtUpdateTitle.getText().trim();
-            String artistName = txtUpdateArtist.getText().trim();
-            String genre = txtUpdateGenre.getText().trim();
-            String path = txtUpdatePath.getText().trim();
             
-            Song song = new Song(songName, artistName, genre, path);
+            Song song = new Song(TunesViewController.getSongId, txtUpdateTitle.getText().trim(), txtUpdateArtist.getText().trim(), txtUpdateGenre.getText().trim(), txtUpdatePath.getText().trim());
             tMod.editSong(song);
+            
+            Stage stage = (Stage) editSong.getScene().getWindow();
+            stage.close();
+            
         } catch (IOException ex) {
             throw ex;
         }
     }
 
+    
     @FXML
     private void browseFile(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        Stage stage = new Stage();
+        stage.setAlwaysOnTop(true);
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            String fileAsString = file.toString();
+
+            txtUpdatePath.setText(fileAsString);
+        } else {
+            txtUpdatePath.setText(null);
+        }
     }
     
 }

@@ -5,6 +5,7 @@
  */
 package mytunes_group4.gui.SongView;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,60 +14,83 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import mytunes_group4.be.Song;
+import mytunes_group4.gui.MainView.TunesViewController;
 import mytunes_group4.gui.model.TunesModel;
 
 /**
  * FXML Controller class
  *
- * @author Rizvan
+ * @author M
  */
-public class AddSongFXMLController implements Initializable
-{
+public class AddSongFXMLController implements Initializable {
 
-     private TunesModel tMod;
     @FXML
-    private Button cancelWindow;
-    @FXML
-    private Button addSong;
-    @FXML
-    private TextField txtGenre;
-    @FXML
-    private TextField txtPath;
+    private Button add;
     @FXML
     private TextField txtTitle;
     @FXML
     private TextField txtArtist;
+    @FXML
+    private TextField txtGenre;
+    @FXML
+    private TextField txtPath;
+    private TunesModel tMod;
+    private  TunesViewController tcon;
+    @FXML
+    private Button cancelWindow;
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
 
     @FXML
     private void addSong(ActionEvent event) throws Exception {
-
         try {
             tMod = new TunesModel();
-            String songName = txtTitle.getText().trim();
-            String artistName = txtArtist.getText().trim();
-            String genre = txtGenre.getText().trim();
-            String path = txtPath.getText().trim();
-            tMod.addSong(songName, artistName, genre, path);
+
+            tMod.addSong(txtTitle.getText().trim(), txtArtist.getText().trim(), txtGenre.getText().trim(), txtPath.getText().trim());
+            
+            Stage stage = (Stage) add.getScene().getWindow();
+            stage.close();
+            
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
     }
+    
 
     @FXML
-    private void cancelSongWindow(ActionEvent event)
-    {
+    private void cancelSongWindow(ActionEvent event) {
+        
         Stage stage = (Stage) cancelWindow.getScene().getWindow();
         stage.close();
     }
+
+    @FXML
+    private void browseFiles(ActionEvent event) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        Stage stage = new Stage();
+        stage.setAlwaysOnTop(true);
+        File file = fileChooser.showOpenDialog(stage);
+        if (file != null) {
+            String fileAsString = file.toString();
+
+            txtPath.setText(fileAsString);
+        } else {
+            txtPath.setText(null);
+        }
+    }
+
+    }
     
-}
+

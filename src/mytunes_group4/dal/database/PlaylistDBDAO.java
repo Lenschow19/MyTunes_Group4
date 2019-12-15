@@ -14,8 +14,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import mytunes_group4.be.Playlist;
 import mytunes_group4.be.Song;
 
@@ -109,11 +107,10 @@ public class PlaylistDBDAO
     {
         try ( Connection con = dbc.getConnection())
         {
-            String sql = "INSERT INTO Playlist VALUES (?);";
+            String sql = "INSERT INTO Playlist VALUES (?)";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, name);
             int affectedRows = ps.executeUpdate();
-
             if (affectedRows == 1)
             {
                 ResultSet rs = ps.getGeneratedKeys();
@@ -139,12 +136,12 @@ public class PlaylistDBDAO
     {
         try ( Connection con = dbc.getConnection())
         {
-            int id = playlist.getPlaylistId();
+            int playlistId = playlist.getPlaylistId();
             String name = playlist.getName();
             String sql = "UPDATE Playlist SET name=? WHERE playlistId=?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, name);
-            ps.setInt(2, id);
+            ps.setInt(2, playlistId);
             int affectedRows = ps.executeUpdate();
             if (affectedRows != 1)
             {

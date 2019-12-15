@@ -5,6 +5,7 @@
  */
 package mytunes_group4.gui.PlaylistView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -18,44 +19,44 @@ import mytunes_group4.gui.model.TunesModel;
 /**
  * FXML Controller class
  *
- * @author mads_
+ * @author M
  */
-public class AddPlaylistController implements Initializable
-{
+public class AddPlaylistController implements Initializable {
 
-    @FXML
-    private Button savePlaylist;
     @FXML
     private TextField txtPlaylistTitle;
-
-    private TunesModel tModel;
     @FXML
     private Button cancel;
+    @FXML
+    private Button savePlaylist;
+    private TunesModel tModel;
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
-      
-    }
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
 
     @FXML
-    private void addNewPlaylist(ActionEvent event) throws Exception
-    {
-        String titleQuery = txtPlaylistTitle.getText();
-        tModel.createPlaylist(titleQuery);
-
-        Stage stage = (Stage) savePlaylist.getScene().getWindow();
-        stage.close();
-    }
-
-    @FXML
-    private void closeWindow(ActionEvent event)
-    {
+    private void closeWindow(ActionEvent event) {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
 
+    @FXML
+    private void addNewPlaylist(ActionEvent event) throws Exception {
+        try{
+            tModel = new TunesModel();
+            tModel.createPlaylist(txtPlaylistTitle.getText());
+
+            Stage stage = (Stage) savePlaylist.getScene().getWindow();
+            stage.close();
+    
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    
+    }
 }
