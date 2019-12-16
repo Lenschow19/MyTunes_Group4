@@ -3,6 +3,7 @@ package mytunes_group4.gui.MainView;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +17,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
@@ -104,7 +108,7 @@ public class TunesViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        
+
         //keeps track of what view (songlist and songs in playlist) is selected
         SongsInPlaylist.getSelectionModel().selectedItemProperty().addListener((obs, old, newVal) ->
         {
@@ -150,8 +154,9 @@ public class TunesViewController implements Initializable
 
     /**
      * The song table view setting the title, artist and genre columns
+     *
      * @throws IOException
-     * @throws DalException 
+     * @throws DalException
      */
     private void songTable() throws IOException, DalException
     {
@@ -163,12 +168,12 @@ public class TunesViewController implements Initializable
         songTableView.getColumns().addAll(viewSongTitle, viewSongArtist, viewSongGenre);
     }
 
-    
     /**
      * The playlist table view setting the name of our playlists
+     *
      * @throws IOException
      * @throws DalException
-     * @throws Exception 
+     * @throws Exception
      */
     private void playlistTable() throws IOException, DalException, Exception
     {
@@ -229,13 +234,28 @@ public class TunesViewController implements Initializable
     @FXML
     private void deletePlaylist(ActionEvent event) throws Exception
     {
-        tModel.setChosenPlaylist(playlistTableView.getSelectionModel().getSelectedItem());
-        tModel.deletePlaylist(tModel.getChosenPlaylist());
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("A Deletion Confirmation");
+        alert.setHeaderText("Are you sure you want to delete:");
+        alert.setContentText(playlistTableView.getSelectionModel().getSelectedItem() + "?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK)
+        {
+
+            tModel.setChosenPlaylist(playlistTableView.getSelectionModel().getSelectedItem());
+            tModel.deletePlaylist(tModel.getChosenPlaylist());
+
+        } else
+        {
+            alert.close();
+        }
+
     }
 
     /*
     * Deletes a song in a playlist
-    */
+     */
     @FXML
     private void deleteSongInPlaylist(ActionEvent event) throws Exception
     {
@@ -245,7 +265,7 @@ public class TunesViewController implements Initializable
 
     /*
     * Adds song to playlist
-    */
+     */
     @FXML
     private void addSongToPlaylist(ActionEvent event) throws Exception
     {
@@ -436,7 +456,7 @@ public class TunesViewController implements Initializable
             }
         });
     }
-    
+
     /**
      * When a playlist is selected, this displays the songs in the playlist
      */
@@ -480,7 +500,8 @@ public class TunesViewController implements Initializable
     }
 
     /**
-     * This gets the path of our songs when selected and is used to play the selected song
+     * This gets the path of our songs when selected and is used to play the
+     * selected song
      */
     private void setMusicPlayerPath()
     {
@@ -513,7 +534,7 @@ public class TunesViewController implements Initializable
 
     /*
     * gets volume
-    */
+     */
     public double getVolume()
     {
         return currentVolume;
@@ -521,7 +542,7 @@ public class TunesViewController implements Initializable
 
     /*
     * sets volume
-    */
+     */
     public void setVolume(double value)
     {
         if (mediaPlayer != null)
@@ -581,5 +602,6 @@ public class TunesViewController implements Initializable
         SongsInPlaylist.getSelectionModel().select(tModel.moveSong(-1, tModel.getChosenSong(), tModel.getChosenPlaylist()));
 
     }
+
 
 }
