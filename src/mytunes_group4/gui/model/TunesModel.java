@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mytunes_group4.be.Playlist;
-import mytunes_group4.bll.MusicPlayer;
 import mytunes_group4.bll.PlaylistManager;
 
 
@@ -31,8 +30,6 @@ public class TunesModel
     private Song song = null;
     private SongManager songManager;
     private PlaylistManager pm;
-    private MusicPlayer mp;
-    private Double currentVolume;
 
     private Playlist chosenPlaylist;
     private Song chosenSong;
@@ -153,6 +150,7 @@ public class TunesModel
     public void createPlaylist(String name) throws Exception
     {
         Playlist playlist = pm.createPlaylist(name);
+
         playlists.add(playlist);
         playlists.sort(new Comparator<Playlist>()
         {
@@ -163,6 +161,7 @@ public class TunesModel
             }
 
         });
+        
     }
 
     /**
