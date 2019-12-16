@@ -92,6 +92,14 @@ public class PlaylistManager
         return playlistDbDao.deleteSongInPlaylist(songId, playlistId);
     }
     
+    /**
+     * Swaps the positions of two songs in a playlist in the database
+     * @param firstSongId
+     * @param secondSongId
+     * @param playlistId
+     * @return true if positions of songs were changed
+     * @throws Exception
+     */
     public boolean changeSongPosition(int firstSongId, int secondSongId, int playlistId) throws Exception
     {
         return playlistDbDao.changeSongPosition(firstSongId, secondSongId, playlistId);

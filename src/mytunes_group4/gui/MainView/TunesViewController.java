@@ -61,6 +61,7 @@ public class TunesViewController implements Initializable
     private SongManager songmanager;
     private boolean isPlaying;
     private double currentVolume;
+    private final double MAX_VOLUME = 1.0; 
     public static int getSongId;
     public static String getTitle;
     public static String getArtist;
@@ -207,7 +208,7 @@ public class TunesViewController implements Initializable
     Set and show stage editPlaylist
      */
     @FXML
-    private void editPlaylist(ActionEvent event)
+    private void editPlaylist(ActionEvent event) 
     {
         try
         {
@@ -562,7 +563,7 @@ public class TunesViewController implements Initializable
      */
     public void volumeSliderSetup()
     {
-        currentVolume = 1.0;
+        currentVolume = MAX_VOLUME;
         volumeSlider.setValue(getVolume() * volumeSlider.getMax());
         volumeSlider.valueProperty().addListener(new InvalidationListener()
         {
@@ -570,9 +571,7 @@ public class TunesViewController implements Initializable
             public void invalidated(Observable observable)
             {
                 setVolume(volumeSlider.getValue() / volumeSlider.getMax());
-                if (volumeSlider.getValue() == 0)
-                {
-                }
+                
             }
         });
 
@@ -605,12 +604,10 @@ public class TunesViewController implements Initializable
     {
         tModel.setChosenSong(SongsInPlaylist.getSelectionModel().getSelectedItem());
         tModel.setChosenPlaylist(playlistTableView.getSelectionModel().getSelectedItem());
-        int index;
-        index = tModel.moveSong(-1, tModel.getChosenSong(), tModel.getChosenPlaylist());
-        if (index != -1)
-        {
-            SongsInPlaylist.getSelectionModel().select(index);
-        }
+
+        SongsInPlaylist.getSelectionModel().select(tModel.moveSong(-1, tModel.getChosenSong(), tModel.getChosenPlaylist()));
+
     }
+
 
 }
