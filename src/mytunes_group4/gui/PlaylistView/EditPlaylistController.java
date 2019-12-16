@@ -5,8 +5,11 @@
  */
 package mytunes_group4.gui.PlaylistView;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -32,6 +35,9 @@ public class EditPlaylistController implements Initializable
     private Button savePlaylist;
     @FXML
     private Button cancel;
+    
+    TunesModel tModel; 
+
 
     /**
      * Initializes the controller class.
@@ -41,7 +47,16 @@ public class EditPlaylistController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        try
+        {
+            tModel = new TunesModel();
+        } catch (DalException ex)
+        {
+            Logger.getLogger(EditPlaylistController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(EditPlaylistController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
 
     /*
@@ -58,15 +73,35 @@ public class EditPlaylistController implements Initializable
     Saves playlist
     */
     @FXML
-    private void savePlaylist(ActionEvent event) throws DalException, Exception {
+    private void savePlaylist(ActionEvent event) {
         
-        TunesModel tmod = new TunesModel();
-        
-        Playlist playlist = new Playlist(TunesViewController.getPlaylistId, txtPlaylistTitle.getText().trim());
-        tmod.updatePlaylist(playlist);
-        
-        Stage stage = (Stage) savePlaylist.getScene().getWindow();
-        stage.close();
+        try
+        {
+            //tModel = new TunesModel();
+            
+            
+            Playlist playlist = new Playlist(TunesViewController.getPlaylistId, txtPlaylistTitle.getText().trim());
+            tModel.updatePlaylist(playlist);
+            
+           
+            /*Playlist selectedPlaylist = tModel.getChosenPlaylist();
+            
+            String title = txtPlaylistTitle.getText().trim();
+            selectedPlaylist.setName(title);
+            tModel.updatePlaylist(selectedPlaylist);*/
+            
+            //tModel.updatePlaylist(tModel.getChosenPlaylist().getPlaylistId(), txtPlaylistTitle.getText().trim());
+            
+            Stage stage = (Stage) savePlaylist.getScene().getWindow();
+            stage.close();
+        } catch (DalException ex)
+        {
+            Logger.getLogger(EditPlaylistController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex)
+        {
+            Logger.getLogger(EditPlaylistController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+               
     }
     
 }

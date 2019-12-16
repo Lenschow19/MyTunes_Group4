@@ -67,6 +67,8 @@ public class TunesModel
         return playlists;
 
     }
+    
+   
 
     /**
      * Gets and displays a list of all songs in the database
@@ -77,6 +79,7 @@ public class TunesModel
      */
     public ObservableList<Song> getSongs() throws IOException, DalException
     {
+        songs.clear();
         songs.addAll(songManager.getAllSongs());
         songs.sort(new Comparator<Song>()
         {
@@ -129,19 +132,7 @@ public class TunesModel
     public void updatePlaylist(Playlist selectedPlaylist) throws Exception
     {
         pm.updatePlaylist(selectedPlaylist);
-        if (playlists.remove(selectedPlaylist))
-        {
-            playlists.add(selectedPlaylist);
-            playlists.sort(new Comparator<Playlist>()
-            {
-                @Override
-                public int compare(Playlist arg0, Playlist arg1)
-                {
-                    return arg0.getPlaylistId() - arg1.getPlaylistId();
-                }
-
-            });
-        }
+        getPlaylistList();
     }
 
     /*
@@ -150,17 +141,8 @@ public class TunesModel
     public void createPlaylist(String name) throws Exception
     {
         Playlist playlist = pm.createPlaylist(name);
-
         playlists.add(playlist);
-        playlists.sort(new Comparator<Playlist>()
-        {
-            @Override
-            public int compare(Playlist arg0, Playlist arg1)
-            {
-                return arg0.getPlaylistId() - arg1.getPlaylistId();
-            }
-
-        });
+        getPlaylistList();
         
     }
 
@@ -247,6 +229,14 @@ public class TunesModel
 
     }
 
+    /**
+     * Moves a song in a playlist
+     * @param i
+     * @param selectedSong
+     * @param selectedPlaylist
+     * @return index of song if song was moved, otherwise return -1
+     * @throws Exception
+     */
     public int moveSong(int i, Song selectedSong, Playlist selectedPlaylist) throws Exception
     {
         List<Song> songHolder = new ArrayList<>();

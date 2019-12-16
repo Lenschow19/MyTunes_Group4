@@ -30,6 +30,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import mytunes_group4.be.*;
 import mytunes_group4.bll.PlaylistManager;
@@ -51,13 +52,9 @@ public class TunesViewController implements Initializable
     private TunesModel tModel;
     private MediaPlayer mediaPlayer;
     private Media media;
-    private Playlist selectedPlaylist;
-    private Playlist playlist;
-    private PlaylistManager playlistmanager;
-    private SongManager songmanager;
     private boolean isPlaying;
     private double currentVolume;
-    private final double MAX_VOLUME = 1.0; 
+    private final double MAX_VOLUME = 1.0;
     public static int getSongId;
     public static String getTitle;
     public static String getArtist;
@@ -104,7 +101,7 @@ public class TunesViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        
+
         //keeps track of what view (songlist and songs in playlist) is selected
         SongsInPlaylist.getSelectionModel().selectedItemProperty().addListener((obs, old, newVal) ->
         {
@@ -127,6 +124,7 @@ public class TunesViewController implements Initializable
             tModel = new TunesModel();
             songTable();
             playlistTable();
+
         } catch (IOException ex)
         {
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -150,8 +148,9 @@ public class TunesViewController implements Initializable
 
     /**
      * The song table view setting the title, artist and genre columns
+     *
      * @throws IOException
-     * @throws DalException 
+     * @throws DalException
      */
     private void songTable() throws IOException, DalException
     {
@@ -163,12 +162,12 @@ public class TunesViewController implements Initializable
         songTableView.getColumns().addAll(viewSongTitle, viewSongArtist, viewSongGenre);
     }
 
-    
     /**
      * The playlist table view setting the name of our playlists
+     *
      * @throws IOException
      * @throws DalException
-     * @throws Exception 
+     * @throws Exception
      */
     private void playlistTable() throws IOException, DalException, Exception
     {
@@ -183,7 +182,7 @@ public class TunesViewController implements Initializable
     Set and show stage addPlaylist
      */
     @FXML
-    private void addNewPlaylist(ActionEvent event)
+    private void addNewPlaylist(ActionEvent event) throws Exception
     {
         try
         {
@@ -191,36 +190,42 @@ public class TunesViewController implements Initializable
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
-            stage.show();
+            stage.showAndWait();
             stage.setAlwaysOnTop(true);
+            playlistTable();
+
         } catch (IOException ex)
         {
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /*
     Set and show stage editPlaylist
      */
     @FXML
-    private void editPlaylist(ActionEvent event) 
+    private void editPlaylist(ActionEvent event) throws Exception
     {
+
+        Playlist playlistEdit = playlistTableView.getSelectionModel().getSelectedItem();
+        getPlaylistId = playlistEdit.getPlaylistId();
+
         try
         {
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mytunes_group4/gui/PlaylistView/EditPlaylist.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
-            stage.show();
+            stage.showAndWait();
             stage.setAlwaysOnTop(true);
-
-            Playlist playlistEdit = playlistTableView.getSelectionModel().getSelectedItem();
-            getPlaylistId = playlistEdit.getPlaylistId();
-
+            playlistTable();
         } catch (IOException ex)
         {
             Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /*
@@ -235,7 +240,7 @@ public class TunesViewController implements Initializable
 
     /*
     * Deletes a song in a playlist
-    */
+     */
     @FXML
     private void deleteSongInPlaylist(ActionEvent event) throws Exception
     {
@@ -245,7 +250,7 @@ public class TunesViewController implements Initializable
 
     /*
     * Adds song to playlist
-    */
+     */
     @FXML
     private void addSongToPlaylist(ActionEvent event) throws Exception
     {
@@ -257,21 +262,25 @@ public class TunesViewController implements Initializable
     Set and show stage addSong
      */
     @FXML
-    private void addSong(ActionEvent event)
+    private void addSong(ActionEvent event) throws DalException
     {
         try
         {
+
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mytunes_group4/gui/SongView/AddSongFXML.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
-            stage.show();
+            stage.showAndWait();
             stage.setTitle("Add song");
             stage.setAlwaysOnTop(true);
+            songTable();
         } catch (IOException ex)
         {
             ex.printStackTrace();
-            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger
+                    .getLogger(TunesViewController.class
+                            .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -279,28 +288,32 @@ public class TunesViewController implements Initializable
     Set and show stage editSong and store song values in variables
      */
     @FXML
-    private void editSong(ActionEvent event)
+    private void editSong(ActionEvent event) throws DalException
     {
+
+        Song songEdit = songTableView.getSelectionModel().getSelectedItem();
+        getSongId = songEdit.getSongId();
+        getTitle = songEdit.getSongName();
+        getArtist = songEdit.getArtistName();
+        getGenre = songEdit.getGenre();
+        getPath = songEdit.getPath();
+
         try
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/mytunes_group4/gui/SongView/EditSongFXML.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));
-            stage.show();
+            stage.showAndWait();
             stage.setTitle("Edit song");
             stage.setAlwaysOnTop(true);
-
-            Song songEdit = songTableView.getSelectionModel().getSelectedItem();
-            getSongId = songEdit.getSongId();
-            getTitle = songEdit.getSongName();
-            getArtist = songEdit.getArtistName();
-            getGenre = songEdit.getGenre();
-            getPath = songEdit.getPath();
+            songTableView.getColumns().clear();
+            songTable();
 
         } catch (IOException ex)
         {
-            Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TunesViewController.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -317,9 +330,11 @@ public class TunesViewController implements Initializable
             try
             {
                 tModel.deleteSong(selectedSong);
+
             } catch (IOException ex)
             {
-                Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TunesViewController.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -436,7 +451,7 @@ public class TunesViewController implements Initializable
             }
         });
     }
-    
+
     /**
      * When a playlist is selected, this displays the songs in the playlist
      */
@@ -456,9 +471,11 @@ public class TunesViewController implements Initializable
                     try
                     {
                         SongsInPlaylist.setItems(tModel.getSongsInPlaylist());
+
                     } catch (Exception ex)
                     {
-                        Logger.getLogger(TunesViewController.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(TunesViewController.class
+                                .getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             }
@@ -480,7 +497,8 @@ public class TunesViewController implements Initializable
     }
 
     /**
-     * This gets the path of our songs when selected and is used to play the selected song
+     * This gets the path of our songs when selected and is used to play the
+     * selected song
      */
     private void setMusicPlayerPath()
     {
@@ -519,7 +537,7 @@ public class TunesViewController implements Initializable
 
     /*
     * gets volume
-    */
+     */
     public double getVolume()
     {
         return currentVolume;
@@ -527,7 +545,7 @@ public class TunesViewController implements Initializable
 
     /*
     * sets volume
-    */
+     */
     public void setVolume(double value)
     {
         if (mediaPlayer != null)
@@ -550,7 +568,7 @@ public class TunesViewController implements Initializable
             public void invalidated(Observable observable)
             {
                 setVolume(volumeSlider.getValue() / volumeSlider.getMax());
-                
+
             }
         });
 

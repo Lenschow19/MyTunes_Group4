@@ -66,6 +66,8 @@ public class AddPlaylistController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        
+        
     
     }
 }

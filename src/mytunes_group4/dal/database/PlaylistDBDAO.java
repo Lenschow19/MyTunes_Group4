@@ -103,6 +103,12 @@ public class PlaylistDBDAO
         }
     }
 
+    /**
+     * Creates a playlist object in the database
+     * @param name
+     * @return Playlist object
+     * @throws Exception
+     */
     public Playlist createPlaylist(String name) throws Exception
     {
         try ( Connection con = dbc.getConnection())
@@ -130,8 +136,11 @@ public class PlaylistDBDAO
         }
     }
 
-    
-
+    /**
+     * Updates the name of a playlist in the database
+     * @param playlist
+     * @throws Exception
+     */
     public void updatePlaylist(Playlist playlist) throws Exception
     {
         try ( Connection con = dbc.getConnection())
@@ -142,6 +151,8 @@ public class PlaylistDBDAO
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, name);
             ps.setInt(2, playlistId);
+            
+            
             int affectedRows = ps.executeUpdate();
             if (affectedRows != 1)
             {
