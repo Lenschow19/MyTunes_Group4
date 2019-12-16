@@ -491,12 +491,6 @@ public class TunesViewController implements Initializable
     }
 
     @FXML
-    private void changeVolume(MouseEvent event)
-    {
-
-    }
-
-    @FXML
     private void playPreviousSong(ActionEvent event) // plays the previous song when the button '<' is pressed
     {
         selModel.selectPrevious();
