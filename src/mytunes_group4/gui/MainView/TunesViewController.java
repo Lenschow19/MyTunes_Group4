@@ -52,7 +52,6 @@ public class TunesViewController implements Initializable
     private MediaPlayer mediaPlayer;
     private Media media;
     private Playlist selectedPlaylist;
-
     private Playlist playlist;
     private PlaylistManager playlistmanager;
     private SongManager songmanager;
@@ -104,7 +103,8 @@ public class TunesViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-
+        
+        //keeps track of what view (songlist and songs in playlist) is selected
         SongsInPlaylist.getSelectionModel().selectedItemProperty().addListener((obs, old, newVal) ->
         {
             selModel = SongsInPlaylist.getSelectionModel();
@@ -147,6 +147,11 @@ public class TunesViewController implements Initializable
 
     }
 
+    /**
+     * The song table view setting the title, artist and genre columns
+     * @throws IOException
+     * @throws DalException 
+     */
     private void songTable() throws IOException, DalException
     {
         viewSongTitle.setCellValueFactory(new PropertyValueFactory<>("songName"));
@@ -157,6 +162,13 @@ public class TunesViewController implements Initializable
         songTableView.getColumns().addAll(viewSongTitle, viewSongArtist, viewSongGenre);
     }
 
+    
+    /**
+     * The playlist table view setting the name of our playlists
+     * @throws IOException
+     * @throws DalException
+     * @throws Exception 
+     */
     private void playlistTable() throws IOException, DalException, Exception
     {
         viewName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -220,6 +232,9 @@ public class TunesViewController implements Initializable
         tModel.deletePlaylist(tModel.getChosenPlaylist());
     }
 
+    /*
+    * Deletes a song in a playlist
+    */
     @FXML
     private void deleteSongInPlaylist(ActionEvent event) throws Exception
     {
@@ -227,6 +242,9 @@ public class TunesViewController implements Initializable
         tModel.deleteSongInPlaylist(tModel.getChosenSong());
     }
 
+    /*
+    * Adds song to playlist
+    */
     @FXML
     private void addSongToPlaylist(ActionEvent event) throws Exception
     {
@@ -300,7 +318,7 @@ public class TunesViewController implements Initializable
     }
 
     @FXML
-    private void playSong(ActionEvent event) //Plays selected song
+    private void playSong(ActionEvent event) //Plays a selected song
     {
         btnPause.setText("Pause");
         isPlaying = true;
@@ -336,7 +354,7 @@ public class TunesViewController implements Initializable
     }
 
     @FXML
-    private void pauseSong(ActionEvent event)
+    private void pauseSong(ActionEvent event) // pauses the song when the button is pressed
     {
         if (isPlaying == true)
         {
@@ -356,7 +374,7 @@ public class TunesViewController implements Initializable
     }
 
     @FXML
-    private void stopSong(ActionEvent event)
+    private void stopSong(ActionEvent event) // stops the song when the button is pressed. This resets the song duration
     {
         mediaPlayer.stop();
         currentSongPlaying.setText("Nothing is currently playing");
@@ -388,6 +406,9 @@ public class TunesViewController implements Initializable
 
     }
 
+    /**
+     * Displays the selected song in a playlist
+     */
     private void setSongSelectionInPlaylist()
     {
         ssTitle.setEditable(false);
@@ -408,7 +429,10 @@ public class TunesViewController implements Initializable
             }
         });
     }
-
+    
+    /**
+     * When a playlist is selected, this displays the songs in the playlist
+     */
     private void setSongsInPlaylistSelection()
     {
         playlistTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -435,7 +459,7 @@ public class TunesViewController implements Initializable
     }
 
     @FXML
-    private void handleSearch(KeyEvent event)
+    private void handleSearch(KeyEvent event) //the search function
     {
         try
         {
@@ -448,6 +472,9 @@ public class TunesViewController implements Initializable
 
     }
 
+    /**
+     * This gets the path of our songs when selected and is used to play the selected song
+     */
     private void setMusicPlayerPath()
     {
         song = selModel.getSelectedItem();
@@ -463,7 +490,7 @@ public class TunesViewController implements Initializable
     }
 
     @FXML
-    private void playPreviousSong(ActionEvent event)
+    private void playPreviousSong(ActionEvent event) // plays the previous song when the button '<' is pressed
     {
         selModel.selectPrevious();
         isPlaying = true;
@@ -473,7 +500,7 @@ public class TunesViewController implements Initializable
     }
 
     @FXML
-    private void playNextSong(ActionEvent event)
+    private void playNextSong(ActionEvent event) // plays the next song when the button '>' is pressed
     {
         selModel.selectNext();
         isPlaying = true;
@@ -483,11 +510,17 @@ public class TunesViewController implements Initializable
 
     }
 
+    /*
+    * gets volume
+    */
     public double getVolume()
     {
         return currentVolume;
     }
 
+    /*
+    * sets volume
+    */
     public void setVolume(double value)
     {
         if (mediaPlayer != null)
@@ -497,6 +530,9 @@ public class TunesViewController implements Initializable
         currentVolume = value;
     }
 
+    /**
+     * creates the volume slider
+     */
     public void volumeSliderSetup()
     {
         currentVolume = 1.0;
@@ -528,7 +564,7 @@ public class TunesViewController implements Initializable
     }
 
     @FXML
-    private void moveSongUp(ActionEvent event) throws Exception
+    private void moveSongUp(ActionEvent event) throws Exception // moves a selected song in a playlist up
     {
         tModel.setChosenSong(SongsInPlaylist.getSelectionModel().getSelectedItem());
         tModel.setChosenPlaylist(playlistTableView.getSelectionModel().getSelectedItem());
@@ -538,7 +574,7 @@ public class TunesViewController implements Initializable
     }
 
     @FXML
-    private void moveSongDown(ActionEvent event) throws Exception
+    private void moveSongDown(ActionEvent event) throws Exception // moves a selected song in a playlist down
     {
         tModel.setChosenSong(SongsInPlaylist.getSelectionModel().getSelectedItem());
         tModel.setChosenPlaylist(playlistTableView.getSelectionModel().getSelectedItem());
