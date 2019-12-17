@@ -28,19 +28,19 @@ import mytunes_group4.be.Playlist;
  */
 public class EditPlaylistController implements Initializable
 {
-    
+
     @FXML
     private TextField txtPlaylistTitle;
     @FXML
     private Button savePlaylist;
     @FXML
     private Button cancel;
-    
-    TunesModel tModel; 
 
+    TunesModel tModel;
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -57,41 +57,31 @@ public class EditPlaylistController implements Initializable
         {
             Logger.getLogger(EditPlaylistController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
+    }
 
     /*
     Closes window
-    */
+     */
     @FXML
     private void closeWindow(ActionEvent event)
     {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
-    
+
     /*
     Saves playlist
-    */
+     */
     @FXML
-    private void savePlaylist(ActionEvent event) {
-        
+    private void savePlaylist(ActionEvent event)
+    {
+
         try
         {
-            //tModel = new TunesModel();
-            
-            
+
             Playlist playlist = new Playlist(TunesViewController.getPlaylistId, txtPlaylistTitle.getText().trim());
             tModel.updatePlaylist(playlist);
-            
-           
-            /*Playlist selectedPlaylist = tModel.getChosenPlaylist();
-            
-            String title = txtPlaylistTitle.getText().trim();
-            selectedPlaylist.setName(title);
-            tModel.updatePlaylist(selectedPlaylist);*/
-            
-            //tModel.updatePlaylist(tModel.getChosenPlaylist().getPlaylistId(), txtPlaylistTitle.getText().trim());
-            
+
             Stage stage = (Stage) savePlaylist.getScene().getWindow();
             stage.close();
         } catch (DalException ex)
@@ -101,7 +91,7 @@ public class EditPlaylistController implements Initializable
         {
             Logger.getLogger(EditPlaylistController.class.getName()).log(Level.SEVERE, null, ex);
         }
-               
+
     }
-    
+
 }
