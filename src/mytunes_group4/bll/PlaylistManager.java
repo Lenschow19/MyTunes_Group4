@@ -35,6 +35,11 @@ public class PlaylistManager
         return playlistDbDao.getAllPlaylists();
     }
     
+    /**
+     * Updates the name of a playlist
+     * @param playlist
+     * @throws Exception
+     */
     public void updatePlaylist(Playlist playlist) throws Exception
     {
         playlistDbDao.updatePlaylist(playlist);
@@ -51,6 +56,12 @@ public class PlaylistManager
         return playlistDbDao.deletePlaylist(playlist);
     }
     
+    /**
+     * Creates a playlist object
+     * @param name
+     * @return
+     * @throws Exception
+     */
     public Playlist createPlaylist(String name) throws Exception
     {
         Playlist playlist = playlistDbDao.createPlaylist(name);
